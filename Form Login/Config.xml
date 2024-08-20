@@ -1,0 +1,21 @@
+put this below <head>
+
+<script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js'/>
+  <script>
+    /*<![CDATA[*/
+    const config2 = {
+    put your sdk config here
+    
+    };
+    firebase.initializeApp(config2);
+    const dbrl = firebase.database();
+    const auth = firebase.auth();
+    const storagedb = firebase.storage();
+    const db = firebase.firestore();
+/*]]>*/
+   </script>
+ 
