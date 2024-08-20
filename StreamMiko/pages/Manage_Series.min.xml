@@ -1,0 +1,83 @@
+  <b>dashboard_Series Stream Miko</b>
+  
+  <style>
+   .cc_FormSeries { width: 80%; margin: auto; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 5px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; }
+    .dashboard_SeriesStream { margin-top: 20px; }
+    .dashboard_SeriesStream .series-item { padding: 10px; border: 1px solid #ddd; margin-bottom: 10px; display: flex; justify-content: space-between; }
+    .button-edit, .button-delete { cursor: pointer; color: #007bff; border: none; background: none; }
+    .button-edit:hover, .button-delete:hover { text-decoration: underline; }
+    .hidden { display: none; }
+    .loader { border: 4px solid #f3f3f3; border-radius: 50%; border-top: 4px solid #000000; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 20px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .toastStream { position: fixed; top: 20px; right: 20px; background-color: #222; color: white; padding: 15px; border-radius: 5px; display: none; }
+    .cc_FormSeries button { padding: 10px 20px; border: none; background-color: #222; color: white; cursor: pointer; }
+    .cc_FormSeries button:hover { background-color: #0056b3; }
+    .button-delete{display: none;}
+  </style>
+  <div class="cc_FormSeries">
+    <h1>AnimeStream Series</h1>
+    <p>Yang wajib diisi cuman ID sama Title, yang lain bisa diabaikan saja</p>
+    <div>
+      <h2>Tambahkan Series</h2>
+      <form id="series-form">
+        <div class="form-group">
+          <label for="series-id">ID</label>
+          <input placeholder="ID Series Post..." type="text" id="series-id" name="idseries">
+        </div>
+        <div class="form-group">
+          <label for="series-title">Title</label>
+          <input placeholder="Title Series..." type="text" id="series-title" name="title" required>
+        </div>
+        <div class="form-group">
+       <label for="series-tv">TV/Other</label>
+          <input placeholder="Movie/Anime/Hanime" type="text" id="series-tv" name="tv">
+        </div>
+        <div class="form-group">
+          <label for="series-release">Release Year</label>
+          <input placeholder="What?.." type="text" id="series-release" name="release">
+        </div>
+        <div class="form-group">
+          <label for="series-type">Type</label>
+          <input placeholder="TV/BD/OVA.." type="text" id="series-type" name="type">
+        </div>
+        <div class="form-group">
+       <label for="series-season">Season</label>	<input placeholder="Number 01/1" type="text" id="series-season" name="season">
+        </div>
+        <div class="form-group">
+          <label for="series-duration">Duration</label>
+          <input placeholder="24 min. per ep." type="text" id="series-duration" name="duration">
+        </div>
+        <div class="form-group">
+    <label for="series-country">Country</label>
+          <input placeholder="Jepang/What?.." type="text" id="series-country" name="country">
+        </div>
+        <div class="form-group">
+     <label for="series-genres">Genre</label>
+          <input placeholder="Action,Fantasy,Romance,Comedy.." type="text" id="series-genres" name="genres">
+        </div>
+        <div class="form-group">
+     <label for="series-rating">Rating</label>
+          <input placeholder="9,65" type="text" id="series-rating" name="rating">
+        </div>
+        <button type="submit" class="button">Add Series</button>
+        <button type="button" id="cancel-edit" class="button hidden">Cancel</button>
+      </form>
+    </div>
+ <div id="loader" class="loader hidden"></div>
+      <div class="dashboard_SeriesStream" id="series-list">
+      <h2>Series List</h2>
+    </div>
+    <div id="toastStream" class="toastStream"></div>
+  </div>
+      
+<script>
+  function showtoastStream(e){let t=document.getElementById("toastStream");t.textContent=e,t.style.display="block",setTimeout(()=>{t.style.display="none"},5e3)}function showLdrSeries(e){document.getElementById("loader").classList.toggle("hidden",!e)}function getListSeries(){return{idseries:document.getElementById("series-id").value||new Date().getTime().toString(),title:document.getElementById("series-title").value||"",tv:document.getElementById("series-tv").value||"",release:document.getElementById("series-release").value||"",type:document.getElementById("series-type").value||"",season:document.getElementById("series-season").value||"",duration:document.getElementById("series-duration").value||"",country:document.getElementById("series-country").value||"",genres:document.getElementById("series-genres").value||"",rating:document.getElementById("series-rating").value||""}}async function loadSeries(){showLdrSeries(!0);try{let e=await dbrl.ref("series").once("value"),t=document.getElementById("series-list");t.innerHTML="",e.forEach(e=>{let s=e.val(),r=document.createElement("div");r.className="series-item",r.innerHTML=`
+          <span>ID: ${s.idseries}</span>
+          <span>Title: ${s.title}</span>
+          <button class="button-edit" onclick="editSeries('${e.key}')">Edit</button>
+          <button class="button-delete" onclick="deleteSeries('${e.key}')">Delete</button>
+        `,t.appendChild(r)}),showtoastStream("Series loaded successfully")}catch(s){console.error("Error loading series:",s),showtoastStream("Error loading series")}finally{showLdrSeries(!1)}}function editSeries(e){dbrl.ref("series/"+e).once("value",t=>{if(t.exists()){let s=t.val();document.getElementById("series-id").value=e,document.getElementById("series-title").value=s.title,document.getElementById("series-tv").value=s.tv,document.getElementById("series-release").value=s.release,document.getElementById("series-type").value=s.type,document.getElementById("series-season").value=s.season,document.getElementById("series-duration").value=s.duration,document.getElementById("series-country").value=s.country,document.querySelector("#series-form button").innerText="Update Series",document.getElementById("cancel-edit").classList.remove("hidden"),document.querySelector("#series-form").onsubmit=function(t){t.preventDefault(),showLdrSeries(!0);let s=getListSeries();dbrl.ref("series/"+e).update(s).then(()=>{showtoastStream("Series updated successfully"),loadSeries(),t.target.reset(),document.querySelector("#series-form button").innerText="Add Series",document.getElementById("cancel-edit").classList.add("hidden"),document.querySelector("#series-form").onsubmit=addSeries}).catch(e=>{console.error("Error updating series:",e),showtoastStream("Error updating series")}).finally(()=>{showLdrSeries(!1)})}}})}function addSeries(e){e.preventDefault();let t=getListSeries();showLdrSeries(!0),dbrl.ref("series/"+t.idseries).set(t).then(()=>{showtoastStream("Series added successfully"),loadSeries(),e.target.reset()}).catch(e=>{console.error("Error adding series:",e),showtoastStream("Error adding series")}).finally(()=>{showLdrSeries(!1)})}function deleteSeries(e){confirm("Are you sure you want to delete this series?")&&(showLdrSeries(!0),dbrl.ref("series/"+e).remove().then(()=>{showtoastStream("Series deleted successfully"),loadSeries()}).catch(e=>{console.error("Error deleting series:",e),showtoastStream("Error deleting series")}).finally(()=>{showLdrSeries(!1)}))}document.getElementById("series-form").addEventListener("submit",async e=>{e.preventDefault(),showLdrSeries(!0);let t=getListSeries();try{await dbrl.ref("series/"+t.idseries).set(t),showtoastStream("Series added successfully"),loadSeries(),e.target.reset()}catch(s){console.error("Error adding series:",s),showtoastStream("Error adding series")}finally{showLdrSeries(!1)}}),document.getElementById("cancel-edit").addEventListener("click",()=>{document.getElementById("series-form").reset(),document.querySelector("#series-form button").innerText="Add Series",document.getElementById("cancel-edit").classList.add("hidden"),document.querySelector("#series-form").onsubmit=addSeries}),auth.onAuthStateChanged(e=>{e?loadSeries():console.log("No user is logged in")});
+</script>

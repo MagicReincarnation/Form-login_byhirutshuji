@@ -1,0 +1,315 @@
+<style>
+.boxInpuSeriesId h2 {
+  color: #333;
+}
+
+.boxInpuSeriesId input {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  width: auto;
+}
+
+.boxInpuSeriesId button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.tst_StreamMiko {
+  text-align: center;
+  color: #333;
+  margin: 20px;
+}
+
+.lodr_StreamMiko {
+  display: none;
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tst_StreamMiko {
+  visibility: hidden;
+  margin: 0 auto;
+  background-color: #222;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+  z-index: 999;
+  right: 20px;
+  top: 30px;
+  opacity: 0;
+  padding: 10px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.tst_StreamMiko.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+#episode_ccForm {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+#boxepisode_ccForm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.form-group textarea {
+  grid-column: span 2;
+}
+
+#episode_ccForm .button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#episode_ccForm .button[type="button"] {
+  background-color: #888;
+}
+
+/* Dashboard */
+.dashboard {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.dashboard h2 {
+  margin-bottom: 20px;
+}
+
+#listEpisode_perSeries {
+  list-style-type: none;
+  padding: 0;
+}
+
+#listEpisode_perSeries li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 5px;
+    background: #222;
+    color: #ccc;
+    border-radius: 5px;
+}
+span.stream_idpost:before {
+    content: "ID :";
+    margin: 5px;
+    color: #f29766;
+    font-size: 18px;
+    font-weight: bold;
+}
+span.stream_title:before {
+    content: "Title :";
+    margin: 5px;
+    color: #f29766;
+    font-size: 18px;
+    font-weight: bold;
+}
+span.stream_provider:before {
+    content: "Player :";
+    margin: 5px;
+    color: #f29766;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.button-edit, .button-delete {
+  cursor: pointer;
+  color: #007bff;
+  border: none;
+  background: none;
+}
+
+.button-edit:hover, .button-delete:hover {
+  text-decoration: underline;
+} 
+</style>
+<div class="boxccEpisode">  
+<h1>Player Stream Miko - Episode</h1> 
+    <div class="boxInpuSeriesId">
+      <h2>Enter Series ID</h2>
+      <b>Enter your post's Series ID to search for all available Episodes or to add new Episodes to the series.</b>
+      <input type="text" id="input-series-id" placeholder="Enter Series ID" />
+      <button onclick="runEpisodeMiko()">Submit</button>
+    </div>
+
+
+    <div class="tst_StreamMiko" id="lodr_StreamMiko">Loading...</div>
+  <div id="tst_StreamMiko" class="tst_StreamMiko"></div>
+  
+  
+    <div id="episode_ccForm" style="display:none;">
+      <h2 id="form-title">Add Episode</h2>
+      <form id="FrmEpisode">
+        <div id="boxepisode_ccForm" >
+ <div style="display:none" class="form-group">
+          <label for="series-id">Series ID</label>
+          <input type="text" id="series-id" name="seriesId" required readonly>
+        </div>
+      <div class="form-group">
+          <label for="series-dateId">Date ID</label>
+          <input type="text" id="series-dateId" name="dateId" required readonly>
+        </div>
+        
+         <div  class="form-group">  
+        <label for="episode-id">ID Episode</label>
+         <input type="text" id="episode-id" name="idpost" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="episode-title">Title</label>
+          <input type="text" id="episode-title" name="title" required>
+        </div>
+        <div class="form-group">
+          <label for="episode-thumbnail">Thumbnail URL</label>
+          <input type="text" id="episode-thumbnail" name="thumbnail">
+        </div>
+        <div class="form-group">
+          <label for="episode-duration">Duration</label>
+          <input type="text" id="episode-duration" name="duration">
+        </div>
+   <div class="form-group">
+   <label for="episode-provider">Player</label>
+   <select id="episode-provider" name="provider" required>
+    <option value="" disabled selected>Select player</option>
+    <option value="plyr">Plyr</option>
+    <option value="youtube">YouTube</option>
+    <option value="jwplayer">JWPlayer</option>
+    <option value="iframe">Iframe</option>
+   </select>
+        </div>   
+        </div>
+        <div class="form-group">
+          <label for="episode-links-free">Links Free</label>
+          <textarea id="episode-links-free" name="linksFree" rows="6">[
+          
+{
+"quality": "360p", 
+"url": ""},
+
+{
+"quality": "480p", 
+"url": ""}
+
+]</textarea>
+        </div>
+        <div class="form-group">
+          <label for="episode-links-premium">Links Premium</label>
+          <textarea id="episode-links-premium" name="linksPremium" rows="6">[
+          
+{
+ "quality": "720p", 
+ "url": ""},
+
+{
+"quality": "1080p", 
+"url": ""}
+
+]</textarea>
+        </div>
+        <div class="form-group">
+          <label for="episode-download-links-free">Download Links Free</label>
+          <textarea id="episode-download-links-free" name="downloadLinksFree" rows="6">[
+          
+{
+ "quality": "360p", 
+ "url": ""},
+
+{
+ "quality": "480p", 
+ "url": ""}
+
+]</textarea>
+        </div>
+        <div class="form-group">
+          <label for="episode-download-links-premium">Download Links Premium</label>
+          <textarea id="episode-download-links-premium" name="downloadLinksPremium" rows="6">[
+          
+{
+"quality": "720p", 
+"url": ""},
+
+{
+"quality": "1080p", 
+"url": ""}
+
+]</textarea>
+        </div>
+      <button type="submit" class="button">Add Episode</button>
+        <button type="button" onclick="cancelEdit()" class="button">Cancel Edit</button>
+      </form>
+    </div>
+
+
+  <div id="dsblistEpisode_perSeries" class="dashboard">
+    <h2>Episode List</h2>
+ <ul id="listEpisode_perSeries"></ul>
+  </div>  
+  </div>
+  
+  
+<script>
+let authUser=null;function runEpisodeMiko(){if(authUser){let e=document.getElementById("input-series-id").value;e?(loadEpisodes(e),document.getElementById("series-id").value=e,document.getElementById("episode_ccForm").style.display="block"):showtst_StreamMiko("Series ID cannot be empty.")}else showtst_StreamMiko("access denied, because not logged in")}function showlodr_StreamMiko(){document.getElementById("lodr_StreamMiko").style.display="block"}function hidelodr_StreamMiko(){document.getElementById("lodr_StreamMiko").style.display="none"}function showtst_StreamMiko(e){let t=document.getElementById("tst_StreamMiko");t.textContent=e,t.className="tst_StreamMiko show",setTimeout(()=>{t.className=t.className.replace("show","")},5e3)}function loadEpisodes(e){showlodr_StreamMiko(),dbrl.ref("series/"+e+"/episodes").once("value",t=>{let i=document.querySelector("#listEpisode_perSeries");i.innerHTML="",t.forEach(t=>{let r=t.val(),s=document.createElement("li");s.innerHTML=`
+            <span class="stream_idpost">${r.date}</span>
+            <span class="stream_title">${r.title}</span>
+            <span class="stream_provider">${r.provider}</span>
+            <span class="stream_boxtools_btn">
+              <button class="button-edit" onclick="editEpisode('${e}', '${r.date}')">Edit</button>
+              <button class="button-delete" onclick="deleteEpisode('${e}', '${r.date}')">Delete</button>
+            </span>
+          `,i.appendChild(s)}),hidelodr_StreamMiko()}).catch(e=>{hidelodr_StreamMiko(),showtst_StreamMiko("Error loading episodes."),console.error("Error loading episodes: ",e)})}function parseLinks(e){try{return JSON.parse(e)}catch(t){return console.error("Invalid JSON for links:",t),[]}}function addEpisode(e){e.preventDefault(),showLoader();let t={idpost:e.target.idpost.value,date:e.target.dateId.value||new Date().getTime().toString(),title:e.target.title.value,thumbnail:e.target.thumbnail.value,duration:e.target.duration.value,provider:e.target.provider.value,linksFree:parseLinks(e.target.linksFree.value),linksPremium:parseLinks(e.target.linksPremium.value),downloadLinksFree:parseLinks(e.target.downloadLinksFree.value),downloadLinksPremium:parseLinks(e.target.downloadLinksPremium.value)},i=e.target.seriesId.value;dbrl.ref("series/"+i+"/episodes/"+t.date).set(t).then(()=>{loadEpisodes(i),e.target.reset(),hideLoader(),showToast("Episode added successfully.")}).catch(e=>{hideLoader(),showToast("Error adding episode."),console.error("Error adding episode: ",e)})}function editEpisode(e,t){showlodr_StreamMiko(),dbrl.ref("series/"+e+"/episodes/"+t).once("value",i=>{if(i.exists()){let r=i.val();document.getElementById("episode-id").value=r.idpost,document.getElementById("series-id").value=e,document.getElementById("series-dateId").value=t,document.getElementById("episode-title").value=r.title,document.getElementById("episode-thumbnail").value=r.thumbnail,document.getElementById("episode-duration").value=r.duration,document.getElementById("episode-provider").value=r.provider,document.getElementById("episode-links-free").value=JSON.stringify(r.linksFree,null,2),document.getElementById("episode-links-premium").value=JSON.stringify(r.linksPremium,null,2),document.getElementById("episode-download-links-free").value=JSON.stringify(r.downloadLinksFree,null,2),document.getElementById("episode-download-links-premium").value=JSON.stringify(r.downloadLinksPremium,null,2),document.getElementById("dsblistEpisode_perSeries").style.display="none",document.querySelector("#FrmEpisode button").innerText="Update Episode",document.querySelector("#FrmEpisode").onsubmit=function(i){i.preventDefault();let r={idpost:i.target.idpost.value,date:t,title:i.target.title.value,thumbnail:i.target.thumbnail.value,duration:i.target.duration.value,provider:i.target.provider.value,linksFree:parseLinks(i.target.linksFree.value),linksPremium:parseLinks(i.target.linksPremium.value),downloadLinksFree:parseLinks(i.target.downloadLinksFree.value),downloadLinksPremium:parseLinks(i.target.downloadLinksPremium.value)};dbrl.ref("series/"+e+"/episodes/"+t).update(r).then(()=>{loadEpisodes(e),i.target.reset(),document.querySelector("#FrmEpisode button").innerText="Add Episode",document.querySelector("#FrmEpisode").onsubmit=addEpisode,hidelodr_StreamMiko(),showtst_StreamMiko("Episode updated successfully."),document.getElementById("dsblistEpisode_perSeries").style.display="block"}).catch(e=>{hidelodr_StreamMiko(),showtst_StreamMiko("Error updating episode."),console.error("Error updating episode: ",e)})}}hidelodr_StreamMiko()}).catch(e=>{hidelodr_StreamMiko(),showtst_StreamMiko("Error loading episode details."),console.error("Error loading episode details: ",e)})}function deleteEpisode(e,t){confirm("Are you sure you want to delete this episode?")&&(showlodr_StreamMiko(),dbrl.ref("series/"+e+"/episodes/"+t).remove().then(()=>{loadEpisodes(e),hidelodr_StreamMiko(),showtst_StreamMiko("Episode deleted successfully.")}).catch(e=>{hidelodr_StreamMiko(),showtst_StreamMiko("Error deleting episode."),console.error("Error deleting episode: ",e)}))}function cancelEdit(){document.getElementById("FrmEpisode").reset(),document.getElementById("episode_ccForm").style.display="none",document.querySelector("#FrmEpisode button").innerText="Add Episode"}auth.onAuthStateChanged(e=>{e&&(authUser=e.uid)}),document.getElementById("FrmEpisode").addEventListener("submit",e=>{e.preventDefault(),showlodr_StreamMiko();let t={idpost:e.target.idpost.value,date:e.target.dateId.value||new Date().getTime().toString(),title:e.target.title.value,thumbnail:e.target.thumbnail.value,duration:e.target.duration.value,provider:e.target.provider.value,linksFree:parseLinks(e.target.linksFree.value),linksPremium:parseLinks(e.target.linksPremium.value),downloadLinksFree:parseLinks(e.target.downloadLinksFree.value),downloadLinksPremium:parseLinks(e.target.downloadLinksPremium.value)},i=e.target.seriesId.value;dbrl.ref("series/"+i+"/episodes/"+t.date).set(t).then(()=>{loadEpisodes(i),e.target.reset(),hidelodr_StreamMiko(),showtst_StreamMiko("Episode added successfully.")}).catch(e=>{hidelodr_StreamMiko(),showtst_StreamMiko("Error adding episode."),console.error("Error adding episode: ",e)})});
+</script>
