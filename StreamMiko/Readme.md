@@ -4,7 +4,8 @@ Website: datakodehiru.blogspot.com
 
 Rule realtime database: 
 
-  "series": {
+ ```
+"series": {
         ".read": "auth != null || !data.child('linksPremium').exists()",
         ".write": "auth != null",
         "episodes": {
@@ -14,4 +15,4 @@ Rule realtime database:
           }
         }
     },
-      
+  ```    
