@@ -1,0 +1,20 @@
+how to use this code 
+
+https://youtu.be/a4VMDqP2wuk?si=pyjv56CD0yOgEm5j
+
+
+
+<script>
+let streamAnime_HR08082024 = {
+  IDSeries:"ID Series post",//Id Series itu yang ada dipostingan,
+  
+  IDEpisode:"ID Episode - dari Manage Episode", //IDpost Yang dibuat oleh Manage Episode.
+  
+  thumbnailAnime:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvS5rDqyiB7VxLRVd9Av4e-7dmC3hCVo7hCI1echhleRaHyAMopbQbxUs&s=10", 
+ 
+  defaultserver:{
+   premium : ['720p'],
+   free : ['480p']
+   }
+};  
+</script>

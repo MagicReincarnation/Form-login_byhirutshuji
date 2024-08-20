@@ -1,0 +1,591 @@
+/*player StreamMiko - datakodehiru/ https://t.me/webhiru */
+
+/*Letakan css didalam style atau diatas </b:skin>, b:skin itu biasa tempat css thema,*/
+
+
+/*main css*/
+#video_defaultPlay, #player_cc_HIRU08082024 {
+      margin: auto auto;
+    }
+    div#player_cc_HIRU08082024 {
+    background: #000;
+    overflow: hidden;
+}
+    .details_series{
+display:none
+}
+    .details_series {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+    .details_series h3 {
+      margin: 0;
+    }
+    .dropdown, .link-list {
+      margin: 10px 0;
+    }
+div#video_defaultPlay {
+    background: #000;
+    margin: 0 5px;
+    padding: 0;
+    overflow: hidden;
+}
+.episode_List {
+    display: block;
+    background: #000;
+}
+.list_episode {
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+.list_episode li {
+    display: flex;
+    margin: 0;
+    padding: 10px 10px;
+    border-radius: 0;
+    background: #000000;
+    color: #fff;
+    align-items: center;
+}
+.list_episode li:nth-child(even) {
+    background: #181818;
+}
+.list_episode li span {
+    color: #ccc;
+}
+.list_episode li a {
+    color: #ccc;
+    text-decoration: none;
+}
+.list_episode li.active {
+    font-weight: bold;
+}
+.list_episode li.active a{
+      color:#ccc;
+      text-decoration: none;
+}
+
+.list_episode li.active span.titleEpisode, .list_episode li.active a.linkPlayEpisode, .list_episode li.active span.watch-progress-bar > span.historyWatch_episode {
+    color: #ff8600 !important;
+}
+.list_episode li.active span.watch-progress-bar > .watch-progress {
+     background: #ff7200c2 !important;
+}
+.EpisodeHr_code {
+    display: flex;
+    flex-wrap: wrap;
+    width: -webkit-fill-available;
+}
+span.EpOne {
+    display: flex;
+    flex-wrap: wrap;
+}
+a.linkPlayEpisode {
+    display: flex;
+    justify-content: space-between;
+}
+span.titleEpisode {
+    width: 34vh;
+    font-size: 14px;
+    margin-left: 20px;
+   display: inline;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word
+}
+a.linkPlayEpisode:hover > span.titleEpisode {
+    -webkit-line-clamp: 4;
+}
+span.historyWatch_episode {
+    font-size: 12px;
+    position: absolute;
+    top: -20px;
+    right: 5px;
+}
+.watch-progress-bar {
+  background-color: #2424243b;
+  border-radius: 5px;
+  height: 5px;
+  margin-top: 5px;
+  margin-left: 30px;
+  width: 100%;
+  position: relative;
+}
+
+.watch-progress {
+    background: #ffffff78;
+    height: 100%;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+}
+div#cei {
+    margin: 0 5px;
+    border-radius: 12px;
+    color: #ccc;
+    overflow: hidden;
+}	
+#WacthEpisode {
+    padding: 5px;
+    text-align: center;
+    background: #65035fc2;
+    color: #f3f3f3;
+    font-size: 12px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+#WacthServer {
+    padding: 5px;
+    text-align: center;
+    background: #480143d6;
+    color: #f3f3f3;
+    font-size: 12px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+div#boxserver_multi {
+    display: flex;    
+    flex-direction: column;
+    text-align: left;
+    margin: 10px;
+    align-items: flex-start;
+}
+
+ul#link-select, ul#link-select2 {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+ul#link-select button.active,ul#link-select2 button.active {
+    background-color: #FF9000;
+}
+ul#link-select button:hover,ul#link-select2 button:hover {
+      background-color: #0056b3;
+    }
+div#boxnextprev {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 5px;
+    background: #000;
+}
+button.prevVideo, button.nextVideo {
+    display: flex;
+    align-items: center;
+    gap: 0 5px;
+} 
+ul#link-select button,ul#link-select2 button{
+    background-color: transparent;
+    color: #f3f3f3;
+    border: 0.5px solid #ccc;
+    padding: 5px 7px;
+    font-family: sans-serif;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#boxnextprev button{
+    background-color: transparent;
+    color: #f3f3f3;
+    border: none;
+    padding: 5px 7px;
+    font-family: sans-serif;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+div#boxbtndwn_multi {
+    padding: 0px 5px;
+}
+button.dwnShowEps {
+    border: 0.5px solid #ccc;
+    font-size: 15px;
+    font-weight: bold;
+    background: #000;
+    color: #ccc;
+    padding: 3px 7px;
+    border-radius: 2px;
+}
+
+div#linkdwn {
+    padding: 0;
+    margin: auto;
+}
+.link-list {
+    text-align: center;
+    margin: auto;
+    padding: 0;
+}
+.link-list ul {
+    list-style: none;
+    padding: 0;
+}
+.link-list ul li {
+    padding: 3px 7px;
+    display: inline;
+    margin: 5px;
+    background: #000000;
+    border: .5px solid #ccc;
+}
+.download-link {
+    text-decoration: none;
+    color: #ccc;
+}
+/*jwplayer*/
+.jw-preview.jw-reset {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+/*end*/
+
+
+/*plyr*/
+:root {
+  --plyr-color-main: #ccc;
+}
+
+.video-player-container {
+  display: block;
+  position: relative;
+  padding: 50px 15px;
+  overflow: hidden;
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.video-player-container button.plyr__control.plyr__control--overlaid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: translate(-50%,-50%);
+  width: 100px;
+  height: 100px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transition: 0.3s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
+  z-index: 5;
+  background-color: rgba(0,0,0,.20)!important;
+  padding: 0;
+}
+
+.video-player-container button.plyr__control.plyr__control--overlaid:before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 25px solid #fff;
+}
+
+.video-player-container .plyr__control--overlaid svg {
+  display: none;
+}
+
+.video-player-container .plyr--video .plyr__controls {
+  opacity: 0;
+}
+
+.video-player-container:hover .plyr--video .plyr__controls {
+  opacity: 1!important;
+}
+
+.video-player-container .plyr__video-wrapper {
+  display: block;
+  position: relative;
+  background-color: transparent;
+}
+
+.video-player-container .plyr__video-wrapper:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.20);
+  z-index: 2;
+}
+
+.video-player-container .plyr--playing .plyr__video-wrapper:after {
+  opacity: 0;
+}
+
+
+.video-player-container .plyr__poster {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.video-player-container:hover button.plyr__control.plyr__control--overlaid {
+  opacity: .65;
+}
+
+#video-player {
+  background: transparent!important;
+  overflow: hidden;
+  margin-bottom: -1px;
+}
+.plyr__time--duration {
+    display: block !important;
+    min-width: 60px;
+    text-align: right;
+}
+.plyr__controls {
+    padding: 0 10px;
+}
+
+.plyr__menu__container{
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: -webkit-fill-available;
+    max-height: 150px;
+}
+/*end*/
+
+
+.lock-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+}
+
+.covercc {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+.yp img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+/*player css*/
+:root {
+--widthVideo: auto;
+--min-heightPlayer: 250px;
+--max-heightPlayer:600px;
+}
+
+div#playerHr {
+    width: 100%;
+    min-height: var(--min-heightPlayer);
+    max-height:  var(--max-heightPlayer);
+    background: #000;
+}
+video#playerx{
+    width: 100%;
+    min-height: var(--min-heightPlayer);
+    max-height:  var(--max-heightPlayer);
+}
+.boxAnimeframe {
+    width: 100%;
+    min-height: var(--min-heightPlayer);
+    max-height: var(--max-heightPlayer);
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+}
+.boxAnimeframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.jwplayer .jw-preview {
+background-size: cover !important;
+}
+/* Styling untuk grid-view */
+.list_episode.grid-view {
+     display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+    padding: 5px 10px;
+        }
+.list_episode.grid-view li {
+    width: calc(20% - 0px);
+    list-style-type: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px;
+        }
+  
+.list_episode.grid-view li a.linkPlayEpisode {
+    display: flex;
+    flex-direction: column;
+}  
+.list_episode.grid-view li a.linkPlayEpisode .historyWatch_episode {
+    font-size: 11px;
+}    
+ul.list_episode.grid-view li .watch-progress-bar {
+    margin: auto;
+    display: flex;
+}
+
+.boxtools {
+    display: flex;
+    justify-content: space-between;
+    background: #000000;
+    margin: 0 -5px;
+    padding: 10px;
+}
+button#GridList_episode {
+    background: transparent;
+    color: #fff;
+    border: none;
+    padding: 7px;
+    border-radius: 2px;
+}
+button#btnBatch {
+    background: transparent;
+    color: #fff;
+    border: none;
+    padding: 7px;
+    border-radius: 2px;
+    width: 100px;
+}
+span.boxsearchInput {
+    display: flex;
+    align-items: center;
+    gap: 0 2px;
+}
+#searchInput {
+    background-color: #141414;
+    color: #ffffff;
+    padding: 7px;
+    width: 100%;
+    border: none;
+}
+span.boxsearchInput svg {
+    width: 24px;
+    height: 24px;
+}
+#searchInput::placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+#searchInput:focus {
+    outline: none;
+}
+/* Dropdown styling */
+.dwnlist {position: relative;display: inline-block;}
+.dc {
+    display: none;
+    position: absolute;
+    right: -20px;
+    background-color: #000000;
+    color: #fff;
+    border-radius: 4px;
+    min-width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 5;
+}
+.dc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dc li {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        .dc li:hover {
+            background-color: #f1f1f1;
+        }
+
+        .filterShowEpisode {
+            display: block;
+        }
+        
+        
+        
+
+/*Loader yae miko*/
+   .lc-dch {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      height:360px;
+      width: 100%;
+      background: transparent;
+      z-index: 999;
+    }
+div#preloader_yaemiko:before {
+    content: "Player Stream by datakodehiru";
+    color: #ccc;
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 20%;
+}
+div#preloader_yaemiko:after {
+    content: "Stream Miko";
+    font-size: 18px;
+    color: #ccc;
+    font-weight: bold;
+    position: absolute;
+    bottom: 25%;
+}
+    .ld-loader {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: linear-gradient(0deg, #FFFFFF 50%, #FF5C35 100%);
+      animation: spin 1s linear infinite;
+    }
+
+    .ld-inner-circle {
+      width: 90%;
+      height: 90%;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .ld-image {
+      width: 80px; 
+      height: 80px;
+      position: absolute;
+      background-size: cover;
+      background-position: center;      
+      border-radius: 50%;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }

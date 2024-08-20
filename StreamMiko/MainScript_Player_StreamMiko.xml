@@ -1,0 +1,256 @@
+Letakan semua script ini diatas</body>
+
+
+
+<!--Config Player LiasNime (https://t.me/webhiru)-->
+<script>
+ /*<![CDATA[*/
+const series_episode = {
+  EpisodeNow:"<p>You're watching</p> <span>Episode {episode}</span>. <p>If the current player is not working, select another server.</p>",
+  
+  serverNow:"<p>Current Server</p>: <span>{server}</span>",
+  
+  prev: `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'><path fill='white' d='m20.341 4.247l-8 7a1 1 0 0 0 0 1.506l8 7c.647.565 1.659.106 1.659-.753V5c0-.86-1.012-1.318-1.659-.753m-11 0l-8 7a1 1 0 0 0 0 1.506l8 7C9.988 20.318 11 19.859 11 19V5c0-.86-1.012-1.318-1.659-.753' />
+</svg> Prev`,
+
+  next: `Next <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'><path fill='white' d='M2 5v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C3.012 3.682 2 4.141 2 5m11 0v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C14.012 3.682 13 4.141 13 5'/></svg>`,
+  
+  /*box download*/
+  titlebox_download:"Download",
+  btn_download:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"/></svg>`,
+
+  closeBox_dwn:`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><g fill="none" stroke="white" stroke-linecap="round" stroke-width="1"><path d="M5 5L19 5"><animate fill="freeze" attributeName="d" begin="0.2s" dur="0.4s" values="M5 5L19 5;M5 5L19 19"/></path><path d="M5 12H19"><animate fill="freeze" attributeName="d" dur="0.4s" values="M5 12H19;M12 12H12"/><set attributeName="opacity" begin="0.4s" to="0"/></path><path d="M5 19L19 19"><animate fill="freeze" attributeName="d" begin="0.2s" dur="0.4s" values="M5 19L19 19;M5 19L19 5"/></path></g></svg>`,
+ 
+/*badge current server*/
+badgeServerFree:"SD",
+badgeServerPremium:"HD",
+
+ /*Svg Lock list episode (belum tersedia kode komplitnya)*/
+svglistepisode_locked:`Terkunci`,
+
+/* svg lock server*/
+svg_lockedServer:`Terkunci`,// boleh svg disini
+
+/*title Server*/
+titleServerFree: "Server SD",
+titleServerPremium: "Server HD",
+
+
+  seriesEpisode: `
+    <div class="details_series">
+      <h3>{title}</h3>
+      <p><strong>Type</strong>: {type}</p>
+      <p><strong>Country:</strong> {country}</p>
+      <p><strong>Release:</strong> {release}</p>
+      <p><strong>TV:</strong> {tv}</p>
+      <p><strong>Season:</strong> {season}</p>
+      <p><strong>Duration:</strong> {duration}</p>
+      <p><strong>Synopsis:</strong> {synopsis}</p>
+      <p><strong>Genres:</strong> {genres}</p>
+      <p><strong>Rating:</strong> {rating}</p>
+    </div>
+  `,
+  
+  
+  listEpisode: `
+    <li id="{fakeId}" data-fake-id="{fakeId}" index="{index}" lock="{lock}">
+      <div class="EpisodeHr_code">
+        <span class="EpOne">
+          <a class="linkPlayEpisode" href="#">
+            {index}
+            <span class="titleEpisode hidetitle">{title}</span>
+          </a>
+        </span>
+        <span class="watch-progress-bar">
+          <span class="historyWatch_episode">{recentTime}</span>
+          <span class="watch-progress" style="width: {progressPercentage}%;"></span>
+        </span>
+      </div>
+    </li>
+  `,
+
+  notifPremium: "You need to log in to access premium.", //gk boleh html disini
+
+  alertdownload_premium: "You need to log in to access link download.",//gak boleh html
+     
+};
+
+/*config tools episode, grid dan list, select perbacth, pencarian episode*/ 
+
+let toolsEpisode = {
+   perbacth: 2,
+   btnbacth: "EPS:0-{endEps}",
+   rangebacth: "EPS:{eps_range}",
+   
+}
+
+let svgGridEpisode = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><rect width="176" height="176" x="48" y="48" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" rx="20" ry="20"/><rect width="176" height="176" x="288" y="48" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" rx="20" ry="20"/><rect width="176" height="176" x="48" y="288" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" rx="20" ry="20"/><rect width="176" height="176" x="288" y="288" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" rx="20" ry="20"/></svg>';
+
+let svgListEpisode = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 512 512"><path fill="white" d="m61.77 401l17.5-20.15a19.92 19.92 0 0 0 5.07-14.19v-3.31C84.34 356 80.5 352 73 352H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h22.83a157 157 0 0 0-11 12.31l-5.61 7c-4 5.07-5.25 10.13-2.8 14.88l1.05 1.93c3 5.76 6.29 7.88 12.25 7.88h4.73c10.33 0 15.94 2.44 15.94 9.09c0 4.72-4.2 8.22-14.36 8.22a41.5 41.5 0 0 1-15.47-3.12c-6.49-3.88-11.74-3.5-15.6 3.12l-5.59 9.31c-3.72 6.13-3.19 11.72 2.63 15.94c7.71 4.69 20.38 9.44 37 9.44c34.16 0 48.5-22.75 48.5-44.12c-.03-14.38-9.12-29.76-28.73-34.88M496 224H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16m0-160H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16V80a16 16 0 0 0-16-16m0 320H176a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h320a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16M16 160h64a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H64V40a8 8 0 0 0-8-8H32a8 8 0 0 0-7.14 4.42l-8 16A8 8 0 0 0 24 64h8v64H16a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8m-3.91 160H80a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8H41.32c3.29-10.29 48.34-18.68 48.34-56.44c0-29.06-25-39.56-44.47-39.56c-21.36 0-33.8 10-40.46 18.75c-4.37 5.59-3 10.84 2.8 15.37l8.58 6.88c5.61 4.56 11 2.47 16.12-2.44a13.44 13.44 0 0 1 9.46-3.84c3.33 0 9.28 1.56 9.28 8.75C51 248.19 0 257.31 0 304.59v4C0 316 5.08 320 12.09 320"/></svg>'; 
+
+
+const config_playerDiv = {
+   playerDiv: {
+    plyr: `
+      <div id="playerHrxB">
+        <div id="playerHrxS"></div>
+        <video id="playerx" poster="{poster}" playsinline controls src="{videoUrl}"></video>
+      </div>`,
+      
+      
+    youtube: `
+      <div class="boxAnimeframe">
+        <iframe id="playerx" src="{videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>`,
+      
+      
+    iframe: `
+      <div class="boxAnimeframe">
+        <iframe id="playerx" src="{videoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>`,      
+      
+    html5: `
+      <video id="playerx" poster="{poster}" playsinline controls>
+        <source src="{videoUrl}" type="video/mp4">Your browser does not support the video tag.
+      </video>`
+  }
+};
+
+
+/*PLAYER plyr*/
+// function untuk mendeteksi apakah user menggunakan ponsel..
+
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+//Settingan Plyr untuk desktop
+const desktopControls = [
+    'play-large', 
+    'play', 'pause', 'rewind', 'fast-forward', 
+    'progress', 'current-time', 'duration', 
+    'mute', 'volume', 
+    'settings', 'pip', 'fullscreen'
+];
+
+//Settingan Plyr untuk mobile
+const mobileControls = [
+    'current-time', 'duration',
+    'progress', 'rewind', 'play-large',
+    'play', 'pause','fast-forward',
+    'settings','pip','fullscreen',
+];
+
+//Settingan Plyr secara umum
+const plyrSettings = {
+    settings: ['quality', 'speed'],
+   
+/*ads plyr, gak tau berhasil atau gak.. belum dicoba*/
+ ads: {
+        enabled: false,
+        publisherId: '',
+        tagUrl: ''
+    },
+    autopause:true,
+    blankVideo: "https://cdn.plyr.io/static/blank.mp4",
+    storage: { enabled: true, key: 'plyr' },
+    markers: {
+    enabled: true, // fitur marker
+    points: [
+        { time: 120, label: "Opening" }, // Menandai 2 menit (120 detik)
+        { time: 1320, label: "Watch this Scene" } // Menandai 22 menit (1320 detik)
+    ]
+},
+    i18n: {
+        restart: 'Restart',
+        rewind: 'Rewind {seektime}s',
+        buffered: 'Buffered',
+        play: 'Play',
+        pause: 'Pause',
+        fastForward: 'Forward {seektime}s',
+        seek: 'Seek',
+        seekLabel: '{currentTime} of {duration}',
+        mute: 'Mute',
+        unmute: 'Unmute',
+        seekTime: 'Seek Time',
+        volume: 'Volume',
+        settings: 'Settings',
+        pip: 'Picture-in-Picture',
+        fullscreen: 'Fullscreen',
+        exitFullscreen: 'Exit Fullscreen'
+    },
+    tooltips: {
+        controls: true,
+        seek: true
+    },
+    clickToPlay: true, // play/pause on click
+    disableContextMenu: true, // Disable right-click on video
+    duration: true, // durasi ditampilkan
+    controls: isMobile() ? mobileControls : desktopControls // Responsive controls
+};
+
+/*JW Player, gak tau berhasil atau gak.. belum dicoba*/
+function setupAdvertising() {
+  return {
+    client: "vast",
+    schedule: {
+      "myAds": {
+        "offset": "pre",
+        "tag": "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator="
+      }
+    }
+  };
+}
+/*]]>*/
+</script>
+  <!--js main player datakodehiru.blogspot.com / https://t.me/webhiru -->
+  <!--CDN Player-->
+<script type='text/javascript'>
+  /* <![CDATA[ */
+function loadCDNs(scripts, callback) {
+    if (!window.loadedScripts) {
+      window.loadedScripts = {};
+    }
+    let loadedCount = 0;
+    function loadScript(src, singleLoad, onload) {
+      if (singleLoad && window.loadedScripts[src]) {
+        onload();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = function () {
+        if (singleLoad) {
+          window.loadedScripts[src] = true;  }
+        onload();
+      };
+      script.onerror = function () {
+        console.error('Failed to load script:', src);
+      };
+      document.head.appendChild(script);
+    }
+
+    for (const [src, singleLoad] of Object.entries(scripts)) {
+      loadScript(src, singleLoad, function () {
+        loadedCount++;
+        if (loadedCount === Object.keys(scripts).length) {
+          if (callback) callback();
+        }
+      });
+    }
+  }
+  const cdnScripts = {
+'https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/PlayerStream/player_StreamMiko_HRv1.1.js':true,
+  };
+  loadCDNs(cdnScripts, function () {
+    console.log('Semua script berhasil dimuat!');
+  });
+  /* ]]> */
+</script>
+<!--js tools Episode-->
+<script>
+ /*<![CDATA[*/
+function runCode_episodeReady(){fiturfilterEpisode()}function fiturfilterEpisode(){let e=document.querySelectorAll(".list_episode li"),t=toolsEpisode.perbacth,i=document.getElementById("batchList"),l;for(let n=0;n<e.length;n+=t){let r=Math.min(n+t,e.length);l=r}document.getElementById("btnBatch").innerHTML=toolsEpisode.btnbacth.replace("{endEps}",l);let s=document.createElement("li");s.setAttribute("data-range",`1-${l}`),s.textContent=`All 0-${l}`,i.appendChild(s);for(let o=0;o<e.length;o+=t){let c=o+1,d=Math.min(o+t,e.length);l=d;let a=document.createElement("li");a.setAttribute("data-range",`${c}-${d}`),a.textContent=`${c}-${d}`,i.appendChild(a)}document.getElementById("btnBatch").addEventListener("click",function(){document.getElementById("batchDropdown").classList.toggle("filterShowEpisode")}),document.querySelectorAll("#batchDropdown li").forEach(function(e){e.addEventListener("click",function(){let t=e.getAttribute("data-range");document.querySelector("#btnBatch").innerHTML=toolsEpisode.rangebacth.replace("{eps_range}",t);let[i,n]=t.split("-").map(Number),r=document.querySelectorAll(".list_episode li");r.forEach(function(e){let r=parseInt(e.getAttribute("index"),10);t===`0-${l}`||r>=i&&r<=n?e.style.display="":e.style.display="none"}),document.getElementById("batchDropdown").classList.remove("filterShowEpisode")})}),document.getElementById("searchInput").addEventListener("input",function(){let e=this.value.toLowerCase(),t=document.querySelectorAll(".list_episode li");t.forEach(function(t){let i=t.querySelector("span").textContent.toLowerCase(),l=t.getAttribute("index");t.style.display=i.includes(e)||l.includes(e)?"":"none"})}),document.getElementById("GridList_episode").addEventListener("click",function(){let e=document.querySelector(".list_episode");e.classList.toggle("grid-view");let t=document.querySelectorAll(".list_episode li");t.forEach(function(t){let i=t.querySelector(".hidetitle");t.firstChild,i.style.display=e.classList.contains("grid-view")?"none":""}),document.querySelector("#GridList_episode").innerHTML=e.classList.contains("grid-view")?svgGridEpisode:svgListEpisode}),document.querySelector("#GridList_episode").innerHTML=svgListEpisode,window.addEventListener("click",function(e){if(!e.target.matches("#btnBatch")){let t=document.querySelectorAll(".dc");t.forEach(function(e){e.classList.contains("filterShowEpisode")&&e.classList.remove("filterShowEpisode")})}})}
+/*]]>*/
+</script>
+  

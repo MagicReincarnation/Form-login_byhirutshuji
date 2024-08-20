@@ -1,0 +1,42 @@
+Letakan ini diatas </data:post.body> atau dibawahnya 
+
+atau bisa juga ditempat biasa kamu memasang player lain, contoh player dayat..
+player bawaan themplate anime.
+
+<div class='player_utama_hirutshuji'>
+ <div id='player_loader_HIRU08082024' style='display:none;'><div class='lc-dch' id='preloader_yaemiko'>
+ <div class='ld-loader'>
+ <div class='ld-inner-circle'/>
+    </div>
+ <img class='ld-image' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5t8gtqCWEot8zhGywwxD-8sCIdFoBFgyDi9LZlJsreOpyy7twGhuzDxRD'/>
+  </div>
+  </div>  
+  <div class='iframe-container' id='player_cc_HIRU08082024' style='display:none;'>
+    <div id='playerHr'/>
+    <div id='boxnextprev'/>   
+    <div id='cei'>    
+  <div id='WacthEpisode'/> 
+  <div id='WacthServer'/>
+  <div id='boxserver_multi'/>
+  <div id='boxbtndwn_multi'/>
+  <div class='linkdwn' id='linkdwn'/>
+  </div>
+  <div id='video_defaultPlay'>
+<div class='boxtools'>
+ <button id='GridList_episode'/>
+ <div class='dwnlist'>
+   <button id='btnBatch'>EPS:All</button>
+    <div class='dc' id='batchDropdown'>
+       <ul id='batchList'/>
+         </div>
+   </div>
+   <span class='boxsearchInput'>
+     <svg height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14M8 12V7l4 2.5z' fill='white'/></svg><input id='searchInput' placeholder='Cari Eps...' type='text'/></span>
+        </div>
+      <div id='playerStreamSeries_HIRU08082024'>
+   </div> 
+  <div id='playerStreamEpisode_HIRU08082024'>
+  </div> 
+ </div>
+ </div> 
+</div>
