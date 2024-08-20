@@ -1,0 +1,41 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    
+   "riwayat_baca": {
+      "$userId": {
+        ".read": "$userId === auth.uid",
+        ".write": "$userId === auth.uid",
+        "$postId": {
+          ".validate": "newData.hasChildren(['imgcover', 'title', 'url', 'initialtime','latesttimeread','count_read'])"
+        },
+        ".indexOn": ["initialtime"]
+      }
+    },
+  "kontent": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+    },
+ // Membaca semua data
+  "series": {
+        ".read": "auth != null || !data.child('linksPremium').exists()",
+        ".write": "auth != null",
+        "episodes": {
+          "$episodeId": {
+            ".read": "auth != null || !data.child('linksPremium').exists()",
+            ".write": "auth != null"
+          }
+      }
+    },
+    
+    "$other": {
+      ".read": "auth != null",
+      ".write": "root.child('users/' + auth.uid + '/role').val() == 'Admin'"
+    }
+  }
+}

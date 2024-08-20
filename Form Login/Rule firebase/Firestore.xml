@@ -1,0 +1,27 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Izinkan pencarian email
+    match /users/{userId} {
+      allow read: if request.auth == null || resource.data.email == request.auth.token.email;
+      allow create, update, delete: if request.auth != null && request.auth.uid == userId;
+      
+      // Izinkan akses ke semua field dalam dokumen users setelah login
+      match /users/{userId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+  match /profiles_publik/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null && (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['User', 'Member', 'Staff', 'Modder']);
+    }
+
+
+    // Pengecualian untuk pengguna dengan role "Admin" agar mendapat akses ke semua data
+    match /{document=**} {
+      allow read, write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Admin';
+    }
+  }
+}
