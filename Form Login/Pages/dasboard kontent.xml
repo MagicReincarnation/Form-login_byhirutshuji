@@ -1,0 +1,321 @@
+<style>
+    .toast {
+      display: inline-block;
+      padding: 20px;
+      border-radius: 4px;
+      position: relative;
+      margin-bottom: 10px;
+      color: #fff;
+      background-color: #333;
+      max-width: 500px;
+      margin: 10px auto;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .toast--pending {
+      background-color: #f0ad4e;
+    }
+
+    .toast--success {
+      background-color: #5bc0de;
+    }
+
+    .toast--error {
+      background-color: #d9534f;
+    }
+
+    .toast__close {
+      cursor: pointer;
+    }
+    
+    .toast__close svg {
+      width: 15px;
+      height: 15px;
+      fill: #fff;
+    }
+    
+    #toast-container {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+    #edit-form {
+      display: none;
+      margin: 20px 0;
+    }      
+/* Form Styles */
+.cc_form {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-group button:hover {
+  background-color: #555;
+}
+
+#edit-form {
+  margin-top: 30px;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+#edit-form h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .cc_form {
+    padding: 15px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cc_form {
+    padding: 10px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 13px;
+  }
+}
+
+/* Table Styles */
+.ccTabel {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+  overflow-x: auto;
+}
+
+#result-container {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#result-container th,
+#result-container td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+  white-space: nowrap;
+}
+
+#result-container th {
+  background-color: #333;
+  color: white;
+}
+
+#result-container td a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+#result-container td a:hover {
+  text-decoration: underline;
+}
+@media (max-width: 768px) {
+  .table-container table,
+  .table-container thead,
+  .table-container tbody,
+  .table-container th,
+  .table-container td,
+  .table-container tr {
+    display: block;
+  }
+
+  .table-container thead {
+    display: none;
+  }
+
+  .table-container tbody tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .table-container td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+  }
+
+  .table-container td:last-child {
+    border-bottom: none;
+  }
+
+  .table-container td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    text-transform: capitalize;
+    color: #333;
+  }
+
+  .table-container td button {
+    margin-right: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .table-container td button:hover {
+    background-color: #555;
+  }
+}
+@media (min-width: 769px) {
+  .table-container td::before {
+    display: none;
+  }
+}
+</style>  
+<div id="toast-container"></div>  
+  <div class="cc_form">
+  <div class="form-group">
+    <label for="postIdInput">Post ID</label>
+    <input type="number" id="postIdInput" class="form-control" placeholder="Enter post ID..." required>
+  </div>
+  <div class="form-group">
+    <label for="titleInput">Title</label>
+    <input type="text" id="titleInput" class="form-control" placeholder="Enter title...">
+  </div>
+  <div class="form-group">
+    <label for="linkInput">Link</label>
+    <input type="text" id="linkInput" class="form-control" placeholder="Enter link...">
+  </div>
+  <div class="form-group">
+    <label for="contentInput">Content</label>
+    <textarea id="contentInput" class="form-control" rows="10" placeholder="Enter content..." required></textarea>
+  </div>
+  <div class="form-group">
+    <label for="roleSelect">Role</label>
+    <select id="roleSelect" class="form-control">
+      <option value="Member">Member</option>
+      <option value="User">User</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <button onclick="saveContent()">Save Content</button>
+  </div>
+  <div id="edit-form">
+    <h2>Edit Content</h2>
+    <div class="form-group">
+      <label for="editPostIdInput">Post ID</label>
+      <input type="number" id="editPostIdInput" class="form-control" placeholder="Post ID" required>
+    </div>
+    <div class="form-group">
+      <label for="editTitleInput">Title</label>
+      <input type="text" id="editTitleInput" class="form-control" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <label for="editLinkInput">Link</label>
+      <input type="text" id="editLinkInput" class="form-control" placeholder="Link">
+    </div>
+    <div class="form-group">
+      <label for="editContentInput">Content</label>
+      <textarea id="editContentInput" class="form-control" rows="10" placeholder="Content" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="editRoleSelect">Role</label>
+      <select id="editRoleSelect" class="form-control">
+        <option value="Admin">Admin</option>
+        <option value="Member">Member</option>
+        <option value="User">User</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button onclick="updateContent()">Update Content</button>
+      <button onclick="cancelEdit()">Cancel</button>
+    </div>
+  </div></div>
+  <h2>Content List</h2>
+  <div class="ccTabel">
+  <table id="result-container">
+    <thead>
+      <tr>
+        <th>Post ID</th>
+        <th>Title</th>
+        <th>Link</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table></div> 
+<script>
+function showToast(type, message) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast--${type}`;
+      toast.innerHTML = `
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.transition = 'opacity 0.5s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+      }, 3000);
+    }
+function validatePassword(password) {
+  return password === 'HR05082024';
+}
+
+function _0x3969(){const _0x56b22a=['block','kontent','getElementById','appendChild','contentInput','title','set','editPostIdInput','\x22\x20href=\x22','677340ryUmBE','exists','ref','editRoleSelect','message','link','error','oldRole','Error\x20deleting\x20content:\x20','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22editContent(\x27','Error\x20saving\x20content:\x20','innerHTML','2152759YSSHNc','922270LoIcmL','60AdlqQi','pending','success','linkInput','429516ZhMSuy','edit-form','60759ScMtyk','Content\x20saved\x20successfully!','72BCeYND','\x27,\x20\x27','Post\x20ID,\x20Title,\x20and\x20Link\x20are\x20required.','value','All\x20fields\x20are\x20required.','roleSelect','kontent/','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','Content\x20updated\x20successfully!','281132sOhGsz','\x27)\x22>Edit</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22deleteContent(\x27','8BMafNn','editContentInput','style','catch','remove','Saving\x20content...','key','val','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><a\x20title=\x22','postIdInput','dataset','oldPostId','No\x20data\x20found\x20for\x20editing.','display','tbody','forEach','editLinkInput','Content\x20deleted\x20successfully!','then','once','6246eKeAAO','\x27)\x22>Delete</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'];_0x3969=function(){return _0x56b22a;};return _0x3969();}(function(_0x5f4e2d,_0xaebf81){const _0x9de19=_0x4e43,_0x27db80=_0x5f4e2d();while(!![]){try{const _0x3d68bc=-parseInt(_0x9de19(0x1e4))/0x1+parseInt(_0x9de19(0x1ae))/0x2+parseInt(_0x9de19(0x1c4))/0x3*(-parseInt(_0x9de19(0x1e6))/0x4)+parseInt(_0x9de19(0x1dd))/0x5+parseInt(_0x9de19(0x1e2))/0x6+parseInt(_0x9de19(0x1dc))/0x7*(parseInt(_0x9de19(0x1b0))/0x8)+-parseInt(_0x9de19(0x1cf))/0x9*(parseInt(_0x9de19(0x1de))/0xa);if(_0x3d68bc===_0xaebf81)break;else _0x27db80['push'](_0x27db80['shift']());}catch(_0x32b0ac){_0x27db80['push'](_0x27db80['shift']());}}}(_0x3969,0x25aec));function saveContent(){const _0x350825=_0x4e43,_0x55ee41=document[_0x350825(0x1c8)](_0x350825(0x1b9))[_0x350825(0x1e9)],_0xab11cf=document[_0x350825(0x1c8)]('titleInput')[_0x350825(0x1e9)],_0x4fb9be=document[_0x350825(0x1c8)](_0x350825(0x1e1))[_0x350825(0x1e9)],_0x367fc6=document[_0x350825(0x1c8)](_0x350825(0x1ca))[_0x350825(0x1e9)],_0x455172=document['getElementById'](_0x350825(0x1aa))[_0x350825(0x1e9)];if(!_0x55ee41||!_0xab11cf||!_0x4fb9be||!_0x367fc6){showToast(_0x350825(0x1d5),_0x350825(0x1a9));return;}showToast(_0x350825(0x1df),_0x350825(0x1b5));const _0x4e134d=dbrl['ref'](_0x350825(0x1ab)+_0x55ee41+'/'+_0x455172);_0x4e134d[_0x350825(0x1cc)]({'title':_0xab11cf,'link':_0x4fb9be,'kontent':_0x367fc6})['then'](()=>{const _0x4f36c6=_0x350825;showToast(_0x4f36c6(0x1e0),_0x4f36c6(0x1e5)),displayResult();})[_0x350825(0x1b3)](_0x26ca45=>{const _0x5b4d35=_0x350825;showToast('error',_0x5b4d35(0x1da)+_0x26ca45[_0x5b4d35(0x1d3)]);});}function displayResult(){const _0x259e94=_0x4e43,_0x410cda=document[_0x259e94(0x1c8)]('result-container')['getElementsByTagName'](_0x259e94(0x1be))[0x0];_0x410cda[_0x259e94(0x1db)]='',dbrl['ref'](_0x259e94(0x1c7))[_0x259e94(0x1c3)](_0x259e94(0x1e9))['then'](_0x13c22b=>{const _0x2d242d=_0x259e94;_0x13c22b[_0x2d242d(0x1bf)](_0xd3232=>{const _0x13788c=_0x2d242d,_0xa3e9a0=_0xd3232[_0x13788c(0x1b6)];_0xd3232['forEach'](_0x3ef0ae=>{const _0x30f8e4=_0x13788c,_0x297223=_0x3ef0ae[_0x30f8e4(0x1b6)],_0x4e769c=_0x3ef0ae[_0x30f8e4(0x1b7)](),_0x3454b6=document['createElement']('tr');_0x3454b6[_0x30f8e4(0x1db)]=_0x30f8e4(0x1ac)+_0xa3e9a0+_0x30f8e4(0x1d8)+(_0x4e769c[_0x30f8e4(0x1cb)]||'')+_0x30f8e4(0x1b8)+(_0x4e769c[_0x30f8e4(0x1cb)]||'')+_0x30f8e4(0x1ce)+(_0x4e769c[_0x30f8e4(0x1d4)]||'')+'\x22>link</a></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>'+_0x297223+_0x30f8e4(0x1d9)+_0xa3e9a0+_0x30f8e4(0x1e7)+_0x297223+_0x30f8e4(0x1af)+_0xa3e9a0+'\x27,\x20\x27'+_0x297223+_0x30f8e4(0x1c5),_0x410cda[_0x30f8e4(0x1c9)](_0x3454b6);});});})[_0x259e94(0x1b3)](_0x50a201=>{showToast('error','Error\x20fetching\x20content:\x20'+_0x50a201['message']);});}function _0x4e43(_0x8b6589,_0x1fc692){const _0x39693d=_0x3969();return _0x4e43=function(_0x4e4327,_0x54cb34){_0x4e4327=_0x4e4327-0x1a9;let _0x3c0c41=_0x39693d[_0x4e4327];return _0x3c0c41;},_0x4e43(_0x8b6589,_0x1fc692);}function updateContent(){const _0x3b44e9=_0x4e43,_0x2f63e7=document['getElementById']('editPostIdInput')[_0x3b44e9(0x1ba)][_0x3b44e9(0x1bb)],_0x1d8ce4=document[_0x3b44e9(0x1c8)]('editRoleSelect')[_0x3b44e9(0x1ba)]['oldRole'],_0x3bd9b1=document[_0x3b44e9(0x1c8)](_0x3b44e9(0x1cd))[_0x3b44e9(0x1e9)],_0x2f0a7e=document[_0x3b44e9(0x1c8)]('editTitleInput')[_0x3b44e9(0x1e9)],_0x3b273e=document[_0x3b44e9(0x1c8)]('editLinkInput')[_0x3b44e9(0x1e9)],_0x190368=document['getElementById']('editRoleSelect')[_0x3b44e9(0x1e9)];if(!_0x3bd9b1||!_0x2f0a7e||!_0x3b273e){showToast(_0x3b44e9(0x1d5),_0x3b44e9(0x1e8));return;}const _0x23be60=dbrl[_0x3b44e9(0x1d1)](_0x3b44e9(0x1ab)+_0x2f63e7+'/'+_0x1d8ce4);_0x23be60[_0x3b44e9(0x1b4)]()[_0x3b44e9(0x1c2)](()=>{const _0x59a592=_0x3b44e9,_0x531dcb=dbrl[_0x59a592(0x1d1)](_0x59a592(0x1ab)+_0x3bd9b1+'/'+_0x190368);return _0x531dcb[_0x59a592(0x1cc)]({'title':_0x2f0a7e,'link':_0x3b273e,'kontent':document['getElementById'](_0x59a592(0x1b1))['value']});})[_0x3b44e9(0x1c2)](()=>{const _0x576e8f=_0x3b44e9;showToast(_0x576e8f(0x1e0),_0x576e8f(0x1ad)),cancelEdit(),displayResult();})['catch'](_0x4792f6=>{const _0x1201ac=_0x3b44e9;showToast(_0x1201ac(0x1d5),'Error\x20updating\x20content:\x20'+_0x4792f6[_0x1201ac(0x1d3)]);});}function cancelEdit(){const _0x4ca602=_0x4e43;document[_0x4ca602(0x1c8)](_0x4ca602(0x1e3))[_0x4ca602(0x1b2)][_0x4ca602(0x1bd)]='none';}function editContent(_0x54f123,_0x38df3e){const _0x1967d4=_0x4e43,_0x3c6425=dbrl[_0x1967d4(0x1d1)](_0x1967d4(0x1ab)+_0x54f123+'/'+_0x38df3e);_0x3c6425[_0x1967d4(0x1c3)]('value')[_0x1967d4(0x1c2)](_0x349158=>{const _0x4e0d24=_0x1967d4;if(_0x349158[_0x4e0d24(0x1d0)]()){const _0x363af0=_0x349158[_0x4e0d24(0x1b7)]();document[_0x4e0d24(0x1c8)](_0x4e0d24(0x1cd))[_0x4e0d24(0x1e9)]=_0x54f123,document[_0x4e0d24(0x1c8)]('editPostIdInput')[_0x4e0d24(0x1ba)][_0x4e0d24(0x1bb)]=_0x54f123,document[_0x4e0d24(0x1c8)]('editRoleSelect')[_0x4e0d24(0x1e9)]=_0x38df3e,document[_0x4e0d24(0x1c8)](_0x4e0d24(0x1d2))[_0x4e0d24(0x1ba)][_0x4e0d24(0x1d6)]=_0x38df3e,document[_0x4e0d24(0x1c8)]('editTitleInput')[_0x4e0d24(0x1e9)]=_0x363af0[_0x4e0d24(0x1cb)]||'',document['getElementById'](_0x4e0d24(0x1c0))[_0x4e0d24(0x1e9)]=_0x363af0[_0x4e0d24(0x1d4)]||'',document[_0x4e0d24(0x1c8)](_0x4e0d24(0x1b1))[_0x4e0d24(0x1e9)]=_0x363af0[_0x4e0d24(0x1c7)]||'',document[_0x4e0d24(0x1c8)](_0x4e0d24(0x1e3))[_0x4e0d24(0x1b2)][_0x4e0d24(0x1bd)]=_0x4e0d24(0x1c6);}else showToast(_0x4e0d24(0x1d5),_0x4e0d24(0x1bc));})['catch'](_0xed02b9=>{const _0x5c9b29=_0x1967d4;showToast(_0x5c9b29(0x1d5),'Error\x20fetching\x20content\x20for\x20edit:\x20'+_0xed02b9[_0x5c9b29(0x1d3)]);});}function deleteContent(_0x1e1347,_0x2fe636){const _0x4402ae=_0x4e43,_0x5c9a01=prompt('Please\x20enter\x20password\x20to\x20confirm\x20deletion:');if(validatePassword(_0x5c9a01)){const _0x7e318f=dbrl[_0x4402ae(0x1d1)](_0x4402ae(0x1ab)+_0x1e1347+'/'+_0x2fe636);_0x7e318f[_0x4402ae(0x1b4)]()[_0x4402ae(0x1c2)](()=>{const _0x8196cb=_0x4402ae;showToast('success',_0x8196cb(0x1c1)),displayResult();})[_0x4402ae(0x1b3)](_0xdf0552=>{const _0x5040ab=_0x4402ae;showToast(_0x5040ab(0x1d5),_0x5040ab(0x1d7)+_0xdf0552['message']);});}else showToast(_0x4402ae(0x1d5),'Invalid\x20password.\x20Content\x20not\x20deleted.');}
+displayResult();
+  </script>

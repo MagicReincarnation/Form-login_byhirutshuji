@@ -1,0 +1,379 @@
+<style>
+.ProfileX {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ProfileX h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile_data_0,
+.profile_data_1,
+.profile_data_2 {
+    margin-bottom: 20px;
+}
+
+.fotoprofile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.logoprofile {
+    margin-right: 10px;
+}
+
+#userPhoto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+#updateprofile_hr {
+    background-color: #222;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.data-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Ndata {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.username_edit {
+    display: flex;
+    align-items: center;
+}
+
+.edit_Nama {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.btn_opsi_profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_opsi_profile button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color:#fff;
+    margin: 5px;
+}
+
+.DeleteAccount {
+    background-color: #242424;
+}
+
+.Logout {
+    background-color: #242424;
+}
+
+.notif-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    color:#fff;
+    z-index: 999999;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notif-container.hiddenprofile_notif {
+    opacity: 0;
+    transform: translateY(-200px);
+}
+
+.notif-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.notif-content {
+    flex: 1;
+}
+
+.notif-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notif-text {
+    font-size: 14px;
+}
+
+.notif-buttons {
+    margin-top: 10px;
+}
+
+.notif-buttons button {
+    background-color: #242424;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notif-buttons button:hover {
+    background-color: #0056b3;
+}
+
+.success {
+    border-left: 5px solid #28a745;
+}
+
+.error {
+    border-left: 5px solid #dc3545;
+}
+
+.warning {
+    border-left: 5px solid #ffc107;
+}
+
+.info {
+    border-left: 5px solid #17a2b8;
+}
+  
+.loader_delete_akun {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loader_delete_akun::after {
+    content: '';
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #242424;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+  
+</style>
+
+<!-- Form Profile -->
+<div class='ProfileX form' id='profile_hr'>
+ <h1>Profile</h1>
+<div class='profile_data_0'>
+<span class='fotoprofile'>
+<span class='logoprofile' id='cc_profile' style="display:none;">
+<img  id="userPhoto" src="" alt="User Photo">
+</span>  
+<input type="file" id="uploadprofile_hr" accept="image/*" style="display:none;">
+<label for="uploadprofile_hr" style="cursor: pointer;">Pilih Foto</label>
+<script>
+  const input = document.getElementById('uploadprofile_hr');
+  const userPhoto = document.getElementById('userPhoto');
+  input.addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+     userPhoto.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<span id="updateprofile_hr">Update</span>
+</span>  
+<div class='profile_data_1'>
+   <span class='data-user'>
+    <span class='Ndata'>Uid:</span>
+  <span id='profile-uid'></span>
+     </span>
+ <span class='data-user'>
+   <span class='Ndata'>Role: 
+  </span>
+    <span id='profile-role'>
+    </span> 
+    </span>
+   <span class='data-user'>
+ <span class='Ndata'>Exp: 
+    </span>
+    <span id='exp-role'></span>
+   </span> 
+   
+    </div>
+</div> 
+ <div class='profile_data_2'>          
+<span class='data-user username_edit'>
+    <span class='Ndata'>Username:</span>
+   <span id='profile-username'></span> 
+    <button id="UpdateUsername" class='edit_Nama'><svg height='20' viewBox='0 0 32 32' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M13 3c-3.855 0-7 3.145-7 7c0 2.41 1.23 4.55 3.094 5.813C5.527 17.343 3 20.883 3 25h2c0-4.43 3.57-8 8-8c2.145 0 4.063.879 5.5 2.25l-4.719 4.719l-.062.312l-.688 3.532l-.312 1.468l1.469-.312l3.53-.688l.313-.062l10.094-10.094c1.16-1.16 1.16-3.09 0-4.25a3.018 3.018 0 0 0-4.219-.031l-3.968 3.969a10.103 10.103 0 0 0-3.032-2A7.024 7.024 0 0 0 20 10c0-3.855-3.145-7-7-7zm0 2c2.773 0 5 2.227 5 5s-2.227 5-5 5s-5-2.227-5-5s2.227-5 5-5zm13 10c.254 0 .52.082.719.281a.977.977 0 0 1 0 1.406l-9.688 9.688l-1.781.375l.375-1.781l9.688-9.688A.934.934 0 0 1 26 15z' fill='currentColor'/></svg></button>
+    </span>
+  <span class='data-user'>
+    <span class='Ndata'>Email:</span>
+  <span id='profile-email'></span>
+    </span>  
+  <div class='btn_opsi_profile'>
+  <!-- Loader delete -->
+<div id="loader_delete_akun" class="loader_delete_akun" style="display: none;"></div>
+<button id='deleteAccount' class='DeleteAccount'>Delete Account?</button>  
+  <button class='Logout' id='logoutButton'>logout?</button>  
+   </div>
+	</div>
+</div>   
+
+
+<div id="notifContainer" class="notif-container hiddenprofile_notif">
+    <div id="notifIcon" class="notif-icon"></div>
+    <div class="notif-content">
+        <div id="notifTitle" class="notif-title"></div>
+        <div id="notifText" class="notif-text"></div>
+    </div>
+    <div id="notifButtons" class="notif-buttons">
+        <button id="notifConfirm">OK</button>
+        <button id="notifCancel" class="hiddenprofile_notif">Cancel</button>
+    </div>
+</div>
+
+<script>
+ /*<![CDATA[*/
+  const pesanNotif = {
+    logout: {
+        judul: "Berhasil logout!",
+        pesan: "Akun Telah berhasil Logout"
+    },
+    belumLogin: {
+        judul: "Kamu belum Login",
+        pesan: "Kamu harus Login terlebih dahulu dan pastikan sudah vertifikasi email kamu sebelum kesini"
+    },
+    belumTervertifikasi:{
+      judul: "Kamu belum Tervertifikasi",
+      pesan: "Email Kamu harus Tervertifikasi dahulu dan pastikan sudah vertifikasi email kamu sebelum kesini"
+    },    
+    konfirmasiPenghapusan: {
+        judul:"Konfirmasi",
+        pesan:  "Akun yang sudah dihapus tidak bisa dikembalikan. password dibutuhkan sebagai konfirmasi",
+    },
+    berhasilmenghapusAkun: {
+        judul: "Berhasil Dihapus",
+        pesan: "Akun kamu sudah berhasil dihapus"
+    },
+    autentikasiGagal: {
+        judul: "Gagal dihapus",
+        pesan: "Mohon Periksa kata sandi kamu dengan benar"
+    },
+    updateUsername: {
+        judul: "Masukan Username",
+        pesan:"Silahkan masukan Username yang baru",
+        ya:"Update",
+        tidak:"batal"
+    },
+    berhasilUpdateUsername: {
+        judul: "username Diubah",
+        pesan: "Username berhasil diubah"
+    },
+   updateUsernametelegram: {
+        judul: "Masukan Username",
+        pesan:"Silahkan masukan Username yang baru",
+        ya:"Update",
+        tidak:"batal"
+    },
+    updateprofilephoto:{
+     judul:"Update Foto Profil",
+     pesan:"Apakah kamu yakin ingin memperbarui foto profil kamu?",
+     ya:"Update",
+     tidak: "Batal"
+    },
+    suksesUpdatePhoto:{
+      judul:'berhasil Update',
+     pesan:"Profile Telah diupdate"
+    },    
+    wrnUpdatePhoto:{
+      judul:'berhasil Update',
+     pesan:"Profile Telah diupdate"
+    },
+    gagalUpdatePhoto:{
+     judul:'gagal Update',
+    },
+    loaderupdatephoto:{
+     judul:"Mengunggah Foto Profil",
+     pesan:"Sabar...sedang diproses"
+    },
+    ijinProfile:{
+     judul:"warning",
+     pesan:"Maaf, kamu tidak diizinkan untuk melakukan menggunakan fitur ini di luar domain yang terdaftar."
+    }
+};
+ var urlGambarcustom ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGqKEDe_BLCrykvvwKY5QNFVOe-s0C67nRcDJZW_PNHZTOUskqLu2z43OX&s=10";
+ 
+// isi opsi redirect
+    const RedirectOpsiHalaman_pHiru= {
+        custom_url: "https://datakodehiru.blogspot.com",
+        homepage_url: window.location.hostname
+    };
+ //redirect yang dipilih 
+let redirectOpsi_pHiru = "Customurl";
+/*ada tiga opsi "Customurl","Homepage","Reload" */
+
+let waktuTunda_pHiru = 0;// 0detik sebelum redirect dilakukan
+  
+let iconSukses = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="green" d="m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83z"/></svg>`; 
+  
+ let iconGagal = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>`;
+  
+ let iconInfo = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#ffff00" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v8m.05 4v.1h-.1V18z"/></svg>`;
+ 
+ let iconWarning= `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="#ffd43b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="15" d="m381 340.1l-52.8-97.3l-51-94.2a24 24 0 0 0-42.4 0l-51 94.2l-52.8 97.3a24.3 24.3 0 0 0 21.2 35.9h207.7a24.2 24.2 0 0 0 21.1-35.9Z"/><path fill="#ffd43b" d="M243 216.6q1.5-1.3 5.5-1.3h15.3c2.7 0 4.5.4 5.6 1.3s1.5 2.4 1.4 4.7l-3 71.8c-.1 2.3-.7 3.8-1.6 4.6s-2.7 1.3-5.4 1.3h-9.4c-2.6 0-4.4-.5-5.3-1.3s-1.5-2.3-1.6-4.6l-2.9-71.9c0-2.2.4-3.8 1.4-4.6m29 107.6q0 7-3 9.5c-2 1.8-5.6 2.7-11 2.7h-4c-5.4 0-9-1-11-2.6s-3-5-3-9.6v-2.9q0-7 3-9.6c2-1.7 5.6-2.5 11-2.5h4c5.4 0 9 .8 11 2.5s3 5 3 9.6Z"/></svg>`;
+/*]]>*/  
+</script>

@@ -1,0 +1,245 @@
+<style>
+  :root {
+    --bg-datauser-dasboard: #1e2129;
+    --color-dasboard: #0c70de;
+    --color-text-dasboard: #fff;
+  }
+
+  .hidden1 { display: none; }
+
+  ul#user-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul#user-list li.usersub::before {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 3px 7px;
+    background: var(--color-dasboard);
+    color: var(--color-text-dasboard);
+    content: attr(index);
+  }
+
+  #user-list li {
+    position: relative;
+    margin: 55px 0 25px -20px;
+    background: var(--bg-datauser-dasboard);
+    color: var(--color-text-dasboard);
+    height: auto;
+    border-radius: 15px;
+    font-size: 16px;
+    float: left;
+  }
+
+  span.setting-user {
+    display: flex;
+    flex-direction: column;
+  }
+
+  span.setting-user > span {
+    border: 1px solid var(--color-dasboard);
+    border-radius: 5px;
+    padding: 1px 10px;
+    margin: 3px;
+    overflow: hidden;
+  }
+
+  span.setting-user > span:hover {
+    overflow: auto;
+  }
+
+  ul#user-list li button:first-child {
+    background: var(--color-dasboard);
+    color: var(--color-text-dasboard);
+    border: none;
+    border-radius: 5px;
+    right: -5px;
+    top: -25px;
+  }
+
+  ul#user-list li button:nth-child(2) {
+    background: #0000;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    bottom: 13px;
+    right: 16px;
+  }
+
+  ul#user-list li button:nth-child(3) {
+    border: 1px solid var(--color-dasboard);
+    border-radius: 5px;
+    bottom: 0;
+    left: 0;
+  }
+
+  div#set1 {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  input#checkTanggal {
+    padding: 10px 15px;
+    background: #1e2129ba;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  input#checkTanggal::placeholder {
+    color: #fff;
+  }
+
+  span#inputset1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #inputset1 button {
+    background: var(--color-dasboard);
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 6px 20px;
+    margin: 5px;
+  }
+
+  span#result_tanggal {
+    position: relative;
+    border-radius: 15px;
+    background: #1e2129ba;
+    color: #fff;
+    padding: 3px;
+    width: 50%;
+    min-height: 60px;
+    max-height: 100%;
+    margin: 5px;
+  }
+
+  span#result_tanggal:before {
+    content: "Output >";
+    position: absolute;
+    top: 0;
+    left: -80px;
+    background: #1e2129ba;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 16px;
+  }
+  .setting-dashboard {
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  span.cariUser, .filterUser {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  input#search-input {
+    width: 100%;
+    padding: 10px 15px;
+    background: #1e2129ba;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  input#search-input::placeholder {
+    color: #fff;
+  }
+
+  .cariUser button {
+    background: var(--color-dasboard);
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    padding: 6px 20px;
+    margin: 5px;
+  }
+  div#pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 3px;
+  }
+
+  div#pagination button {
+    padding: 5px 8px;
+    background: #0c70de;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+  }
+
+  div#page-numbers {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div#page-numbers span {
+    margin: auto 5px;
+    border: none;
+    background: #0c70de;
+    color: #eee;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 3px 7px;
+  }
+
+  div#page-numbers span.current-page,
+  div#pagination button:hover,
+  div#page-numbers span:hover {
+    background: #ff9a00;
+    color: #1e2129;
+  }
+</style>
+  <div class="setting-dashboard">
+    <span class="cariUser">
+      <input type="text" id="search-input" placeholder="Cari berdasarkan UID"/>
+      <button onclick="searchUsers()">Cari User</button>
+    </span>
+    <br/>
+  </div>
+
+<hr/>
+<div id="admin-dashboard">
+  <ul id="user-list"></ul>
+</div>
+ <hr/>
+<div id="pagination">
+    <button onclick="loadPreviousPage()">Prev</button>
+    <div id="page-numbers"></div>
+    <button onclick="loadNextPage()">Next</button>
+  </div>
+
+
+<script>
+  const perhalaman = 15;
+  function _0x48d4(_0x45442a,_0x42d7e4){const _0x3de2a1=_0x3de2();return _0x48d4=function(_0x48d4b6,_0x4ba678){_0x48d4b6=_0x48d4b6-0xe1;let _0x24320d=_0x3de2a1[_0x48d4b6];return _0x24320d;},_0x48d4(_0x45442a,_0x42d7e4);}const _0x4a5d92=_0x48d4;(function(_0x3b9fb8,_0x191415){const _0x33408e=_0x48d4,_0x58974d=_0x3b9fb8();while(!![]){try{const _0xa3ac1=-parseInt(_0x33408e(0xf3))/0x1*(-parseInt(_0x33408e(0x11f))/0x2)+-parseInt(_0x33408e(0xf6))/0x3+-parseInt(_0x33408e(0x10e))/0x4+-parseInt(_0x33408e(0x121))/0x5*(-parseInt(_0x33408e(0xfe))/0x6)+parseInt(_0x33408e(0x101))/0x7+parseInt(_0x33408e(0x11d))/0x8+parseInt(_0x33408e(0xe1))/0x9*(-parseInt(_0x33408e(0x119))/0xa);if(_0xa3ac1===_0x191415)break;else _0x58974d['push'](_0x58974d['shift']());}catch(_0x4cb6ff){_0x58974d['push'](_0x58974d['shift']());}}}(_0x3de2,0x51081));let currentPage=0x1;function setperhalaman(_0x17b9f6){perhalaman=_0x17b9f6,currentPage=0x1,loadUsers();}function loadUsers(){const _0x1a6666=_0x48d4,_0x2164d9=(currentPage-0x1)*perhalaman,_0x45358e=_0x2164d9+perhalaman;db['collection']('users')['get']()[_0x1a6666(0x105)](_0x481f7a=>{const _0xe310a7=_0x1a6666,_0x1558a8=[];_0x481f7a[_0xe310a7(0x11c)](_0x1298a0=>{_0x1558a8['push']({'id':_0x1298a0['id'],..._0x1298a0['data']()});});const _0x1ed369=_0x1558a8[_0xe310a7(0x107)](_0x2164d9,_0x45358e);showUserList(_0x1ed369),displayPageNumbers(_0x1558a8[_0xe310a7(0xee)]);});}function _0x3de2(){const _0x2f2d43=['value','createElement','202926LoDPsK','Admin','textContent','1865241zbRjhK','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22exp-role\x22>Exp:\x20','numeric','setAttribute','then','email','slice','message','addEventListener','.editexp','Gagal\x20mengubah\x20Role\x20User:\x20','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<summary>Info\x20Role</summary>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Hanya\x203\x20Role\x20yang\x20tersedia</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>1:\x20Admin\x20=\x20membuka\x20Konten\x20User\x20&\x20Member\x20&\x20Admin</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>2:\x20Member\x20=\x20membuka\x20Konten\x20User\x20&\x20Member</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>3:\x20User\x20=\x20membuka\x20Konten\x20User</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<summary>Info\x20Aturan\x20Exp\x20Role</summary>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>Hanya\x20Tanggal\x20angka\x20yang\x20diijinkan</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>1.\x20dd/mm/yyyy:\x20harus\x20wajib\x20dua\x20angka\x20seperti\x20ini\x20[01/01/2023]\x20Angka\x20satu\x20punya\x20angka\x20nol</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>2.\x20dd/mm/yyyy:\x20Dalam\x20Tanggal\x20kalian\x20tidak\x20boleh\x20memasukan\x20Huruf,\x20Hanya\x20angka\x20yang\x20diperbolehkan</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>3.\x20dd/mm/yyyy:\x20Kalian\x20juga\x20tidak\x20boleh\x20memasukan\x20WIB\x20karena\x20itu\x20otomatis\x20akan\x20ada\x20dengan\x20sendirinya</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22role-user\x22>Role:\x20','role','2102108YOhRPd','exists','error','data','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<summary>Info\x20Status\x20Email?</summary>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>false\x20=\x20Belum\x20verifikasi\x20email\x20dan\x20belum\x20login\x20sama\x20sekali</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>true\x20=\x20sudah\x20verifikasi\x20email\x20dan\x20sudah\x20login\x20sekali\x20(terdaftar)</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</details>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22email-user\x22>Email:\x20','split','toLowerCase','test','#page-numbers','Masukkan\x20tanggal\x20Exp\x20membership:\x20contoh\x20(30/12/2023)\x20tanpa\x20WIB:','#user-list','2890Hjollm','classList','getTime','forEach','4793624mwJqBO','Masukkan\x20Role\x20baru\x20untuk\x20User:','478cSlzSt','Asia/Jakarta','35DaJdzZ','collection','Format\x20tanggal\x20tidak\x20valid.\x20Gunakan\x20format\x20dd/mm/yyyy.','appendChild','querySelector','index','catch','Error\x20getting\x20user\x20data:','774VAhIll','users','includes','map','toLocaleDateString','filter','add','innerHTML','Gagal\x20mengambil\x20data\x20User:\x20','get','usersub','Error\x20getting\x20users:','current-page','length','Role\x20User\x20berhasil\x20diubah.','update','doc','\x0a\x20\x20\x20\x20\x20\x20<span\x20class=\x22setting-user\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20id=\x22uidcheck\x22\x20class=\x22username-user\x22>Uid:\x20','79mRaoSj','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22email-status\x22>Status\x20Email:\x20','click','717024WfACYM','2-digit','span','#search-input','short','exp'];_0x3de2=function(){return _0x2f2d43;};return _0x3de2();}function loadPreviousPage(){currentPage>0x1&&(currentPage--,loadUsers());}function loadNextPage(){currentPage++,loadUsers();}function displayPageNumbers(_0x3228f2){const _0x3b677c=_0x48d4,_0x552cd4=Math['ceil'](_0x3228f2/perhalaman),_0x3d4e54=document[_0x3b677c(0x125)](_0x3b677c(0x116));_0x3d4e54['innerHTML']='';for(let _0x13f784=0x1;_0x13f784<=_0x552cd4;_0x13f784++){const _0x358d3f=document[_0x3b677c(0xfd)](_0x3b677c(0xf8));_0x358d3f[_0x3b677c(0x100)]=_0x13f784,_0x13f784===currentPage&&_0x358d3f[_0x3b677c(0x11a)][_0x3b677c(0xe7)](_0x3b677c(0xed)),_0x358d3f[_0x3b677c(0x109)](_0x3b677c(0xf5),()=>{currentPage=_0x13f784,loadUsers();}),_0x3d4e54[_0x3b677c(0x124)](_0x358d3f);}}function ExpRoleuser(_0x54ad62,_0xe99a44){const _0x4fc6ff=_0x48d4;if(!/^(\d{2})\/(\d{2})\/(\d{4})$/[_0x4fc6ff(0x115)](_0xe99a44)){alert('Format\x20tanggal\x20tidak\x20valid.\x20Gunakan\x20format\x20dd/mm/yyyy.');return;}db[_0x4fc6ff(0x122)]('users')[_0x4fc6ff(0xf1)](_0x54ad62)[_0x4fc6ff(0xea)]()[_0x4fc6ff(0x105)](_0x4e64ae=>{const _0x2fc6f0=_0x4fc6ff;if(_0x4e64ae[_0x2fc6f0(0x10f)]){const _0x2e09da=_0x4e64ae[_0x2fc6f0(0x111)]();if(_0x2e09da[_0x2fc6f0(0x10d)]==='Admin'){alert('Tidak\x20diizinkan\x20mengubah\x20tanggal\x20Exp\x20pada\x20user\x20dengan\x20Role\x20Admin.');return;}const [_0x144cd4,_0x5cc11e,_0x284c61]=_0xe99a44[_0x2fc6f0(0x113)]('/')[_0x2fc6f0(0xe4)](Number),_0x6e161a=new Date(_0x284c61,_0x5cc11e-0x1,_0x144cd4);if(isNaN(_0x6e161a[_0x2fc6f0(0x11b)]())){alert(_0x2fc6f0(0x123));return;}const _0xa1ed06=_0x6e161a[_0x2fc6f0(0xe5)]('id-ID',{'timeZone':_0x2fc6f0(0x120),'day':_0x2fc6f0(0xf7),'month':_0x2fc6f0(0xf7),'year':_0x2fc6f0(0x103),'timeZoneName':_0x2fc6f0(0xfa)});db['collection'](_0x2fc6f0(0xe2))[_0x2fc6f0(0xf1)](_0x54ad62)[_0x2fc6f0(0xf0)]({'exp':_0xa1ed06})[_0x2fc6f0(0x105)](()=>{alert('Tanggal\x20Exp\x20Role\x20User\x20berhasil\x20diubah.'),loadUsers();})[_0x2fc6f0(0x127)](_0x51d495=>{const _0x430b8e=_0x2fc6f0;alert('Gagal\x20mengubah\x20Tanggal\x20Exp\x20Role\x20User:\x20'+_0x51d495[_0x430b8e(0x108)]);});}})[_0x4fc6ff(0x127)](_0x1f698c=>{const _0x13a27a=_0x4fc6ff;console[_0x13a27a(0x110)](_0x13a27a(0x128),_0x1f698c);});}function changeUserRole(_0x1bb417,_0x45877b){const _0x715d89=_0x48d4;db[_0x715d89(0x122)](_0x715d89(0xe2))[_0x715d89(0xf1)](_0x1bb417)[_0x715d89(0xea)]()[_0x715d89(0x105)](_0x237143=>{const _0x2840e6=_0x715d89;if(_0x237143[_0x2840e6(0x10f)]){const _0xa26ef2=_0x237143[_0x2840e6(0x111)]();if(_0xa26ef2[_0x2840e6(0x10d)]===_0x2840e6(0xff)){alert('Tidak\x20diizinkan\x20mengubah\x20User\x20dengan\x20Role\x20Admin.');return;}db[_0x2840e6(0x122)]('users')[_0x2840e6(0xf1)](_0x1bb417)['update']({'role':_0x45877b})[_0x2840e6(0x105)](()=>{const _0x40bca4=_0x2840e6;alert(_0x40bca4(0xef)),loadUsers();})[_0x2840e6(0x127)](_0x31397b=>{const _0x2bf98d=_0x2840e6;alert(_0x2bf98d(0x10b)+_0x31397b['message']);});}})['catch'](_0x452c0c=>{const _0x59f728=_0x715d89;alert(_0x59f728(0xe9)+_0x452c0c[_0x59f728(0x108)]);});}function showUserList(_0x499ba4){const _0x2c9e3c=_0x48d4,_0xbb6114=document[_0x2c9e3c(0x125)](_0x2c9e3c(0x118));_0xbb6114[_0x2c9e3c(0xe8)]='',_0x499ba4[_0x2c9e3c(0x11c)]((_0x46fbb7,_0x3cca69)=>{const _0x35f61a=_0x2c9e3c,_0x3c80b1=document[_0x35f61a(0xfd)]('li');_0x3c80b1[_0x35f61a(0x11a)][_0x35f61a(0xe7)](_0x35f61a(0xeb)),_0x3c80b1[_0x35f61a(0x104)](_0x35f61a(0x126),_0x3cca69+0x1),_0x3c80b1['innerHTML']=_0x35f61a(0xf2)+_0x46fbb7['id']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22username-user\x22>Nama:\x20'+_0x46fbb7['username']+_0x35f61a(0x112)+_0x46fbb7[_0x35f61a(0x106)]+_0x35f61a(0xf4)+_0x46fbb7['emailVerified']+_0x35f61a(0x10c)+_0x46fbb7['role']+_0x35f61a(0x102)+_0x46fbb7[_0x35f61a(0xfb)]+'</span>\x0a\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20\x20\x20<span\x20class=\x22btn-edit\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22editrole\x22>Edit\x20Role</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22editexp\x22>Edit\x20Tanggal\x20Exp</button>\x0a\x20\x20\x20\x20\x20\x20</span>\x0a\x20\x20\x20\x20',_0x3c80b1[_0x35f61a(0x125)]('.editrole')[_0x35f61a(0x109)](_0x35f61a(0xf5),()=>{const _0x59a556=_0x35f61a,_0x323234=prompt(_0x59a556(0x11e));_0x323234&&changeUserRole(_0x46fbb7['id'],_0x323234);}),_0x3c80b1[_0x35f61a(0x125)](_0x35f61a(0x10a))[_0x35f61a(0x109)](_0x35f61a(0xf5),()=>{const _0x4d7259=_0x35f61a,_0x3f950a=prompt(_0x4d7259(0x117));_0x3f950a&&ExpRoleuser(_0x46fbb7['id'],_0x3f950a);}),_0xbb6114[_0x35f61a(0x124)](_0x3c80b1);});}function searchUsers(){const _0x57b12b=_0x48d4,_0x5cbbcb=document[_0x57b12b(0x125)](_0x57b12b(0xf9))[_0x57b12b(0xfc)][_0x57b12b(0x114)]();db[_0x57b12b(0x122)](_0x57b12b(0xe2))[_0x57b12b(0xea)]()[_0x57b12b(0x105)](_0x33c15c=>{const _0x439631=_0x57b12b,_0x50dd64=[];_0x33c15c['forEach'](_0x370bba=>{const _0x2b26e7=_0x48d4;_0x50dd64['push']({'id':_0x370bba['id'],..._0x370bba[_0x2b26e7(0x111)]()});});const _0x2a74d8=_0x50dd64[_0x439631(0xe6)](_0x317cd5=>_0x317cd5['id'][_0x439631(0x114)]()[_0x439631(0xe3)](_0x5cbbcb));showUserList(_0x2a74d8),displayPageNumbers(_0x2a74d8['length']);})['catch'](_0x3a1ab9=>{const _0x55c061=_0x57b12b;console[_0x55c061(0x110)](_0x55c061(0xec),_0x3a1ab9);});}document[_0x4a5d92(0x109)]('DOMContentLoaded',()=>{loadUsers();});
+  </script>

@@ -1,0 +1,186 @@
+<style>
+.btn_login,.frinput{font-size:16px;width:100%}.border-wrp,.notif{align-items:center}.loginHiru{background:#f4f4f4;padding:20px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,.1);max-width:400px;width:100%;text-align:center}.login-form h3{font-size:24px;margin-bottom:20px;color:#333}.group_login{position:relative;margin-bottom:20px}.frinput{padding:10px 10px 10px 0;display:block;border:none;border-bottom:2px solid #333;background:0 0;color:#333;outline:0}.frinput::placeholder{color:#999}.group_login label{color:#333;font-size:14px;position:absolute;top:-20px;left:0}.bar_login{position:absolute;bottom:0;left:0;height:2px;width:100%;background:#333;transition:transform .3s;transform:scaleX(0)}.frinput:focus~.bar_login{transform:scaleX(1)}.icon_lock_pass_login{position:absolute;right:10px;top:10px;cursor:pointer}.btn_login{background-color:#000;color:#fff;padding:10px;border:none;border-radius:4px;cursor:pointer;transition:background-color .3s}.btn_login:hover{background-color:#333}.message{margin:15px 0 0;font-size:14px;color:#333}.message a{color:#000;text-decoration:none;font-weight:700}.border-wrp{display:flex;justify-content:center;margin:20px 0}.border-bts{height:1px;width:100%;background:#333}.spanor{padding:0 10px;font-weight:700;color:#333}.icon_lock_pass_login svg{width:24px;height:24px}.hiddeniconpass_login{display:none}@media (max-width:500px){.loginHiru{padding:15px}.login-form h3{font-size:20px}}.notif{position:fixed;top:20px;right:20px;background-color:#222;color:#fff;padding:20px;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.2);z-index:99999999;display:flex;transition:opacity .3s,visibility .3s}.notif.hiddeniconpass_login{opacity:0;visibility:hidden}.notif-content{display:flex;align-items:center}.notif-content h4{margin:0 10px;font-size:18px}.notif-content p{margin:0}.notif.success{border-left:4px solid #4caf50}.notif.error{border-left:4px solid #f44336}.notif.warning{border-left:4px solid #ff9800}#notifIcon{font-size:24px;margin-right:10px}@keyframes slideInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}@keyframes slideOutRight{from{transform:translateX(0)}to{transform:translateX(100%)}}
+</style>
+<div class='loginHiru'>
+  <!-- Form Login -->
+  <form class='login-form' id='formlogin'>
+   <h3>Welcome Back!</h3> 
+  <div class='group_login'>
+  <input class='frinput' id='login_email' placeholder='name@gmail.com' required='required' type='email'/>
+     <span class='bar_login'></span>
+      <label>EMAIL ADDRESS</label>
+      </div>
+   <div class='group_login'>
+   <input class='frinput Validpass1' id='login_password' placeholder='Password' required='required' type='password'/>
+  <span class='bar_login'></span>
+<label>PASSWORD</label>
+<span class='icon_lock_pass_login' id='clickShowpass_login'>
+<svg class='showPas icon1' viewBox='0 0 24 24'><path d='M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z' fill='#bbb'/></svg>
+<svg class='showPas icon2 hiddeniconpass_login' viewBox='0 0 24 24'>
+<path d='M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z' fill='#bbb'/></svg>
+</span> 
+      </div>
+<div class='boxbutton'>        
+   <button class='btn_login' type='submit'>Sign-in</button>
+      </div>  
+   <p class='message'>
+   <a class='reoverPassword'>Forgot Password?</a>
+    </p>
+    <div class="border-wrp">
+<div class="border-bts"></div>
+<span class="spanor">Hirutshuji</span>
+<div class="border-bts"></div>
+</div>
+  <p class='message'>Don&#39;t have an account? <a class='createAccount'>Register</a>
+    </p>   
+    </form> 
+    </div>   
+<div id="loginNotif" class="notif hiddeniconpass_login">
+  <div class="notif-content">
+    <span id="notifIcon"></span>
+    <h4 id="notifTitle"></h4>
+    <p id="notifText"></p>
+  </div>
+</div> 
+<script>
+ /*<![CDATA[*/
+    const pesanLogin = {
+   berhasilLogin: {
+        judul: "Berhasil Login!",
+        pesan: "kamu berhasil masuk ke akun kamu."
+        },
+   emailBelumTervertifikasi: {
+        judul: "Email Belum Terverifikasi",
+        pesan: "Pastikan kamu telah melakukan verifikasi email sebelum mencoba login.",
+        ya: "Mengerti"
+        },
+   kirimEmailVertifikasi:{
+        judul: "Kirim Vertifikasi email",
+        pesan:"Apakah kamu ingin Vertifikasi email sekarang?",
+        ya: "ya,kirim",
+        tidak: "batal"
+        },
+    vertifyTerkirim:{
+      judul:"verifikasi terkirim",
+      pesan:"Email verifikasi telah dikirim ke",
+      pesan2:"Silahkan cek inbox pesan kamu"
+        },
+    ijinLogin:{
+      judul:"warning",
+      pesan:"Maaf, kamu tidak diizinkan untuk melakukan operasi autentikasi di luar domain yang terdaftar."
+       },
+     loaderLogin:{
+      judul:"sabar bro",
+      pesan:"Mengecek data kamu dulu"
+      },
+     errorLog: {
+       judul: "Gagal Login",
+       pesan: "Terjadi kesalahan saat login. Silakan coba lagi nanti."
+        },
+     userTidakDitemukan: {
+      judul: "Gagal Login",
+        pesan: "Email tidak ditemukan. Silakan daftar terlebih dahulu.",
+        ya:"Tutup"
+        },
+     emailSalah: {
+      judul: "Gagal Login",
+        pesan: "Email yang kamu masukan salah. Silakan masukan email benar",
+        ya:"Tutup"
+        },
+     passwordSalah: {
+        judul: "Gagal Login",
+        pesan: "Kata sandi salah. Silakan coba lagi."
+        },
+    loginLimit: {
+        judul: "Gagal Login",
+        pesan :"Terlalu banyak percobaan masuk. Silakan coba lagi nanti."
+       },
+    gagalVertifypassword: {
+        judul: "Gagal Login",
+        pesan: "Verifikasi password gagal. harap masukan password yang benar."
+        }
+    };
+    
+
+ let iconSukses = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="green" d="m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83z"/></svg>`; 
+  
+ let iconGagal = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>`;
+ let iconInfo = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#ffff00" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v8m.05 4v.1h-.1V18z"/></svg>`;
+ let iconWarning= `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="#ffd43b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="15" d="m381 340.1l-52.8-97.3l-51-94.2a24 24 0 0 0-42.4 0l-51 94.2l-52.8 97.3a24.3 24.3 0 0 0 21.2 35.9h207.7a24.2 24.2 0 0 0 21.1-35.9Z"/><path fill="#ffd43b" d="M243 216.6q1.5-1.3 5.5-1.3h15.3c2.7 0 4.5.4 5.6 1.3s1.5 2.4 1.4 4.7l-3 71.8c-.1 2.3-.7 3.8-1.6 4.6s-2.7 1.3-5.4 1.3h-9.4c-2.6 0-4.4-.5-5.3-1.3s-1.5-2.3-1.6-4.6l-2.9-71.9c0-2.2.4-3.8 1.4-4.6m29 107.6q0 7-3 9.5c-2 1.8-5.6 2.7-11 2.7h-4c-5.4 0-9-1-11-2.6s-3-5-3-9.6v-2.9q0-7 3-9.6c2-1.7 5.6-2.5 11-2.5h4c5.4 0 9 .8 11 2.5s3 5 3 9.6Z"/></svg>`;
+ let iconLoader = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#ffff00" d="M12,23a9.63,9.63,0,0,1-8-9.5,9.51,9.51,0,0,1,6.79-9.1A1.66,1.66,0,0,0,12,2.81h0a1.67,1.67,0,0,0-1.94-1.64A11,11,0,0,0,12,23Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>`;
+ let iconTanya = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 64 64"><path fill="#be212f" d="M31.03 51.23q-2.854 0-4.872 1.809c-1.344 1.204-2.02 2.662-2.02 4.381q0 2.905 2.038 4.563c1.362 1.106 2.948 1.664 4.761 1.664c1.843 0 3.451-.55 4.827-1.641q2.062-1.642 2.062-4.587q0-2.577-1.972-4.381c-1.315-1.203-2.921-1.808-4.827-1.808M50.458 8.617c-1.75-2.656-4.251-4.78-7.438-6.319C39.851.773 36.16 0 32.046 0c-4.429 0-8.371.926-11.711 2.753c-3.344 1.83-5.928 4.178-7.68 6.978C10.895 12.545 10 15.375 10 18.145c0 1.477.616 2.856 1.824 4.096c1.214 1.248 2.724 1.879 4.488 1.879c3.01 0 5.061-1.766 6.105-5.23c.951-2.865 2.124-5.05 3.48-6.498c1.276-1.364 3.346-2.056 6.149-2.056c2.418 0 4.326.678 5.84 2.075c1.491 1.378 2.217 3.02 2.217 5.02c0 1.01-.236 1.917-.709 2.775c-.503.9-1.13 1.727-1.863 2.463c-.775.776-2.054 1.941-3.802 3.473c-2.036 1.785-3.679 3.348-4.875 4.646c-1.25 1.349-2.263 2.935-3.02 4.712c-.756 1.789-1.14 3.924-1.14 6.349c0 2.069.577 3.671 1.717 4.762c1.128 1.08 2.533 1.63 4.178 1.63c3.145 0 5.121-1.719 5.709-4.935q.448-2.006.674-2.802c.136-.483.333-.979.586-1.474c.246-.482.635-1.028 1.16-1.625c.547-.631 1.286-1.371 2.192-2.198c3.389-3.03 5.78-5.222 7.106-6.52c1.368-1.337 2.561-2.946 3.546-4.778c1.014-1.875 1.528-4.084 1.528-6.559c.002-3.131-.887-6.072-2.637-8.737"/></svg>`;
+
+   // isi opsi redirect
+    const RedirectOpsiHalaman_lHiru= {
+        custom_url: "https://datakodehiru.blogspot.com",
+        homepage_url: window.location.hostname
+    };
+  
+
+ //redirect yang dipilih 
+let redirectOpsi_loginHiru = "Customurl";
+/*ada tiga opsi "Customurl","Homepage","Reload" */
+
+let waktuTunda_lHiru = 1000;// 1detik sebelum redirect dilakukan
+
+let waktuTundaNotif = 3000; //3detik notif berhasil login muncul
+/*]]>*/
+</script>  
+<script defer='defer'>
+/*<![CDATA[*/ 
+ let idPassword = '#login_password';
+function showpasslogin() {
+ var pshowLogin = document.querySelector(idPassword);
+ pshowLogin.setAttribute('type', 'text'); 
+var loginpassshowicon = document.querySelector('.icon1'); loginpassshowicon.classList.add("hiddeniconpass_login");
+ var loginpassshowicon2 = document.querySelector('.icon2'); loginpassshowicon2.classList.remove("hiddeniconpass_login");
+}
+function hidepasslogin() {
+ var hidepassLogin = document.querySelector(idPassword);
+ hidepassLogin.setAttribute('type', 'password');
+
+ var hideniconpasslogin = document.querySelector('.icon1'); hideniconpasslogin.classList.remove("hiddeniconpass_login");
+ var hideniconpasslogin2 = document.querySelector('.icon2'); hideniconpasslogin2.classList.add("hiddeniconpass_login");
+}
+
+
+var pwShownLogin = 0;
+document.getElementById("clickShowpass_login").addEventListener("click", function () {
+if (pwShownLogin == 0) {
+ pwShownLogin = 1;
+showpasslogin();
+}
+else {
+ pwShownLogin = 0;
+hidepasslogin();
+}}, false);
+function encryptPassword(password) {
+  return btoa(password);
+}
+function decryptPassword(encryptedPassword) {
+  return atob(encryptedPassword);
+}
+function simpanHistoryLoginTerakhir(email, password) {
+  const ceklog = encryptPassword(password);
+  localStorage.setItem('lastLoginEmail', email);
+  localStorage.setItem('lastLoginPassword',ceklog);
+}
+function getLastLoginHistory() {
+  const lastLoginEmail = localStorage.getItem('lastLoginEmail');
+  const ceklog = localStorage.getItem('lastLoginPassword');
+  return { email: lastLoginEmail, password: ceklog };
+}
+function showLastLoginHistory() {
+  const { email, password } = getLastLoginHistory();
+  if (email) {
+    document.getElementById('login_email').value = email;
+  }
+  if (password) {
+    const decryptedPassword = decryptPassword(password);
+    document.getElementById('login_password').value = decryptedPassword;
+  }
+}
+window.onload = function() {
+  showLastLoginHistory();}
+ /*]]>*/
+   </script>
