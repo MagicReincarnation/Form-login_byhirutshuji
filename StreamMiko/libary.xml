@@ -1,4 +1,6 @@
-   <link href='https://cdn.plyr.io/3.7.8/plyr.css' rel='stylesheet'/>
+put under the <head>
+
+  <link href='https://cdn.plyr.io/3.7.8/plyr.css' rel='stylesheet'/>
   <script src='https://cdn.plyr.io/3.7.8/plyr.polyfilled.js'/>
   <script src='https://content.jwplatform.com/libraries/xZ88RwO4.js'/>
-<script>jwplayer.key=&quot;zTEbSn/eAplL0RLXT030FzOcek6qXmtrxju6Jg==&quot;</script>
+  <script>jwplayer.key=&quot;zTEbSn/eAplL0RLXT030FzOcek6qXmtrxju6Jg==&quot;</script>
