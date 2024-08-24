@@ -1,0 +1,108 @@
+Letakan diatas </body>
+
+
+
+
+<div class="toast_cc_bookmark" id="toast_cc_bookmark"></div>
+<script> 
+/*<![CDATA[*/ 
+let configBookmark = {
+  //limit per status bookmark
+  bookmarkLimit: 100,
+  bookmark: "Bookmark",
+  btnBookmarked: "Bookmarked {status}",
+  cekStatus: ["ongoing", "completed", "dropped", "hiatus", "watch", "unwatch"],
+  pesan_delete:"yakin ingin menghapus series ini dari bookmark?",
+  svgbtn_delete: `delete`,// svg delete bookmark
+  svgbtn_move: `move`,// svg move bookmark
+  
+  
+    //tab
+    tabs: {
+        tabAwal_statusbookmark: 'ongoing',
+        status_bookmark: ['ongoing', 'completed', 'dropped', 'hiatus', 'watch', 'unwatch']
+    },
+    
+    //pesan notifikasi
+    PESAN_ALERT: {        
+        
+      /*notif action bookmark*/
+        berhasil_dihapus: "berhasil dihapus.",
+		batalkan_hapus: "batal menghapus",
+        
+        berhasil_dipindahkan: "Series berhasil dipindakan ke",
+        
+        berhasil_membookmark: "Series berhasil dibookmark ke status",
+        
+        
+        /*notif duplikat bookmark*/
+	    duplikat_ditemukan: "Series/Chapter ini sudah ada di Folder Status berikut:",
+        
+        duplikat_dihapus: "Memindahkan Series/Chapter lama berhasil dilakukan.",
+        
+        /*notif limit bookmark*/
+        bookmarkLimit: "Tidak dapat menambahkan lebih dari 100 series/ep ke",
+        /*ntf action dan action fitur*/
+        gagal_bakcup: "Error saat melakukan backup.",
+        
+        importErrorHTML: "Gagal memulihkan Bookmark dari file HTML. Pastikan file yang diupload valid, LEBIH BAIK GUNAKAN FILE JSON.",
+        
+        importErrorFileType: "Format file tidak didukung. Silakan unggah file JSON.",
+        
+        importError: "Gagal mengimport Bookmark. Pastikan file yang diupload benar.",
+       
+    	berhasil_memulihkan_bookmark: "Bookmark berhasil dipulihkan!",
+                
+        perlu_login: "Silahkan login terlebih dahulu",
+
+        fitur_perluLogin: "Diperlukan login untuk mengakses fitur ini.",
+        
+        gagal_bakcup: "Error saat memulihkan data Bookmark: "
+    },
+
+    //untuk toast
+    toast: {
+        duration: 8000, // Durasi 8 detik tampil dalam milidetik
+    },
+
+    //import dan export
+   nama_file_backup: {
+        HTML: 'list_series_',
+        JSON: 'backup_bookmark_',
+        BULAN: [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"],
+        
+        README:{
+         FOLDER: 'BACA_AKU_PENTING_',
+         PESAN_README: `Backup dan Restore Bookmark Series diweb datakodehiru.blogspot.com:
+
+1. Backup data bookmark:
+   - File "list_series.html" berisi tampilan daftar series yang bisa langsung dibuka di browser.
+   - File "backup_bookmark.json" berisi data mentah dalam format JSON yang dapat diimpor(Restore) kembali.
+
+2. Pulihkan data backup bookmark:
+   - Untuk memulihkan bookmark, pilih button "Pulihkan" diweb kami, lalu unggah file "backup_bookmark.json" yang berisi data JSON Series.
+   
+CATATAN PENTING: 
+SETIAP KALI KAMU MEMULIHKAN DATA BOOKMARK KAMU MAKA DATA YANG SAAT INI SUDAH ADA WEB KAMI AKAN DIHAPUS DAN DIGANTIKAN DENGAN DATA BACKUP.
+
+Web kami: datakodehiru.blogspot.com
+
+Semoga bermanfaat!`,
+		},
+		ERRORBACKUP: "<p>Bookmark tidak ditemukan.</p>",
+    },
+
+    //untuk tampilan innerHTML bookmark
+    tampilan_notif_bookmark: {
+        loadingText: "Loading...",
+        tidak_ada_bookmark: "Tidak ditemukan history bookmark di status ini.",
+        noLogin: "Diperlukan login untuk mengakses fitur ini."
+    },
+    
+    cover: 's1600-c', //resolusi cover series
+};
+/*]]>*/
+ </script>
+<script src="https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/Fitur%20Bookmark/bookmark.js"></script>

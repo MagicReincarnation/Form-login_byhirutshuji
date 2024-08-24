@@ -1,0 +1,30 @@
+Letakan dihalaman bebas kasih judul apa aja.
+ini untuk menampilkan hasil Bookmark.
+
+
+<h2>List Bookmark</h2>  
+<div class="cc_backup_bookmark">
+<button onclick="backup_data_bookmark()">Backup Data</button>
+<input type="file" class="importBackupFile" id="importFile" accept=".json" />
+<button onclick="pulihkan_data_bookmark()">Pulihkan</button>
+</div>
+   <div class="cc_tabs_bookmark">
+   <div id="tabs_bookmark"></div>
+   </div>
+  <div class="cc_ls_history">
+   <div id="ls_history"></div>
+   </div>    
+    <div id="list_opsi" style="display: none;">
+      <div class="cc_list_opsi">
+        <form id="move-options-form">
+            <input type="radio" name="move-status" value="ongoing"> Ongoing<br>
+            <input type="radio" name="move-status" value="completed"> Completed<br>
+            <input type="radio" name="move-status" value="dropped"> Dropped<br>
+            <input type="radio" name="move-status" value="hiatus"> Hiatus<br>
+            <input type="radio" name="move-status" value="watch"> Watch<br>
+            <input type="radio" name="move-status" value="unwatch"> Unwatch<br>
+        </form>
+        <button onclick="move_Status_post()">Move</button>
+        <button onclick="op_statusOpsi(this)">Cancel</button>
+        </div>
+    </div>
