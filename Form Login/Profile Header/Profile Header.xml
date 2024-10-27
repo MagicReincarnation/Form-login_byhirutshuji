@@ -1,6 +1,6 @@
 <img class="profilePicture" src="" alt="Profile Picture" style="width:30px; height:30px; border-radius:50%;"/>
 
-<span class="username"></span>
+<span class="username">Guest</span>
 <span class="userRole"></span>
 <span class="userExp"></span>
 <span class="userEmail"></span>
@@ -41,16 +41,15 @@ function get_datauser(userId) {
         if (doc.exists) {
             return doc.data();
         } else {
-            console.warn("No user data found for this ID.");
-            return { username: "Guest" };
+  console.warn("No data.");
+            return;
         }
     }).catch((error) => {
-        console.error("Error fetching user data:", error);
-        return { username: "Guest" };
+        console.error("Error:", error);
+        return;
     });
 }
 
-// Display the user's profile data
 function displayUserProfile(user, data_user) {
     const profile_Avatar = document.querySelector(".profilePicture");
     const username = document.querySelector(".username");
@@ -58,12 +57,12 @@ function displayUserProfile(user, data_user) {
     const userExp = document.querySelector(".userExp");
     const userEmail = document.querySelector(".userEmail");
 
-    // Display profile picture if available
     if (user.photoURL) {
         profile_Avatar.src = user.photoURL;
     }
 
-    // Display username, role, EXP role, and email
+    // username, role, EXP role, dan email
+
     username.textContent = data_user.username || "Guest";
     userRole.textContent = data_user.role ? `Role: ${data_user.role}` : "Role: N/A";
     userExp.textContent = data_user.exp ? `EXP role: ${data_user.exp}` : "EXP role: N/A";
@@ -81,11 +80,11 @@ function logoutUser() {
 auth.onAuthStateChanged(function(user) {
     runprofile_Header(user);
     if (user) {
-        get_datauser(user.uid).then((data_user) => {
-            displayUserProfile(user, data_user);
+    get_datauser(user.uid).then((data_user) => {
+         displayUserProfile(user, data_user);
         });
     } else {
-        displayUserProfile(null, { username: "" });
+        displayUserProfile(null,null);
     }
 });
 /*]]>*/
