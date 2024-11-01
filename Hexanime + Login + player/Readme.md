@@ -124,13 +124,17 @@ service firebase.storage {
 - Masuk ke akun Blogger Kamu.
 - Buka **"Tema"** di menu sebelah kiri.
 - Klik pada **"Cadangkan/Pulihkan"** dan unggah file tema Hexanime yang telah Kamu unduh.
-### Atau cara manual 
+- **Atau cara manual**
 Copy File tema dan pergi ke **Tema** dan pergi ke **Edit HTML**
 hapus dulu semua isinya dan paste file tema yang kamu copy sebelumnya.
 - Setelah itu, pergi ke folder
  - **"[Halaman Login](https://github.com/MagicReincarnation/Form-login_byhirutshuji/tree/main/Form%20Login/Pages)"**
  - **"[Halaman StreamMiko](https://github.com/MagicReincarnation/Form-login_byhirutshuji/tree/main/StreamMiko/pages)"**
 dan buat halaman baru dengan kode yang ada difolder tersebut untuk masing-masing kodenya.
+
+
+### 3. pasang Config Sdk Firebase
+masuk kebagian layout blogger kamu dan cari bagian **Config Sdk** ganti isi config dengan punyamu.
 
 ## Penggunaan
 
