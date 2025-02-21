@@ -1,0 +1,163 @@
+/*css Login hirutshuji*/
+:root {
+  --bgdropdown: #001F3F;
+  --background-color: #001F3F;
+  /* Latar belakang header */
+  --header-border-color: #3A6D8C;
+  /* Warna batas bawah header */
+  --text-color: #EAD8B1;
+  /* Warna teks utama */
+  --secondary-text-color: #c1c1af;
+  /* Warna teks tambahan */
+  --item-hover-color: #6A9AB0;
+  /* Warna latar belakang item saat hover */
+  --link-color: #EAD8B1;
+  /* Warna tautan */
+  --icon-color: #EAD8B1;
+  /* Warna ikon */
+}
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+  margin-right: 5px;
+  float: right;
+}
+
+.openrecentlogin {
+  padding: 2px;
+  background: var(--bg-icon-header-light);
+  color: var(--icon-header-light);
+  border-radius: 4px;
+  margin: 10px 10px auto auto;
+  border: none;
+}
+
+.profile-picture {
+  display: flex;
+  height: 32px;
+  width: 32px;
+  flex: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.profilePicture:hover {
+  transform: scale(1.05);
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 80px;
+  right: 5px;
+  background-color: var(--bgdropdown);
+  border: 1px solid var(--header-border-color);
+  z-index: 99999;
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  padding: 12px;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--header-border-color);
+}
+
+.dropdown-header .username {
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.dropdown-header .userRole,
+.dropdown-header .userExp,
+.dropdown-header .userEmail {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin-top: 4px;
+}
+
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-item {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  padding: 3px 6px;
+  cursor: pointer;
+  align-items: center;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--item-hover-color);
+}
+
+.dropdown-item svg {
+  margin-right: 8px;
+  fill: var(--icon-color);
+  width: 16px;
+  height: 16px;
+}
+
+.registerLink a,
+.loginLink a,
+.profileLink a,
+.resetPasswordLink a,
+.logoutLink a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--link-color);
+  transition: color 0.3s;
+  font-size: 0.8rem;
+}
+
+.registerLink:hover,
+.loginLink:hover {
+  color: #0056b3;
+}
+
+/* Dark Mode */
+
+.dark-mode .openrecentlogin {
+  background: var(--bg-icon-header-dark);
+  color: var(--icon-header-dark);
+}
+
+.darkmode .dropdown-header {
+  background-color: #3B1C32;
+  border-bottom: 1px solid var(--header-border-color);
+}
+
+.darkmode .username,
+.darkmode .userRole,
+.darkmode .userExp,
+.darkmode .userEmail {
+  color: #ffffff;
+}
+
+.darkmode .dropdown-item {
+  color: #ffffff;
+}
+
+.darkmode .dropdown-item:hover {
+  background-color: #4A2C4D;
+}
+
+.showprofile {
+  display: block !important;
+}
