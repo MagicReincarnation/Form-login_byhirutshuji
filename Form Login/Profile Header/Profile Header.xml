@@ -1,40 +1,7 @@
 <b:widget id='HTML111' locked='true' title='my profile' type='HTML' version='2' visible='true'>
   <b:widget-settings>
     <b:widget-setting name='content'>
-      <![CDATA[links: {
-            register: '/p/register.html',
-            login: '/p/login_2.html',
-            profile: '/p/profile.html',
-            resetPassword: '/p/reset-password.html'
-        },
-        userData: {
-            username: { element: '.username', defaultValue: 'Guest' },
-            userRole: { element: '.userRole', defaultValue: 'Role: ' },
-            userExp: { element: '.userExp', defaultValue: 'EXP role:' },
-            userEmail: { element: '.userEmail', defaultValue: 'Email: ?' }
-        },
-        visibility: {
-            loggedIn: {
-                register: false,
-                login: false,
-                profile: true,
-                resetPassword: false,
-                logout: true
-            },
-            loggedOut: {
-                register: true,
-                login: true,
-                profile: false,
-                resetPassword: true,
-                logout: false
-            }
-        }]]>
-    </b:widget-setting>
-  </b:widget-settings>
-  <b:includable id='main'>
-    <script>
-      const config = { <data:content/> };
-    </script>
+      <![CDATA[
     <!--Menu Login/Register-->
     <!--avatar users-->
     <div class='profile-container flex h-8 w-8 items-center justify-center relative'>
@@ -43,6 +10,7 @@
       </button>
       <div class='dropdown' id='profileDropdown'>
         <div class='dropdown-header'>
+        
           <span class='username'>Anonim</span><br />
           <span class='userRole'>Guest</span><br />
           <span class='userExp'>Non member</span><br />
@@ -79,8 +47,42 @@
     </div>
     <!--avatar users-->
     <!--Menu Login/Register-->
+        ]]>
+    </b:widget-setting>
+  </b:widget-settings>
+  <b:includable id='main'>
+  <data:content/>
  <script>
   /*<![CDATA[*/
+const config = {
+links: {
+register: '/p/register.html',
+login: '/p/login_2.html',
+profile: '/p/profile.html',
+resetPassword: '/p/reset-password.html'
+},
+userData: {
+username: { element: '.username', defaultValue: 'Guest' },
+userRole: { element: '.userRole', defaultValue: 'Role: ' },
+userExp: { element: '.userExp', defaultValue: 'EXP role:' },
+userEmail: { element: '.userEmail', defaultValue: 'Email: ?' }
+},
+visibility: {
+loggedIn: {
+register: false,
+login: false,
+profile: true,
+resetPassword: false,
+logout: true
+},
+loggedOut: {
+register: true,
+login: true,
+profile: false,
+resetPassword: true,
+logout: false
+ }
+};
 function _0x5100(_0x30cefd,_0x4d0379){const _0x3af1bf=_0x3af1();return _0x5100=function(_0x5100f6,_0x481a19){_0x5100f6=_0x5100f6-0x179;let _0x4876d3=_0x3af1bf[_0x5100f6];return _0x4876d3;},_0x5100(_0x30cefd,_0x4d0379);}const _0x4bba5b=_0x5100;(function(_0xc7fa6d,_0x361fe6){const _0x2704ac=_0x5100,_0x3c8875=_0xc7fa6d();while(!![]){try{const _0x53607e=parseInt(_0x2704ac(0x1a3))/0x1+-parseInt(_0x2704ac(0x19c))/0x2+parseInt(_0x2704ac(0x1b0))/0x3*(parseInt(_0x2704ac(0x187))/0x4)+parseInt(_0x2704ac(0x17e))/0x5+parseInt(_0x2704ac(0x19e))/0x6+-parseInt(_0x2704ac(0x192))/0x7*(-parseInt(_0x2704ac(0x180))/0x8)+-parseInt(_0x2704ac(0x190))/0x9;if(_0x53607e===_0x361fe6)break;else _0x3c8875['push'](_0x3c8875['shift']());}catch(_0x380e4e){_0x3c8875['push'](_0x3c8875['shift']());}}}(_0x3af1,0xa265f));function runProfileHeader(_0x1e836d){const _0x5adaae=_0x5100,{visibility:_0x37b7c5}=config;document[_0x5adaae(0x18f)](_0x5adaae(0x1ab))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):'loggedOut']['register']?'flex':_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x17f))['style'][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):'loggedOut'][_0x5adaae(0x1a8)]?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x19a))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?'loggedIn':_0x5adaae(0x1b7)]['profile']?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x186))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):_0x5adaae(0x1b7)]['resetPassword']?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)]('.logoutLink')['style'][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?'loggedIn':'loggedOut'][_0x5adaae(0x193)]?_0x5adaae(0x1a1):'none';}function getUserData(_0x339490){const _0x38fc2a=_0x5100,_0x2e8389=db[_0x38fc2a(0x17a)](_0x38fc2a(0x19f))[_0x38fc2a(0x182)](_0x339490);return _0x2e8389[_0x38fc2a(0x196)]()[_0x38fc2a(0x1b3)](_0x38fad9=>{const _0x2ccffa=_0x38fc2a;return _0x38fad9[_0x2ccffa(0x1b1)]?_0x38fad9[_0x2ccffa(0x18d)]():(console[_0x2ccffa(0x181)](_0x2ccffa(0x194)),{});})['catch'](_0x3dcf35=>{const _0x32458e=_0x38fc2a;return console[_0x32458e(0x1b2)]('Error:',_0x3dcf35),{};});}function displayUserProfile(_0x1ac19c,_0x31322d){const _0x5903d4=_0x5100,{userData:_0x4cb6f3}=config;_0x1ac19c?.[_0x5903d4(0x199)]&&(document[_0x5903d4(0x18f)](_0x5903d4(0x19d))[_0x5903d4(0x1aa)]=_0x1ac19c[_0x5903d4(0x199)]),document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x18b)][_0x5903d4(0x185)])['textContent']=_0x31322d['username']||_0x4cb6f3[_0x5903d4(0x18b)][_0x5903d4(0x1ae)],document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x18a)]['element'])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x197)]?'Role:\x20'+_0x31322d[_0x5903d4(0x197)]:_0x4cb6f3[_0x5903d4(0x18a)][_0x5903d4(0x1ae)],document['querySelector'](_0x4cb6f3['userExp'][_0x5903d4(0x185)])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x184)]?_0x5903d4(0x191)+_0x31322d[_0x5903d4(0x184)]:_0x4cb6f3[_0x5903d4(0x1b4)][_0x5903d4(0x1ae)],document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x17c)][_0x5903d4(0x185)])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x1a2)]?_0x5903d4(0x1af)+_0x31322d[_0x5903d4(0x1a2)]:_0x4cb6f3['userEmail']['defaultValue'];}function logoutUser(){const _0x18a469=_0x5100;auth['signOut']()[_0x18a469(0x1b3)](()=>{const _0x3b88d2=_0x18a469;window[_0x3b88d2(0x1b6)][_0x3b88d2(0x189)]=config[_0x3b88d2(0x179)]['login'];})[_0x18a469(0x18c)](_0x22947a=>{const _0x23909b=_0x18a469;console[_0x23909b(0x1b2)]('Error\x20logging\x20out:',_0x22947a);});}document['querySelector']('.open_profiledropdown')[_0x4bba5b(0x1a6)](_0x4bba5b(0x1a0),function(){const _0x33936a=_0x4bba5b,_0x49c83f=document[_0x33936a(0x1a5)]('profileDropdown');_0x49c83f[_0x33936a(0x1a4)][_0x33936a(0x19b)](_0x33936a(0x1a9));});const profileDropdown=document[_0x4bba5b(0x1a5)](_0x4bba5b(0x1a7));function _0x3af1(){const _0x5cd2b6=['.resetPasswordLink','540376byBRHx','remove','href','userRole','username','catch','data','textContent','querySelector','28785204ZTfCDQ','EXP\x20role:\x20','2669198TITeYW','logout','No\x20data.','display','get','role','none','photoURL','.profileLink','add','969396GpegkJ','.profilePicture','6453840uDgZtX','users','click','flex','email','885569SLpiCr','classList','getElementById','addEventListener','profileDropdown','login','showprofile','src','.registerLink','style','matches','defaultValue','Email:\x20','6gttrUE','exists','error','then','userExp','loggedIn','location','loggedOut','links','collection','.profile-picture','userEmail','contains','4864490LMfvDz','.loginLink','24JTJaxF','warn','doc','target','exp','element'];_0x3af1=function(){return _0x5cd2b6;};return _0x3af1();}window['addEventListener']('click',_0x295860=>{const _0x2c2592=_0x4bba5b;!_0x295860[_0x2c2592(0x183)][_0x2c2592(0x1ad)](_0x2c2592(0x17b))&&!profileDropdown[_0x2c2592(0x17d)](_0x295860['target'])&&(profileDropdown[_0x2c2592(0x1a4)][_0x2c2592(0x17d)]('showprofile')&&profileDropdown['classList'][_0x2c2592(0x188)]('showprofile'));}),auth['onAuthStateChanged'](function(_0x516679){const _0xcbc78e=_0x4bba5b;runProfileHeader(_0x516679),_0x516679?getUserData(_0x516679['uid'])[_0xcbc78e(0x1b3)](_0x158457=>{displayUserProfile(_0x516679,_0x158457);}):displayUserProfile(null,{});});
   /*]]>*/
 </script>
