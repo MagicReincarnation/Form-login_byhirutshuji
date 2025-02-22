@@ -1,0 +1,801 @@
+ <script>
+   /*<![CDATA[*/
+   // Lisensi for protect code.
+   const lisensi_hr = [
+   {
+     lisensi: 'DAgGFB8cDBACAC0RBRUVCgQLAQ0BGwc=',
+     ownerLisensi: 'Hirutshuji',
+   }];
+   
+   let hariWrn = 2; //peringatan membership akan habis dalam 2 hari lagi
+   
+   let notifwrn_membership = "Membership Anda akan habis dalam {hari} hari lagi.";
+   
+   let notifwrn_membership_habis1 = "Membership Anda habis besok hari.";
+   
+   let notifwrn_membership_habis2 = "Membership kamu telah habis.";
+   
+   function showntf(message, autoClose, closeTime = 5000) {
+     const notifDiv = document.createElement("div");
+     notifDiv.innerHTML = `
+    <div style="position: fixed; top: 10px; right: 10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; z-index: 99999999;">
+      <p>${message}</p>
+      <a href="#" style="border:none;" onclick="this.parentElement.style.display='none';">Tutup</a>
+    </div>
+  `;
+     document.body.appendChild(notifDiv);
+     if (autoClose) {
+       setTimeout(() => {
+         notifDiv.style.display = 'none';
+       }, closeTime);
+     }
+   }
+   
+   
+   var locknologin = '<div class="warning">Content locked. Please log in to view this content.</div>';
+   
+   var lockAkses = '<div class="warning">Access not granted. You do not have permission to view this content.</div>';
+   
+   var lockKontent = '<div class="warning">No content available.</div>';
+   
+   var loaderKontent = '<p>Loading...</p>';
+   
+   var ijinrole = {
+     "Admin": ["Admin", "Member", "User"],
+     "Member": ["Member", "User"],
+     "User": ["User"]
+   };
+   /*]]>*/
+ </script>
+ 
+ <!--Raw v4.5 daru kode cdn ini 
+    <script src='https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/codebyhirutshuji_lite/logincode_litex_v4.0.js'/>  -->
+ <script type='text/javascript'>
+   /*<![CDATA[*/
+   const loginForm = document.querySelector("#formlogin"),
+     loginEmail = document.querySelector("#login_email"),
+     loginPassword = document.querySelector("#login_password");
+   
+   let elementsloginArray = [loginForm, loginEmail, loginPassword];
+   
+   let dataloginExists = elementsloginArray.every(elementlogin => {
+     return elementlogin !== null && elementlogin !== undefined;
+   });
+   
+   if (dataloginExists) {
+     
+     function loginRun_hr() {
+       let email = loginEmail.value,
+         password = loginPassword.value;
+       showNotif('loading', pesanLogin.loaderLogin.judul, pesanLogin.loaderLogin.pesan);
+       
+       auth.signInWithEmailAndPassword(email, password)
+         .then(datahiru => {
+           let user = datahiru.user;
+           if (user.emailVerified) {
+             db.collection("users").doc(user.uid).update({ emailVerified: true }).then(() => {
+               
+               hideNotif();
+               showNotif('success', pesanLogin.berhasilLogin.judul, pesanLogin.berhasilLogin.pesan);
+               
+               
+               simpanHistoryLoginTerakhir(email, password);
+               runredirect_loginHiru();
+             }).catch(error => {
+               console.error("error update emailVerified: " + error);
+             });
+           } else {
+             hideNotif();
+             showNotif('error', pesanLogin.emailBelumTervertifikasi.judul, pesanLogin.emailBelumTervertifikasi.pesan);
+             sendManualEmailVerification();
+           }
+         })
+         .catch(e => {
+           hideNotif();
+           let errorMessage = "";
+           if (e.code == "auth/user-not-found") {
+             errorMessage = pesanLogin.userTidakDitemukan.pesan;
+           } else if (e.code === "auth/invalid-email") {
+             errorMessage = pesanLogin.emailSalah.pesan;
+           } else if (e.code === "auth/wrong-password") {
+             errorMessage = pesanLogin.passwordSalah.pesan;
+           } else if (e.code === "auth/too-many-requests") {
+             errorMessage = pesanLogin.loginLimit.pesan;
+           } else if (e.code === "auth/internal-error") {
+             errorMessage = pesanLogin.gagalVertifypassword.pesan;
+           } else {
+             errorMessage = pesanLogin.errorLog.pesan + e.message;
+           }
+           
+           showNotif('error', pesanLogin.errorLog.judul, errorMessage);
+         });
+     }
+     
+     function sendManualEmailVerification() {
+       var user = auth.currentUser;
+       if (user) {
+         showNotif('question', pesanLogin.kirimEmailVertifikasi.judul, pesanLogin.kirimEmailVertifikasi.pesan);
+         
+         user.sendEmailVerification().then(() => {
+           showNotif('success', pesanLogin.vertifyTerkirim.judul, `${pesanLogin.vertifyTerkirim.pesan} ${user.email}. ${pesanLogin.vertifyTerkirim.pesan2}`);
+         }).catch((error) => {
+           showNotif('error', 'Error', `Error: ${error.message}`);
+         });
+       } else {
+         showNotif('error', 'Error', 'Email not found.');
+       }
+     }
+     
+     function runredirect_loginHiru() {
+       switch (redirectOpsi_loginHiru.toLowerCase()) {
+         case "reload":
+           setTimeout(function() {
+             location.reload();
+           }, waktuTunda_lHiru);
+           break;
+         case "homepage":
+           setTimeout(function() {
+             window.location.href = RedirectOpsiHalaman_lHiru.homepage_url;
+           }, waktuTunda_lHiru);
+           break;
+         case "customurl":
+           setTimeout(function() {
+             window.location.href = RedirectOpsiHalaman_lHiru.custom_url;
+           }, waktuTunda_lHiru);
+           break;
+         default:
+           setTimeout(function() {
+             location.reload();
+           }, waktuTunda_lHiru);
+           break;
+       }
+     }
+     
+     loginForm.addEventListener("submit", e => {
+       e.preventDefault();
+       checkLisensi_hr(cur_blog_id_hr, function(isLicensed) {
+         if (isLicensed) {
+           loginRun_hr();
+           console.log("Kode dijalankan karena lisensi valid.");
+         }
+       });
+       
+     });
+     
+   } else {
+     console.log("Code login tidak bekerja karena element id dan class tidak ada.");
+   }
+   
+   function showNotif(type, title, text) {
+     const notif = document.getElementById('loginNotif');
+     const notifIcon = document.getElementById('notifIcon');
+     const notifTitle = document.getElementById('notifTitle');
+     const notifText = document.getElementById('notifText');
+     notif.className = 'notif';
+     switch (type) {
+       case 'success':
+         notifIcon.innerHTML = iconSukses;
+         notif.classList.add('success');
+         break;
+       case 'error':
+         notifIcon.innerHTML = iconGagal;
+         notif.classList.add('error');
+         break;
+       case 'warning':
+         notifIcon.innerHTML = iconWarning;
+         notif.classList.add('warning');
+         break;
+       case 'loading':
+         notifIcon.innerHTML = iconLoader;
+         notif.classList.add('loading');
+         break;
+       case 'question':
+         notifIcon.innerHTML = iconTanya;
+         notif.classList.add('question');
+         break;
+       default:
+         notifIcon.innerHTML = iconInfo;
+         notif.classList.add('info');
+         break;
+     }
+     notifTitle.innerHTML = title;
+     notifText.innerHTML = text;
+     notif.classList.remove('hiddeniconpass_login');
+     if (type !== 'loading') {
+       setTimeout(() => {
+         notif.classList.add('hiddeniconpass_login');
+       }, 5000);
+     }
+   }
+   
+   function hideNotif() {
+     const notif = document.getElementById('loginNotif');
+     notif.classList.add('hiddeniconpass_login');
+   }
+   let registerForm = document.querySelector("#register-form");
+   let registerEmail = document.querySelector("#register-email");
+   let registerUsername = document.querySelector("#register-username");
+   let registerPassword = document.querySelector("#register-password");
+   
+   let elementsregisterArray = [registerForm, registerEmail, registerUsername, registerPassword];
+   
+   let dataregisterExists = elementsregisterArray.every(elementregister => {
+     return elementregister !== null && elementregister !== undefined;
+   });
+   
+   if (dataregisterExists) {
+     function konfirmasiRegister() {
+       const email = registerEmail.value;
+       showinforNotifRegister('warning', pesanNotifregister.konfimasiRegister.judul, `${pesanNotifregister.konfimasiRegister.pesan} ${email}. ${pesanNotifregister.konfimasiRegister.pesan2}`);
+       document.getElementById('confirmRegisterNotif').classList.remove('hiddenregister_notif');
+       document.getElementById('confirmYes').addEventListener('click', () => {
+         document.getElementById('confirmRegisterNotif').classList.add('hiddenregister_notif');
+         registerUser();
+         document.getElementById('registerNotif').classList.add('hiddenregister_notif');
+       });
+       
+       document.getElementById('confirmNo').addEventListener('click', () => {
+         document.getElementById('confirmRegisterNotif').classList.add('hiddenregister_notif');
+         document.getElementById('registerNotif').classList.add('hiddenregister_notif');
+       });
+     }
+     
+     function registerUser() {
+       const t = registerEmail.value,
+         s = registerUsername.value,
+         r = registerPassword.value;
+       showNotifRegister('info', pesanNotifregister.loaderSaatRegister.judul, pesanNotifregister.loaderSaatRegister.pesan);
+       
+       auth.createUserWithEmailAndPassword(t, r)
+         .then(e => {
+           let user = e.user;
+           return db.collection("users").doc(user.uid).set({
+             email: t,
+             username: s,
+             role: "User",
+             exp: "",
+             emailVerified: false
+           });
+         })
+         .then(() => {
+           showNotifRegister('success', pesanNotifregister.registerBerhasil.judul, pesanNotifregister.registerBerhasil.pesan);
+           
+           setTimeout(() => {
+             const isConfirmed = confirm(pesanNotifregister.konfimasiVertifyemail.judul + "\n" + pesanNotifregister.konfimasiVertifyemail.pesan);
+             if (isConfirmed) {
+               var userVerify = auth.currentUser;
+               if (userVerify) {
+                 userVerify.sendEmailVerification();
+                 showNotifRegister('success', pesanNotifregister.vertifyEmailterkirim.judul, pesanNotifregister.vertifyEmailterkirim.pesan);
+                 
+                 setTimeout(function() {
+                   auth.signOut();
+                   runredirect_rgHiru();
+                 }, 1000);
+               }
+             } else {
+               showNotifRegister('info', pesanNotifregister.infoRulevertify.judul, pesanNotifregister.infoRulevertify.pesan);
+               setTimeout(function() {
+                 auth.signOut();
+                 runredirect_rgHiru();
+               }, 1000);
+             }
+           }, 1000);
+         })
+         .catch(e => {
+           if (e.code === "auth/email-already-in-use") {
+             showNotifRegister('error', pesanNotifregister.emailTerdaftar.judul, pesanNotifregister.emailTerdaftar.pesan);
+           } else {
+             showNotifRegister('error', pesanNotifregister.errorRegister.judul, pesanNotifregister.errorRegister.pesan + e.message);
+           }
+         });
+     }
+     registerForm.addEventListener("submit", e => {
+       e.preventDefault();
+       checkLisensi_hr(cur_blog_id_hr, function(isLicensed) {
+         if (isLicensed) {
+           konfirmasiRegister();
+           console.log("Kode dijalankan karena lisensi valid.");
+         }
+       });
+       
+     });
+     
+     function runredirect_rgHiru() {
+       switch (redirectOpsi_rgHiru.toLowerCase()) {
+         case "reload":
+           setTimeout(function() {
+             location.reload();
+           }, waktuTunda_rgHiru);
+           break;
+         case "homepage":
+           setTimeout(function() {
+             window.location.href = RedirectOpsiHalaman_rgHiru.homepage_url;
+           }, waktuTunda_rgHiru);
+           break;
+         case "customurl":
+           setTimeout(function() {
+             window.location.href = RedirectOpsiHalaman_rgHiru.custom_url;
+           }, waktuTunda_rgHiru);
+           break;
+         default:
+           setTimeout(function() {
+             location.reload();
+           }, waktuTunda_rgHiru);
+           break;
+       }
+     }
+     
+   } else {
+     console.log("code register tidak bekerja karena element id dan class tidak ada.");
+   }
+   
+   function showNotifRegister(type, title, text) {
+     const notif_register = document.getElementById('registerNotif');
+     const notifIcon_register = document.getElementById('notifIcon_register');
+     const notifTitle_register = document.getElementById('notifTitle_register');
+     const notifText_register = document.getElementById('notifText_register');
+     notif_register.className = 'notifregister_main hiddenregister_notif';
+     switch (type) {
+       case 'success':
+         notifIcon_register.innerHTML = iconSukses;
+         notif_register.classList.add('success');
+         break;
+       case 'error':
+         notifIcon_register.innerHTML = iconGagal;
+         notif_register.classList.add('error');
+         break;
+       case 'warning':
+         notifIcon_register.innerHTML = iconWarning;
+         notif_register.classList.add('warning');
+         break;
+       default:
+         notifIcon_register.innerHTML = iconInfo;
+         notif_register.classList.add('info');
+         break;
+     }
+     notifTitle_register.innerHTML = title;
+     notifText_register.innerHTML = text;
+     notif_register.classList.remove('hiddenregister_notif');
+     setTimeout(() => {
+       notif_register.classList.add('hiddenregister_notif');
+     }, 3000);
+   }
+   
+   
+   function showinforNotifRegister(type, title, text) {
+     const notif_register = document.getElementById('registerNotif');
+     const notifIcon_register = document.getElementById('notifIcon_register');
+     const notifTitle_register = document.getElementById('notifTitle_register');
+     const notifText_register = document.getElementById('notifText_register');
+     notif_register.className = 'notifregister_main hiddenregister_notif';
+     
+     switch (type) {
+       case 'warning':
+         notifIcon_register.innerHTML = iconWarning;
+         notif_register.classList.add('warning');
+         break;
+     }
+     notifTitle_register.innerHTML = title;
+     notifText_register.innerHTML = text;
+     notif_register.classList.remove('hiddenregister_notif');
+   }
+   
+   let profileUid = document.querySelector("#profile-uid");
+   let profileEmail = document.querySelector("#profile-email");
+   let profileUsername = document.querySelector("#profile-username");
+   let profileRole = document.querySelector("#profile-role");
+   let expRoleuser = document.querySelector("#exp-role");
+   let userPhoto_hr = document.getElementById("userPhoto");
+   let userProfile_hr = document.getElementById("cc_profile");
+   
+   function runCodeprofile() {
+     let elementsArray = [profileUid, profileEmail, profileUsername, profileRole, expRoleuser, userPhoto_hr, userProfile_hr];
+     
+     let dataExists = elementsArray.every(element => {
+       return element !== null && element !== undefined;
+     });
+     
+     if (dataExists) {
+       
+       function showProfile(user) {
+         if (user.photoURL) {
+           userPhoto_hr.src = user.photoURL;
+           userProfile_hr.style.display = "block";
+         } else {
+           userPhoto_hr.src = urlGambarcustom;
+           userProfile_hr.style.display = "block";
+           console.log("Tidak ada foto profile");
+         }
+         db.collection("users").doc(user.uid).get().then(dc => {
+           if (dc.exists) {
+             let t = dc.data();
+             profileUid.innerHTML = user.uid;
+             profileEmail.innerHTML = t.email;
+             profileUsername.innerHTML = t.username;
+             profileRole.innerHTML = t.role;
+             expRoleuser.innerHTML = t.exp;
+           } else {
+             console.log("Data User tidak ditemukan!");
+           }
+         }).catch(error => {
+           console.log("error Mengambil data User:", error);
+         });
+       }
+       
+       document.getElementById("updateprofile_hr").addEventListener("click", function() {
+         const newPhotoFile = document.getElementById("uploadprofile_hr").files[0];
+         const userId = auth.currentUser;
+         
+         if (newPhotoFile) {
+           if (userId) {
+             showNotification_profile('question', pesanNotif.updateprofilephoto.judul, pesanNotif.updateprofilephoto.pesan, true, () => {
+               showNotification_profile('info', pesanNotif.loaderupdatephoto.judul, pesanNotif.loaderupdatephoto.pesan, false);
+               
+               const storageRefProfile = storagedb.ref();
+               let nameFoto;
+               
+               db.collection('users').doc(userId.uid).get()
+                 .then((doc) => {
+                   if (doc.exists) {
+                     const userData = doc.data();
+                     nameFoto = userData.username;
+                   } else {
+                     showNotification_profile('error', pesanNotif.gagalUpdatePhoto.judul, "User not found");
+                   }
+                 })
+                 .catch((error) => {
+                   showNotification_profile('error', pesanNotif.gagalUpdatePhoto.judul, error.message);
+                 })
+                 .then(() => {
+                   const fileName = `${nameFoto}.${getExtension(newPhotoFile.name)}`;
+                   const photoRef = storageRefProfile.child(`profile_photos/${userId.uid}/${fileName}`);
+                   
+                   photoRef.put(newPhotoFile)
+                     .then(() => {
+                       photoRef.getDownloadURL().then((url) => {
+                         userId.updateProfile({
+                           username: userId.username,
+                           photoURL: url
+                         }).then(() => {
+                           showNotification_profile('success', pesanNotif.suksesUpdatePhoto.judul, pesanNotif.suksesUpdatePhoto.pesan);
+                           document.getElementById("userPhoto").src = url;
+                         }).catch((error) => {
+                           showNotification_profile('error', pesanNotif.gagalUpdatePhoto.judul, error.message);
+                         });
+                       });
+                     })
+                     .catch((error) => {
+                       showNotification_profile('error', pesanNotif.gagalUpdatePhoto.judul, error.message);
+                     });
+                 });
+             }, () => {});
+           } else {
+             showNotification_profile('error', "Error", "User is not logged in");
+           }
+         } else {
+           showNotification_profile('warning', pesanNotif.wrnUpdatePhoto.judul, pesanNotif.wrnUpdatePhoto.pesan);
+         }
+       });
+       
+       function showLoader() {
+         document.getElementById('loader_delete_akun').style.display = 'flex';
+       }
+       
+       function hideLoader() {
+         document.getElementById('loader_delete_akun').style.display = 'none';
+       }
+       document.querySelector("#deleteAccount").addEventListener("click", () => {
+         showNotification_profile('question', pesanNotif.konfirmasiPenghapusan.judul, pesanNotif.konfirmasiPenghapusan.pesan, true, () => {
+           const password = prompt(pesanNotif.konfirmasiPenghapusan.pesan);
+           
+           if (password) {
+             showLoader();
+             const user = auth.currentUser;
+             const credential = firebase.auth.EmailAuthProvider.credential(user.email, password);
+             user.reauthenticateWithCredential(credential)
+               .then(() => {
+                 return db.collection("users").doc(user.uid).delete()
+                   .then(() => {
+                     return user.delete()
+                       .then(() => {
+                         hideLoader();
+                         showNotification_profile('success', pesanNotif.berhasilmenghapusAkun.judul, pesanNotif.berhasilmenghapusAkun.pesan);
+                         
+                         logoutTriggered = false;
+                       })
+                       .catch(error => {
+                         hideLoader();
+                         showNotification_profile('error', "ah this error", error.message);
+                       });
+                   })
+                   .catch(error => {
+                     hideLoader();
+                     showNotification_profile('error', "ah this error", error.message);
+                   });
+               })
+               .catch(error => {
+                 hideLoader();
+                 showNotification_profile('error', pesanNotif.autentikasiGagal.judul, pesanNotif.autentikasiGagal.pesan);
+               });
+           }
+         }, () => {
+           console.log('cancel menghapus akun');
+         });
+       });
+       
+       
+       const changeUsernameButton = document.querySelector("#UpdateUsername");
+       changeUsernameButton.addEventListener("click", () => {
+         showNotification_profile('warning', pesanNotif.updateUsername.judul, pesanNotif.updateUsername.pesan, true, () => {
+           let t = auth.currentUser;
+           const newUsername = prompt("Enter new username:");
+           if (newUsername) {
+             db.collection("users").doc(t.uid).update({
+               username: newUsername
+             }).then(() => {
+               showNotification_profile('success', pesanNotif.berhasilUpdateUsername.judul, pesanNotif.berhasilUpdateUsername.pesan);
+               profileUsername.innerHTML = newUsername;
+             }).catch(e => {
+               showNotification_profile('error', "ah this error", e.message);
+             });
+           }
+         });
+       });
+       
+       
+       
+       function getExtension(fileName) {
+         return fileName.split('.').pop();
+       }
+       
+       let logoutTriggered;
+       logoutButton.addEventListener("click", () => {
+         if (auth.currentUser) {
+           logoutTriggered = true;
+           auth.signOut().then(() => {
+             showNotification_profile('success', pesanNotif.logout.judul, pesanNotif.logout.pesan, false, () => {
+               runredirect_pHiru();
+               logoutTriggered = false;
+             });
+           });
+         }
+       });
+       
+       auth.onAuthStateChanged(user => {
+         if (!user) {
+           if (!logoutTriggered) {
+             showNotification_profile('warning', pesanNotif.belumLogin.judul, pesanNotif.belumLogin.pesan, false, () => {
+               runredirect_pHiru();
+             });
+             setTimeout(() => {
+               runredirect_pHiru();
+             }, "5000");
+             
+           }
+         } else if (!user.emailVerified) {
+           showNotification_profile('warning', pesanNotif.belumTervertifikasi.judul, pesanNotif.belumTervertifikasi.pesan, false, () => {
+             runredirect_pHiru();
+           });
+         } else {
+           checkLisensi_hr(cur_blog_id_hr, function(isLicensed) {
+             if (isLicensed) {
+               showProfile(user);
+               console.log("Kode dijalankan karena lisensi valid.");
+             }
+           });
+           
+         }
+       });
+       
+       function runredirect_pHiru() {
+         switch (redirectOpsi_pHiru.toLowerCase()) {
+           case "reload":
+             setTimeout(function() {
+               location.reload();
+             }, waktuTunda_pHiru);
+             break;
+           case "homepage":
+             setTimeout(function() {
+               window.location.href = RedirectOpsiHalaman_pHiru.homepage_url;
+             }, waktuTunda_pHiru);
+             break;
+           case "customurl":
+             setTimeout(function() {
+               window.location.href = RedirectOpsiHalaman_pHiru.custom_url;
+             }, waktuTunda_pHiru);
+             break;
+           default:
+             setTimeout(function() {
+               location.reload();
+             }, waktuTunda_pHiru);
+             break;
+         }
+       }
+       
+       
+     } else {
+       console.log("code Profile tidak bekerja karena element id dan class tidak ada.");
+     }
+   }
+   window.onload = (event) => {
+     runCodeprofile();
+   };
+   
+   function showNotification_profile(type, title, text, showCancelButton = false, confirmCallback = null, cancelCallback = null) {
+     const notif = document.getElementById('notifContainer');
+     const notifIcon = document.getElementById('notifIcon');
+     const notifTitle = document.getElementById('notifTitle');
+     const notifText = document.getElementById('notifText');
+     const notifConfirm = document.getElementById('notifConfirm');
+     const notifCancel = document.getElementById('notifCancel');
+     switch (type) {
+       case 'success':
+         notifIcon.innerHTML = iconSukses;
+         notif.className = 'notif-container success';
+         break;
+       case 'error':
+         notifIcon.innerHTML = iconGagal;
+         notif.className = 'notif-container error';
+         break;
+       case 'warning':
+         notifIcon.innerHTML = iconWarning;
+         notif.className = 'notif-container warning';
+         break;
+       default:
+         notifIcon.innerHTML = iconInfo;
+         notif.className = 'notif-container info';
+         break;
+     }
+     
+     notifTitle.innerHTML = title;
+     notifText.innerHTML = text;
+     if (showCancelButton) {
+       notifCancel.classList.remove('hiddenprofile_notif');
+     } else {
+       notifCancel.classList.add('hiddenprofile_notif');
+     }
+     notif.classList.remove('hiddenprofile_notif');
+     notifConfirm.onclick = () => {
+       notif.classList.add('hiddenprofile_notif');
+       if (confirmCallback) confirmCallback();
+     };
+     
+     notifCancel.onclick = () => {
+       notif.classList.add('hiddenprofile_notif');
+       if (cancelCallback) cancelCallback();
+     };
+     if (!showCancelButton) {
+       setTimeout(() => {
+         notif.classList.add('hiddenprofile_notif');
+       }, 3000);
+     }
+   }
+   
+   /*]]>*/
+ </script>
+ 
+ 
+ <!--Raw v4.5 dari kode cdn ini
+ <script src='https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/codebyhirutshuji_lite/lisensiCodeLogin_lite.js'/>
+-->
+ 
+ <script type='text/javascript'>
+   /*<![CDATA[*/
+const cur_blog_id_hr="hirutshuji_datakodehiru";function decrypt_hr(e,t){let i=atob(e),o="";for(let a=0;a<i.length;a++)o+=String.fromCharCode(i.charCodeAt(a)^t.charCodeAt(a%t.length));return o}function checkLisensi_hr(e,t){let i=!1;for(let o=0;o<lisensi_hr.length;o++){if("Hirutshuji"!==lisensi_hr[o].ownerLisensi){alert("Do not remove the owner name from this code.");continue}let a=decrypt_hr(lisensi_hr[o].lisensi,"datakodehiru");if(e===a){console.log("Lisensi terdaftar."),i=!0;break}}if(i)t(!0);else{let r=`<div style="position: fixed;top: 10%;left: 0;width: 90%;max-width: 400px;background-color: #23282f;color: #f3f3f3;font-size: 12px;padding: 10px;margin: 5px;text-align: center;z-index: 1000;box-shadow: 0px 7px 12px #000000a6;">
+    <div id="xyza_app">
+      <div id="xyza_header-img"></div>
+      <div id="xyza_profile">
+        <section id="xyza_upper">
+          <div class="xyza_dp"></div>
+          <div class="xyza_details">
+            <h1 id="xyza_username">Hirutshuji</h1>
+            <p class="xyza_profession">Owner</p>
+          </div>
+        </section>
+        <div class="xyza_links">
+          <a href="https://datakodehiru.blogspot.com/?ko-fi=true">Ko-fi</a>
+          <a href="https://datakodehiru.blogspot.com/?Trakteer=true">Trakteer</a>
+        </div>
+        <section id="xyza_middle">
+          <div class="xyza_middlesvg">
+            <p>This code is free to use but it requires a license. If you want to remove the license, I need your support. Any amount will help a lot. There are many books that I want to buy and study.</p>
+            <p><a href="https://datakodehiru.blogspot.com/?SupportMe=true" target="_blank" style="color: yellow; text-decoration: underline;">Support Me</a> | <a href="https://datakodehiru.blogspot.com/?Myblog=true" target="_blank" style="color: yellow; text-decoration: underline;">My blog</a></p>
+            <p>If you do not install the license within the next <span id="xyza_timer"></span> seconds, you will be redirected to my blog.</p>     
+          </div>
+          <div class="xyza_pin-slider">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLqGjLm-cHcIS37wLo_1iTOAcnY0tEDDlo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+          </div>
+        </section>
+      </div>
+      <div class="xyza_lower">
+        <h6><a href="https://datakodehiru.blogspot.com/?GetLisensi=true" title="hiru">GET YOUR LICENSE</a></h6>
+      </div>
+    </div>
+  </div>
+  <style>
+    #xyza_app{position:relative;aspect-ratio:9/16;height:auto;max-height:90vh;border:5px solid rgba(240,240,240,.3);border-radius:18px;overflow-y:auto;background-color:#23282f}#xyza_header-img{position:relative;width:100%;aspect-ratio:16/9;height:8vh;background:url('https://iili.io/dlNepHl.jpg') top/cover;border-radius:18px 18px 0 0;opacity:.75}.xyza_dp{aspect-ratio:1/1;height:8vh;border:3px solid #f3f3f3;border-radius:50%;background:url('https://iili.io/dlNPRqB.jpg') center/cover no-repeat}.xyza_details{display:flex;flex-direction:column;gap:1vh;justify-content:center;margin-right:20px}.xyza_links{display:flex;align-items:center;justify-content:space-evenly;gap:10px;margin-top:10px}.xyza_links a{text-decoration:none;background:#8300ff;color:#fff;text-shadow:1px 1px 2px #000,0 0 25px #00f,0 0 5px #00008b;border-radius:7px;font-size:14px;font-weight:700;display:inline-block;padding:7px 15px}#xyza_upper{display:flex;justify-content:space-between;margin-bottom:1vh}#xyza_username{font-size:1.5rem;color:#f3f3f3}.xyza_profession{font-size:1rem;color:#f3f3f3}#xyza_middle{padding-top:2vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2vh;font-size:.9rem}.xyza_middlesvg{overflow-y:auto;overflow-x:hidden;word-wrap:break-word;padding:20px}.xyza_pin-slider{width:100%;margin-top:10vh}.xyza_pin-slider iframe{width:100%;height:auto;aspect-ratio:16/9;background:rgba(240,240,240,.25)}.xyza_lower{display:grid;place-items:center;text-align:center;color:#f3f3f3;font-size:1.5rem;width:100%;height:4vh;background:#23282f;border-radius:0 0 18px 18px}.xyza_lower a{text-decoration:none;color:#f3f3f3}@media screen and (max-width:480px),screen and (max-height:980px){#xyza_app{height:auto;width:100%;border:none;margin:0;overflow-y:auto;border-radius:0}#xyza_header-img{height:20vh}.xyza_dp{height:12vh}#xyza_header-img,.xyza_lower{border-radius:0}.xyza_links{flex-direction:column;gap:5px;margin-top:5px}.xyza_links a{width:80%;text-align:center;padding:5px 10px}}
+  </style>`,d=30;document.body.innerHTML+=r;let n=setInterval(function(){d--,document.getElementById("xyza_timer").textContent=d,d<=0&&(clearInterval(n),window.location.href="https://datakodehiru.blogspot.com")},1e3);t(!1)}}
+function checkMembershipExp() {
+  let t = auth.currentUser.uid;
+  db.collection("users").doc(t).get().then(r => {
+    if (r.exists) {
+      let l = r.data(),
+        n = l.exp;
+      if (n) {
+        let i = n.split(",");
+        if (2 === i.length) {
+          let o = i[0],
+            s = o.split("/");
+          if (3 === s.length) {
+            let c = parseInt(s[0], 10),
+              a = parseInt(s[1], 10) - 1,
+              u = parseInt(s[2], 10),
+              f = new Date(u, a, c);
+            if (!isNaN(f.getTime())) {
+              let $ = new Date,
+                d = Math.ceil((f - $) / 864e5);
+              d > 0 && d <= hariWrn ? showntf(notifwrn_membership.replace("{hari}", d), !0) : 0 === d ? showntf(notifwrn_membership_habis1, !0) : d < 0 && (showntf(notifwrn_membership_habis2, !1), db.collection("users").doc(t).update({
+                role: "User",
+                exp: ""
+              }).catch(t => {
+                console.error("error mengubah role user:", t)
+              }))
+            }
+          }
+        }
+      }
+    } else console.log("User tidak ditemukan!")
+  }).catch(t => {
+    console.error("error mengambil data user:", t)
+  })
+}
+
+function aksesrole(t, r) {
+  return ijinrole[t].includes(r)
+}
+async function uCrHR(t) {
+  let r = await cek_role(t);
+  if (r) {
+    let l = document.querySelectorAll("[idpost]");
+    l.forEach(async t => {
+      t.innerHTML = loaderKontent;
+      let l = t.getAttribute("idpost"),
+        n = dbrl.ref(`kontent/${l}`),
+        i = await n.once("value"),
+        o = i.val();
+      if (o) {
+        let s = Object.keys(o),
+          c = !1;
+        for (let a = 0; a < s.length; a++) {
+          let u = s[a];
+          if (aksesrole(r, u)) {
+            let f = o[u];
+            t.innerHTML = f.kontent, c = !0;
+            break
+          }
+        }
+        c || (t.innerHTML = lockAkses)
+      } else t.innerHTML = lockKontent
+    })
+  } else e.innerHTML = locknologin, console.error("User not found 404.")
+}
+async function cek_role(t) {
+  let r = await db.collection("users").doc(t).get();
+  if (!r.exists) return console.error("User not found 404."), null;
+  {
+    let l = r.data().role;
+    return l
+  }
+}
+auth.onAuthStateChanged(t => {
+  if (t) checkMembershipExp(), uCrHR(t.uid);
+  else {
+    let r = document.querySelectorAll("[idpost]");
+    r.forEach(t => {
+      t.innerHTML = locknologin
+    })
+  }
+});
+   /*]]>*/
+ </script>

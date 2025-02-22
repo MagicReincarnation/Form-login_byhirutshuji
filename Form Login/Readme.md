@@ -1,3 +1,6 @@
+# Tutorial 
+### how to install on zeistmanga v6 : [Link](https://youtu.be/EcQDbNEB-H4?si=YHWcilWgtvnBJZeY)
+
 # Version 4.0
 
 ## Apa yang baru?
@@ -198,4 +201,5 @@ Letakan juga di halaman blog, tapi ingat jangan sampai ketahuan orang lain
 Maaf jika kodenya tidak responsif atau style kurang bagus, aku membuat kode ini hanya pakai ponsel, jadi responsif hanya diponsel, tidak di laptop.
 Jika kalian bisa membuat stylenya sendiri dan mau membagikan stylenya, silahkan hubungi admin di group. Imbalannya, bisa kuberikan kode tanpa encrypt.
 
-### [How To post](https://youtu.be/5wOTJdY3Pio?si=l4thItDiHndDtoFP)
+### How To post 
+ How To post chapter premium : [Link](https://youtu.be/5wOTJdY3Pio?si=l4thItDiHndDtoFP)
