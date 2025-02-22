@@ -125,9 +125,9 @@ service cloud.firestore {
     }
   }
 }
-
-Storage
-
+```
+# Storage
+```text
 service firebase.storage {
   match /b/{bucket}/o {
     match /profile_photos/{allPaths=**} {
