@@ -1,4 +1,4 @@
-name: Change Log Generator
+name: Generate Change Log
 
 on:
   workflow_dispatch:
@@ -13,9 +13,13 @@ jobs:
 
     - name: Generate Change Log
       run: |
-        echo "| Date | Commit Hash | Log |" > CHANGELOG.md
-        echo "|---------|------------|--------------|" >> CHANGELOG.md
-        git log --pretty=format:"| %ad | %h | %s |" --date=short >> CHANGELOG.md
+        echo "# Change Log" > CHANGELOG.md
+        echo "" >> CHANGELOG.md
+        git log --pretty=format:"%ad" --date=short | sort -u | while read DATE; do
+          echo "## $DATE" >> CHANGELOG.md
+          git log --pretty=format:"- **%s**" --date=short --since="$DATE 00:00" --until="$DATE 23:59" --name-only | awk 'NF' | awk 'NR%2{printf "  - `%s`\n", $0; next}1' >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+        done
 
     - name: Commit Change Log
       run: |
