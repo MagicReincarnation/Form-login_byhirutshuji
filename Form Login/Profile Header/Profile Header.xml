@@ -1,45 +1,69 @@
-<b:widget id='HTML111' locked='true' title='my profile' type='HTML' version='2' visible='true'>
-  <b:widget-settings>
-    <b:widget-setting name='content'>
-      <![CDATA[
+ <b:widget id='HTML111' locked='true' title='my profile' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[userData: {
+            username: { element: '.username', defaultValue: 'Guest' },
+            userRole: { element: '.userRole', defaultValue: 'Role: ' },
+            userExp: { element: '.userExp', defaultValue: 'EXP role:' },
+            userEmail: { element: '.userEmail', defaultValue: 'Email: ?' }
+        },
+        visibility: {
+            loggedIn: {
+                register: false,
+                login: false,
+                profile: true,
+                resetPassword: true,
+                logout: true
+            },
+            loggedOut: {
+                register: true,
+                login: true,
+                profile: false,
+                resetPassword: false,
+                logout: false
+            }
+        }]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+    <script>
+  const config = { <data:content/> };
+    </script>
     <!--Menu Login/Register-->
     <!--avatar users-->
     <div class='profile-container flex h-8 w-8 items-center justify-center relative'>
       <button class='open_profiledropdown openrecentlogin' title='menu login'>
-        <img alt='Profile Picture' class='profile-picture profilePicture' src='https://www.icegif.com/wp-content/uploads/2022/04/icegif-1302.gif' width='55' />
+        <img alt='Profile Picture' class='profile-picture profilePicture' src='https://www.icegif.com/wp-content/uploads/2022/04/icegif-1302.gif' width='55'/>
       </button>
       <div class='dropdown' id='profileDropdown'>
         <div class='dropdown-header'>
-        
-          <span class='username'>Anonim</span><br />
-          <span class='userRole'>Guest</span><br />
-          <span class='userExp'>Non member</span><br />
+          <span class='username'>Anonim</span><br/>
+          <span class='userRole'>Guest</span><br/>
+          <span class='userExp'>Non member</span><br/>
           <span class='userEmail'>guest@gmail.com</span>
         </div>
         <ul class='dropdown-list'>
           <li class='dropdown-item loginLink'><svg height='1em' viewBox='0 0 24 24' width='1em' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M7 1c-1.1 0-2 .9-2 2v4h2V4h10v16H7v-3H5v4c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zM6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c1.3 0 2.4-.8 2.8-2H11v2h2v-2h2v-2H8.8C8.4 9.8 7.3 9 6 9m0 2c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1' fill='currentColor' />
-            </svg><a href='/p/login_2.html'>Login</a>
+              <path d='M7 1c-1.1 0-2 .9-2 2v4h2V4h10v16H7v-3H5v4c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zM6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c1.3 0 2.4-.8 2.8-2H11v2h2v-2h2v-2H8.8C8.4 9.8 7.3 9 6 9m0 2c.6 0 1 .4 1 1s-.4 1-1 1s-1-.4-1-1s.4-1 1-1' fill='currentColor'/>
+            </svg><a href='/p/login_68.html'>Login</a>
           </li>
           <li class='dropdown-item registerLink'><svg height='1em' viewBox='0 0 24 24' width='1em' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M3 20v-2.8q0-.85.438-1.562T4.6 14.55q1.55-.775 3.15-1.162T11 13q.5 0 1 .038t1 .112q-.1 1.45.525 2.738T15.35 18v2zm16 3l-1.5-1.5v-4.65q-1.1-.325-1.8-1.237T15 13.5q0-1.45 1.025-2.475T18.5 10t2.475 1.025T22 13.5q0 1.125-.638 2t-1.612 1.25L21 18l-1.5 1.5L21 21zm-8-11q-1.65 0-2.825-1.175T7 8t1.175-2.825T11 4t2.825 1.175T15 8t-1.175 2.825T11 12m7.5 2q.425 0 .713-.288T19.5 13t-.288-.712T18.5 12t-.712.288T17.5 13t.288.713t.712.287' fill='currentColor' />
+              <path d='M3 20v-2.8q0-.85.438-1.562T4.6 14.55q1.55-.775 3.15-1.162T11 13q.5 0 1 .038t1 .112q-.1 1.45.525 2.738T15.35 18v2zm16 3l-1.5-1.5v-4.65q-1.1-.325-1.8-1.237T15 13.5q0-1.45 1.025-2.475T18.5 10t2.475 1.025T22 13.5q0 1.125-.638 2t-1.612 1.25L21 18l-1.5 1.5L21 21zm-8-11q-1.65 0-2.825-1.175T7 8t1.175-2.825T11 4t2.825 1.175T15 8t-1.175 2.825T11 12m7.5 2q.425 0 .713-.288T19.5 13t-.288-.712T18.5 12t-.712.288T17.5 13t.288.713t.712.287' fill='currentColor'/>
             </svg>
-            <a href='/p/register.html'>Register</a>
+            <a href='/p/register_21.html'>Register</a>
           </li>
           
           <li class='dropdown-item profileLink'><svg height='1em' viewBox='0 0 24 24' width='1em' xmlns='http://www.w3.org/2000/svg'>
-              <path d='m20 22.09l2.45 1.49l-.65-2.81l2.2-1.88l-2.89-.25L20 16l-1.13 2.64l-2.87.25l2.18 1.88l-.68 2.81zM14.08 21H2a2.074 2.074 0 0 1-2-2V5c.04-1.09.91-1.96 2-2h20c1.09.04 1.96.91 2 2v10.53c-.58-.53-1.25-.92-2-1.19V5H2v14h12.08c-.05.33-.08.66-.08 1s.03.68.08 1M14 17H4v-1.25c0-1.66 3.34-2.5 5-2.5s5 .84 5 2.5zm0-6h4v1h-4zM9 7C7.63 7 6.5 8.13 6.5 9.5S7.63 12 9 12s2.5-1.13 2.5-2.5S10.37 7 9 7m5 2h6v1h-6zm0-2h6v1h-6z' fill='currentColor' />
+              <path d='m20 22.09l2.45 1.49l-.65-2.81l2.2-1.88l-2.89-.25L20 16l-1.13 2.64l-2.87.25l2.18 1.88l-.68 2.81zM14.08 21H2a2.074 2.074 0 0 1-2-2V5c.04-1.09.91-1.96 2-2h20c1.09.04 1.96.91 2 2v10.53c-.58-.53-1.25-.92-2-1.19V5H2v14h12.08c-.05.33-.08.66-.08 1s.03.68.08 1M14 17H4v-1.25c0-1.66 3.34-2.5 5-2.5s5 .84 5 2.5zm0-6h4v1h-4zM9 7C7.63 7 6.5 8.13 6.5 9.5S7.63 12 9 12s2.5-1.13 2.5-2.5S10.37 7 9 7m5 2h6v1h-6zm0-2h6v1h-6z' fill='currentColor'/>
             </svg>
-            <a href='/p/profile.html'>Profile</a>
+            <a href='/p/profile_21.html'>Profile</a>
           </li>
           <li class='dropdown-item resetPasswordLink'>
             <svg height='1em' viewBox='0 0 48 48' width='1em' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M10.25 7A6.25 6.25 0 0 0 4 13.25v15.5A6.25 6.25 0 0 0 10.25 35h11.788a13 13 0 0 1 .048-2.5H10.25a3.75 3.75 0 0 1-3.75-3.75v-15.5a3.75 3.75 0 0 1 3.75-3.75h27.5a3.75 3.75 0 0 1 3.75 3.75v9.49a13 13 0 0 1 2.5 1.88V13.25A6.25 6.25 0 0 0 37.75 7zm16.194 17.212a13 13 0 0 1 2.06-1.475L26.768 21l1.866-1.866a1.25 1.25 0 0 0-1.768-1.768L25 19.232l-1.866-1.866a1.25 1.25 0 0 0-1.768 1.768L23.232 21l-1.866 1.866a1.25 1.25 0 0 0 1.768 1.768L25 22.768zm-14.31-6.846a1.25 1.25 0 0 0-1.768 1.768L12.232 21l-1.866 1.866a1.25 1.25 0 0 0 1.768 1.768L14 22.768l1.866 1.866a1.25 1.25 0 0 0 1.768-1.768L15.768 21l1.866-1.866a1.25 1.25 0 0 0-1.768-1.768L14 19.232zM46 34c0 6.075-4.925 11-11 11s-11-4.925-11-11s4.925-11 11-11s11 4.925 11 11m-5 0a1 1 0 0 0-1-1h-4v-6a1 1 0 1 0-2 0v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1' fill='currentColor' />
-            </svg> <a href='/p/reset-password.html'>Reset Password</a>
+              <path d='M10.25 7A6.25 6.25 0 0 0 4 13.25v15.5A6.25 6.25 0 0 0 10.25 35h11.788a13 13 0 0 1 .048-2.5H10.25a3.75 3.75 0 0 1-3.75-3.75v-15.5a3.75 3.75 0 0 1 3.75-3.75h27.5a3.75 3.75 0 0 1 3.75 3.75v9.49a13 13 0 0 1 2.5 1.88V13.25A6.25 6.25 0 0 0 37.75 7zm16.194 17.212a13 13 0 0 1 2.06-1.475L26.768 21l1.866-1.866a1.25 1.25 0 0 0-1.768-1.768L25 19.232l-1.866-1.866a1.25 1.25 0 0 0-1.768 1.768L23.232 21l-1.866 1.866a1.25 1.25 0 0 0 1.768 1.768L25 22.768zm-14.31-6.846a1.25 1.25 0 0 0-1.768 1.768L12.232 21l-1.866 1.866a1.25 1.25 0 0 0 1.768 1.768L14 22.768l1.866 1.866a1.25 1.25 0 0 0 1.768-1.768L15.768 21l1.866-1.866a1.25 1.25 0 0 0-1.768-1.768L14 19.232zM46 34c0 6.075-4.925 11-11 11s-11-4.925-11-11s4.925-11 11-11s11 4.925 11 11m-5 0a1 1 0 0 0-1-1h-4v-6a1 1 0 1 0-2 0v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1' fill='currentColor'/>
+            </svg> <a href='/p/change-password_21.html'>Reset Password</a>
           </li>
           <li class='dropdown-item logoutLink' style='display:none;'><svg height='1em' viewBox='0 0 16 16' width='1em' xmlns='http://www.w3.org/2000/svg'>
-              <path d='M3.5 8c.3 0 .5.2.5.5v2c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2c0-.3.2-.5.5-.5m0-1C2.7 7 2 7.7 2 8.5v2c0 .8.7 1.5 1.5 1.5S5 11.3 5 10.5v-2C5 7.7 4.3 7 3.5 7M8 7v3.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V7H6v3.5c0 .8.7 1.5 1.5 1.5S9 11.3 9 10.5V7zm5 0h-3v1h1v4h1V8h1z' fill='currentColor' />
-              <path d='M15 6V5h-2.4L8.9 2c.1-.2.1-.3.1-.5C9 .7 8.3 0 7.5 0S6 .7 6 1.5c0 .2 0 .3.1.5L2.4 5H0v9h1v1h15V6zM6.7 2.8c.3.1.5.2.8.2s.5-.1.8-.2L11 5H4zM14 13H1V6h13z' fill='currentColor' />
+              <path d='M3.5 8c.3 0 .5.2.5.5v2c0 .3-.2.5-.5.5s-.5-.2-.5-.5v-2c0-.3.2-.5.5-.5m0-1C2.7 7 2 7.7 2 8.5v2c0 .8.7 1.5 1.5 1.5S5 11.3 5 10.5v-2C5 7.7 4.3 7 3.5 7M8 7v3.5c0 .3-.2.5-.5.5s-.5-.2-.5-.5V7H6v3.5c0 .8.7 1.5 1.5 1.5S9 11.3 9 10.5V7zm5 0h-3v1h1v4h1V8h1z' fill='currentColor'/>
+              <path d='M15 6V5h-2.4L8.9 2c.1-.2.1-.3.1-.5C9 .7 8.3 0 7.5 0S6 .7 6 1.5c0 .2 0 .3.1.5L2.4 5H0v9h1v1h15V6zM6.7 2.8c.3.1.5.2.8.2s.5-.1.8-.2L11 5H4zM14 13H1V6h13z' fill='currentColor'/>
             </svg><a href='#' onclick='logoutUser()'>Logout</a>
           </li>
         </ul>
@@ -47,44 +71,11 @@
     </div>
     <!--avatar users-->
     <!--Menu Login/Register-->
-        ]]>
-    </b:widget-setting>
-  </b:widget-settings>
-  <b:includable id='main'>
-  <data:content/>
  <script>
   /*<![CDATA[*/
-const config = {
-links: {
-register: '/p/register.html',
-login: '/p/login_2.html',
-profile: '/p/profile.html',
-resetPassword: '/p/reset-password.html'
-},
-userData: {
-username: { element: '.username', defaultValue: 'Guest' },
-userRole: { element: '.userRole', defaultValue: 'Role: ' },
-userExp: { element: '.userExp', defaultValue: 'EXP role:' },
-userEmail: { element: '.userEmail', defaultValue: 'Email: ?' }
-},
-visibility: {
-loggedIn: {
-register: false,
-login: false,
-profile: true,
-resetPassword: false,
-logout: true
-},
-loggedOut: {
-register: true,
-login: true,
-profile: false,
-resetPassword: true,
-logout: false
- }
-};
 function _0x5100(_0x30cefd,_0x4d0379){const _0x3af1bf=_0x3af1();return _0x5100=function(_0x5100f6,_0x481a19){_0x5100f6=_0x5100f6-0x179;let _0x4876d3=_0x3af1bf[_0x5100f6];return _0x4876d3;},_0x5100(_0x30cefd,_0x4d0379);}const _0x4bba5b=_0x5100;(function(_0xc7fa6d,_0x361fe6){const _0x2704ac=_0x5100,_0x3c8875=_0xc7fa6d();while(!![]){try{const _0x53607e=parseInt(_0x2704ac(0x1a3))/0x1+-parseInt(_0x2704ac(0x19c))/0x2+parseInt(_0x2704ac(0x1b0))/0x3*(parseInt(_0x2704ac(0x187))/0x4)+parseInt(_0x2704ac(0x17e))/0x5+parseInt(_0x2704ac(0x19e))/0x6+-parseInt(_0x2704ac(0x192))/0x7*(-parseInt(_0x2704ac(0x180))/0x8)+-parseInt(_0x2704ac(0x190))/0x9;if(_0x53607e===_0x361fe6)break;else _0x3c8875['push'](_0x3c8875['shift']());}catch(_0x380e4e){_0x3c8875['push'](_0x3c8875['shift']());}}}(_0x3af1,0xa265f));function runProfileHeader(_0x1e836d){const _0x5adaae=_0x5100,{visibility:_0x37b7c5}=config;document[_0x5adaae(0x18f)](_0x5adaae(0x1ab))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):'loggedOut']['register']?'flex':_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x17f))['style'][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):'loggedOut'][_0x5adaae(0x1a8)]?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x19a))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?'loggedIn':_0x5adaae(0x1b7)]['profile']?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)](_0x5adaae(0x186))[_0x5adaae(0x1ac)][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?_0x5adaae(0x1b5):_0x5adaae(0x1b7)]['resetPassword']?_0x5adaae(0x1a1):_0x5adaae(0x198),document[_0x5adaae(0x18f)]('.logoutLink')['style'][_0x5adaae(0x195)]=_0x37b7c5[_0x1e836d?'loggedIn':'loggedOut'][_0x5adaae(0x193)]?_0x5adaae(0x1a1):'none';}function getUserData(_0x339490){const _0x38fc2a=_0x5100,_0x2e8389=db[_0x38fc2a(0x17a)](_0x38fc2a(0x19f))[_0x38fc2a(0x182)](_0x339490);return _0x2e8389[_0x38fc2a(0x196)]()[_0x38fc2a(0x1b3)](_0x38fad9=>{const _0x2ccffa=_0x38fc2a;return _0x38fad9[_0x2ccffa(0x1b1)]?_0x38fad9[_0x2ccffa(0x18d)]():(console[_0x2ccffa(0x181)](_0x2ccffa(0x194)),{});})['catch'](_0x3dcf35=>{const _0x32458e=_0x38fc2a;return console[_0x32458e(0x1b2)]('Error:',_0x3dcf35),{};});}function displayUserProfile(_0x1ac19c,_0x31322d){const _0x5903d4=_0x5100,{userData:_0x4cb6f3}=config;_0x1ac19c?.[_0x5903d4(0x199)]&&(document[_0x5903d4(0x18f)](_0x5903d4(0x19d))[_0x5903d4(0x1aa)]=_0x1ac19c[_0x5903d4(0x199)]),document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x18b)][_0x5903d4(0x185)])['textContent']=_0x31322d['username']||_0x4cb6f3[_0x5903d4(0x18b)][_0x5903d4(0x1ae)],document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x18a)]['element'])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x197)]?'Role:\x20'+_0x31322d[_0x5903d4(0x197)]:_0x4cb6f3[_0x5903d4(0x18a)][_0x5903d4(0x1ae)],document['querySelector'](_0x4cb6f3['userExp'][_0x5903d4(0x185)])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x184)]?_0x5903d4(0x191)+_0x31322d[_0x5903d4(0x184)]:_0x4cb6f3[_0x5903d4(0x1b4)][_0x5903d4(0x1ae)],document[_0x5903d4(0x18f)](_0x4cb6f3[_0x5903d4(0x17c)][_0x5903d4(0x185)])[_0x5903d4(0x18e)]=_0x31322d[_0x5903d4(0x1a2)]?_0x5903d4(0x1af)+_0x31322d[_0x5903d4(0x1a2)]:_0x4cb6f3['userEmail']['defaultValue'];}function logoutUser(){const _0x18a469=_0x5100;auth['signOut']()[_0x18a469(0x1b3)](()=>{const _0x3b88d2=_0x18a469;window[_0x3b88d2(0x1b6)][_0x3b88d2(0x189)]=config[_0x3b88d2(0x179)]['login'];})[_0x18a469(0x18c)](_0x22947a=>{const _0x23909b=_0x18a469;console[_0x23909b(0x1b2)]('Error\x20logging\x20out:',_0x22947a);});}document['querySelector']('.open_profiledropdown')[_0x4bba5b(0x1a6)](_0x4bba5b(0x1a0),function(){const _0x33936a=_0x4bba5b,_0x49c83f=document[_0x33936a(0x1a5)]('profileDropdown');_0x49c83f[_0x33936a(0x1a4)][_0x33936a(0x19b)](_0x33936a(0x1a9));});const profileDropdown=document[_0x4bba5b(0x1a5)](_0x4bba5b(0x1a7));function _0x3af1(){const _0x5cd2b6=['.resetPasswordLink','540376byBRHx','remove','href','userRole','username','catch','data','textContent','querySelector','28785204ZTfCDQ','EXP\x20role:\x20','2669198TITeYW','logout','No\x20data.','display','get','role','none','photoURL','.profileLink','add','969396GpegkJ','.profilePicture','6453840uDgZtX','users','click','flex','email','885569SLpiCr','classList','getElementById','addEventListener','profileDropdown','login','showprofile','src','.registerLink','style','matches','defaultValue','Email:\x20','6gttrUE','exists','error','then','userExp','loggedIn','location','loggedOut','links','collection','.profile-picture','userEmail','contains','4864490LMfvDz','.loginLink','24JTJaxF','warn','doc','target','exp','element'];_0x3af1=function(){return _0x5cd2b6;};return _0x3af1();}window['addEventListener']('click',_0x295860=>{const _0x2c2592=_0x4bba5b;!_0x295860[_0x2c2592(0x183)][_0x2c2592(0x1ad)](_0x2c2592(0x17b))&&!profileDropdown[_0x2c2592(0x17d)](_0x295860['target'])&&(profileDropdown[_0x2c2592(0x1a4)][_0x2c2592(0x17d)]('showprofile')&&profileDropdown['classList'][_0x2c2592(0x188)]('showprofile'));}),auth['onAuthStateChanged'](function(_0x516679){const _0xcbc78e=_0x4bba5b;runProfileHeader(_0x516679),_0x516679?getUserData(_0x516679['uid'])[_0xcbc78e(0x1b3)](_0x158457=>{displayUserProfile(_0x516679,_0x158457);}):displayUserProfile(null,{});});
   /*]]>*/
 </script>
   </b:includable>
-</b:widget>
+  </b:widget>
+ 
