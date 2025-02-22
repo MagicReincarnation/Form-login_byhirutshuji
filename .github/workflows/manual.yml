@@ -1,33 +1,64 @@
-name: Generate Log
+name: Log
 
 on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
-  generate_changelog:
+  update_changelog:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Generate Log
+    - name: Log
       run: |
-        echo "# Change Log" > CHANGELOG.md
+        echo "## Change Log" > CHANGELOG.md
         echo "" >> CHANGELOG.md
-        git log --pretty=format:"%ad" --date=short | sort -u | while read DATE; do
-          echo "## $DATE" >> CHANGELOG.md
-          git log --pretty=format:"- **%s**" --date=short --since="$DATE 00:00" --until="$DATE 23:59" --name-only | awk 'NF' | awk 'NR%2{printf "  - `%s`\n", $0; next}1' >> CHANGELOG.md
-          echo "" >> CHANGELOG.md
-        done
 
-    - name: Commit Change Log
+        git log --pretty=format:"%ad | %s | %an" --date=short --no-merges -- . ':(exclude).github/workflows/changelog.yml' | awk -F'|' '
+        {
+          date=$1;
+          message=$2;
+          author=$3;
+          if (author ~ /github-actionsbot/) next;
+          
+          cmd="git show --pretty=format:\"\" --name-only --no-merges --diff-filter=AMR " date " | sort | uniq";
+          cmd | getline files;
+          close(cmd);
+          
+          if (date != prev_date) {
+            print "### " date "\n" > "CHANGELOG.md";
+            prev_date = date;
+          }
+          
+          print "- **" message "**" > "CHANGELOG.md";
+          split(files, file_array, "\n");
+          for (i in file_array) {
+            if (file_array[i] != "") {
+              print "  - [" file_array[i] "](https://github.com/${{ github.repository }}/blob/main/" file_array[i] ")" > "CHANGELOG.md";
+            }
+          }
+          print "" > "CHANGELOG.md";
+        }' >> CHANGELOG.md
+
+    - name: Commit Log to `changelog` branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+        git checkout -B changelog  
         git add CHANGELOG.md
-        git commit -m "Update Change Log"
-        git push
+
+        
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+          exit 0
+        fi
+
+        git commit -m "Update Log"
+        git push --force https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git changelog
