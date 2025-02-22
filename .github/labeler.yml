@@ -1,0 +1,34 @@
+Form Login:
+  - "Form Login/**"
+
+MainScript:
+  - "Form Login/MainScript/**"
+
+Raw MainScript:
+  - "Form Login/MainScript/raw/**"
+
+Form Login pages:
+  - "Pages/**"
+
+Profile Header:
+  - "Profile Header/**"
+
+Rule Firebase:
+  - "Rule firebase/**"
+
+Code Post:
+  - "Code Post.xml"
+
+Config:
+  - "Config.xml"
+
+Hexanime + Login + Player:
+  - "Hexanime + Login + player/**"
+
+StreamMiko:
+  - "StreamMiko/**"
+StreamMiko pages:
+  - "StreamMiko/pages/**"
+README:
+  - "README.md"
+  - "Readme.md"
