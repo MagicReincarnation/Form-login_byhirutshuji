@@ -1,0 +1,38 @@
+name: Greetings
+
+on: [pull_request_target, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          🎉 **Wih, ada yang baru join!** 🎉  
+          
+          Makasih udah buka issue pertama di repo ini! Santai aja, kita bakal cek secepatnya.  
+          Kalau ada yang bingung, jangan sungkan buat nanya. Enjoy coding! 🚀  
+
+          ---  
+
+          🎉 **Yo, welcome aboard!** 🎉  
+          
+          Thanks for opening your first issue! We’ll check it out soon.  
+          If you got any questions, don’t hesitate to ask. Enjoy coding! 🚀  
+        pr-message: |
+          🔥 **Waduh, ada PR baru!** 🔥  
+          
+          Mantap! Makasih udah kontribusi, kita bakal cek dan kasih feedback kalau perlu.  
+          Keep it up dan gas terus kontribusinya! 💪  
+
+          ---  
+
+          🔥 **Whoa, new PR in the house!** 🔥  
+          
+          Awesome! Thanks for contributing, we’ll review it soon and give feedback if needed.  
+          Keep up the good work and stay awesome! 💪
