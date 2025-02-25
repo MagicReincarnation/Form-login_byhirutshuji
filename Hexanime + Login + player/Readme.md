@@ -1,24 +1,16 @@
 # Hexanime
 
-[Hexanime](https://emissionhex.blogspot.com/2024/08/hexanime-v1-free.html?m=1#c2757858608377440120) adalah template streaming anime untuk platform Blogger. Versi ini menyediakan sistem login yang terintegrasi dengan Firebase dan opsi pemutar video khusus (pemutar defaultnya masih ada cukup pakai label `dayat`).
+[Hexanime](https://emissionhex.blogspot.com/2024/08/hexanime-v1-free.html?m=1#c2757858608377440120) adalah template streaming anime untuk platform Blogger. Versi ini menyediakan sistem login yang terintegrasi dengan Firebase dan Player video khusus.
 
 ## Fitur
 
 ### Login
-Sistem login yang terintegrasi dengan Hexanime. Pengguna perlu mendaftar dan masuk untuk mengakses fitur premium.
+Sistem login yang terintegrasi dengan Hexanime. users perlu mendaftar dan masuk untuk mengakses episode premium.
 
-### StreamMiko
-StreamMiko adalah pemutar video khusus untuk sistem login, yang mendukung berbagai jenis pemutaran video:
+### Akses Episode Premium
+Hanya users yang sudah login yang dapat mengakses episode premium. Ini memberikan pengalaman streaming yang lebih eksklusif.
 
-1. **Plyr** - Pemutar video yang modern dan responsif (rekomendasi).
-2. **Iframe YouTube** - Memungkinkan pemutaran video dari YouTube.
-3. **Iframe Normal** - Pemutaran video dari sumber lain dengan menggunakan iframe.
-4. **HTML5** - Mendukung pemutaran video menggunakan elemen HTML5.
-
-### Akses Server Premium
-Hanya pengguna yang sudah login yang dapat mengakses server premium dan fitur download. Ini memberikan pengalaman streaming yang lebih baik dan eksklusif.
-
-## Instalasi
+## Cara Setup
 
 ### 1. Buat Akun Firebase
 - Kunjungi [Firebase Console](https://console.firebase.google.com/).
@@ -123,25 +115,39 @@ service firebase.storage {
 ### 2. Pasang Template di Blogger
 - Masuk ke akun Blogger Kamu.
 - Buka **"Tema"** di menu sebelah kiri.
-- Klik pada **"Cadangkan/Pulihkan"** dan unggah file tema Hexanime yang telah Kamu unduh.
+- Klik pada **"Cadangkan/Pulihkan"** dan unggah file tema Hexanime yang telah diunduh.
 - **Atau cara manual**
 Copy File tema dan pergi ke **Tema** dan pergi ke **Edit HTML**
-hapus dulu semua isinya dan paste file tema yang kamu copy sebelumnya.
-- Setelah itu, pergi ke folder
- - **"[Halaman Login](https://github.com/MagicReincarnation/Form-login_byhirutshuji/tree/main/Form%20Login/Pages)"**
- - **"[Halaman StreamMiko](https://github.com/MagicReincarnation/Form-login_byhirutshuji/tree/main/StreamMiko/pages)"**
-dan buat halaman baru dengan kode yang ada difolder tersebut untuk masing-masing kodenya.
-
+hapus dulu semua isinya dan paste file tema yang sudah dicopy sebelumnya.
+- Setelah itu, pergi ke folder `pages`
+   dan buat halaman baru dengan kode yang ada difolder tersebut untuk masing-masing kodenya.
 
 ### 3. pasang Config Sdk Firebase
-masuk kebagian layout blogger kamu dan cari bagian **Config Sdk** ganti isi config dengan punyamu.
+masuk kebagian layout blogger dan cari bagian **Config Sdk** ganti dengan config dengan punyamu.
 
-## Penggunaan
-
-- Masuk ke akun Kamu untuk mengakses konten premium.
-- Pilih salah satu player yang tersedia untuk menikmati video anime.
-
+## Cara pakai playerClone
+  pasang role pada episode yang mau dikunci.
+  contoh: 
+  ```json
+  {
+    'title': 'Skill sampah ternyata berguna',
+    'episode': '1',
+    'role': "Member",
+    'files': [{
+      0: 'Youtube',
+      1: 'https://www.youtube.com/embed/0xNH5gMaa0U',
+      2: 'sub'
+    }, {
+      0: 'Youtube',
+      1: 'https://www.youtube.com/embed/N-QwYL6JWic',
+      2: 'dub'
+    }]
+  }, 
+  ```
+  silahkan cek codepost agar lebih jelas.
+  **Tersedia 3 role**: `Admin`, `Member`, `User`.
+  
 ## Kontribusi 
  1. **[Wernayasa](https://emissionhex.blogspot.com/2024/08/hexanime-v1-free.html?m=1#c2757858608377440120)** (Developer tema hexanime)
- 2. **Hirutshuji** (Login & player StreamMiko & playerClone hexanime)
- 3. **Roka** (player StreamMiko)
+ 2. **Hirutshuji** (Login & playerClone hexanime)
+ 3. **Roka** (player Clone)
