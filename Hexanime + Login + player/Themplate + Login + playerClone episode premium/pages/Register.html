@@ -1,0 +1,171 @@
+<div class='registerHiru'>
+<!-- Form Register -->
+<form name="form_register" class='register-form' id='register-form'>
+    <h3>Create Account</h3>
+<div class='group_register'>
+<input name="name" id='register-username' placeholder='Name' required='required' type='text' autocomplete="off"/>
+    <span class='bar_register'></span>
+     <label>YOUR NAME</label>
+     </div>
+<div class='group_register'>
+ <input name="email" id='register-email' pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$' placeholder='name@gmail.com' required='required' value="email@gmail.com" type='email' autocomplete="off"/>
+ <span class='bar_register'></span>
+ <label>EMAIL ADDRESS</label>       </div>
+
+<div class='group_register'>
+ <input name="password" class='Validpass2' id='register-password' placeholder='Password' required='required' type='password' autocomplete="off"/> 
+   <span class='bar_register'></span>
+  <label>PASSWORD</label>
+<span class='icon_lock_pass_register' id='showpass2'>
+<svg class='showPas icon3' viewBox='0 0 24 24'><path d='M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z' fill='var(--color-svg-input)'/></svg>
+<svg class='showPas icon4 hiddeniconpass_registers' viewBox='0 0 24 24'>
+<path d='M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z' fill='var(--color-svg-input)'/></svg>
+</span>
+    </div>  
+  <div class='group_register'>
+    <input name="password" id='register-confirm-password' placeholder='Confirm Password' required='required' type='password' autocomplete="off"/>
+<span id="passTidaksama" class="error-message"></span>
+    <span class='bar_register'></span>
+    <label>CONFIRM PASSWORD</label>
+</div>
+  <button class='btn_register' type='submit'>Sign-up</button>
+<div class='inforegister'>
+<p class='message_register'>Baca kebijakan kami disini</p><p class='message_register'><span class='brd_r'></span><a href='#' class='readnow'>Read Now</a><span class='brd_r'></span></p>
+</div>
+<p class='message_register'>Have an account?<a class='signIn' href='#'>Sign-in</a></p>
+    </form>       
+    
+      </div>
+      
+      <!-- Notifikasi Pendaftaran -->
+<div id="registerNotif" class="notifregister_main hiddenregister_notif">
+    <div class="notif-icon" id="notifIcon_register"></div>
+    <div class="notif-content">
+        <div class="notif-title" id="notifTitle_register"></div>
+        <div class="notif-text" id="notifText_register"></div>
+    </div>
+</div>
+
+<!-- Notifikasi Konfirmasi -->
+<div id="confirmRegisterNotif" class="notifkonfirmasi warning notifregister_main hiddenregister_notif">
+    <div class="notif-icon">⚠️</div>
+    <div class="notif-content">
+        <div class="notif-title">Konfirmasi Pendaftaran</div>
+        <div class="notif-text">Apakah Anda yakin ingin mendaftar?</div>
+        <div class="notif-buttons">
+            <button id="confirmYes">tentu</button>
+            <button id="confirmNo">batal</button>
+        </div>
+    </div>
+</div>
+
+ <script defer='defer'>
+/*<![CDATA[*/ 
+const pesanNotifregister = {
+    registerBerhasil: {
+        judul: "Berhasil Register!",
+        pesan: "Silakan periksa email Kamu untuk memverifikasi akunmu"
+    },
+    konfimasiRegister: {
+        judul: "Apakah kamu yakin ingin register?",
+        pesan: "kamu akan membuat akun dengan email ini ",
+        pesan2:" Jika kamu click 'tentu' maka kami anggap bahwa kamu sudah membaca dan setuju dengan kebijakan kami. ",
+    },
+    emailTerdaftar: {
+        judul: "Email terdaftar",
+        pesan:"Email sudah digunakan. Silakan gunakan email lain."
+    },
+    errorRegister:{
+     judul:"Gagal register",
+     pesan: "Registrasi gagal. "
+    },
+  
+    loaderSaatRegister:{
+     judul:"Proses register",
+     pesan:"Sabar...sedang diproses"
+    },
+  
+    konfimasiVertifyemail:{
+     judul:"Email verifikasi",
+     pesan:"kami akan mengirim verifikasi ke emailmu untuk memverifikasi akunmu, click 'Oke' untuk mendapatkan pesan vertifikasi",
+    },
+  
+    vertifyEmailterkirim:{
+     judul:"verifikasi berhasil terkirim",
+     pesan:"Email verifikasi telah dikirim, silahkan cek inbox pesan kamu."
+    },
+    infoRulevertify:{
+     judul:"Pemberitahuan",
+     pesan:"Beberapa fitur tidak dapat diakses sampai email verifikasi dikonfimasi."
+    },
+
+ijinRegister:{
+     judul:"warning",
+     pesan:"Maaf, kamu tidak diizinkan untuk melakukan operasi autentikasi di luar domain yang terdaftar."
+    },
+};
+
+// isi opsi redirect
+    const RedirectOpsiHalaman_rgHiru= {
+        custom_url: "https://datakodehiru.blogspot.com",
+        homepage_url: window.location.hostname
+    };
+ //redirect yang dipilih 
+let redirectOpsi_rgHiru = "Customurl";
+/*ada tiga opsi "Customurl","Homepage","Reload" */
+
+let waktuTunda_rgHiru = 0;// 0detik sebelum redirect dilakukan
+   
+ let iconSukses = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="green" d="m9 20.42l-6.21-6.21l2.83-2.83L9 14.77l9.88-9.89l2.83 2.83z"/></svg>`; 
+  
+ let iconGagal = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="red" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg>`;
+ let iconInfo = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#ffff00" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v8m.05 4v.1h-.1V18z"/></svg>`;
+ let iconWarning= `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512"><path fill="none" stroke="#ffd43b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="15" d="m381 340.1l-52.8-97.3l-51-94.2a24 24 0 0 0-42.4 0l-51 94.2l-52.8 97.3a24.3 24.3 0 0 0 21.2 35.9h207.7a24.2 24.2 0 0 0 21.1-35.9Z"/><path fill="#ffd43b" d="M243 216.6q1.5-1.3 5.5-1.3h15.3c2.7 0 4.5.4 5.6 1.3s1.5 2.4 1.4 4.7l-3 71.8c-.1 2.3-.7 3.8-1.6 4.6s-2.7 1.3-5.4 1.3h-9.4c-2.6 0-4.4-.5-5.3-1.3s-1.5-2.3-1.6-4.6l-2.9-71.9c0-2.2.4-3.8 1.4-4.6m29 107.6q0 7-3 9.5c-2 1.8-5.6 2.7-11 2.7h-4c-5.4 0-9-1-11-2.6s-3-5-3-9.6v-2.9q0-7 3-9.6c2-1.7 5.6-2.5 11-2.5h4c5.4 0 9 .8 11 2.5s3 5 3 9.6Z"/></svg>`;
+
+/*]]>*/
+  </script>     
+<script defer='defer'>
+/*<![CDATA[*/ 
+function showpassregister() {
+ var pshowRegister = document.querySelector('#register-password');
+ pshowRegister.setAttribute('type', 'text'); 
+var registerpassshowicon = document.querySelector('.icon3'); registerpassshowicon.classList.add("hiddeniconpass_registers");
+ var registerpassshowicon2 = document.querySelector('.icon4'); registerpassshowicon2.classList.remove("hiddeniconpass_registers");
+}
+
+function hidepassregister() {
+ var hidepassregister = document.querySelector('#register-password');
+ hidepassregister.setAttribute('type', 'password');
+
+ var hideiconpassregister = document.querySelector('.icon3'); hideiconpassregister.classList.remove("hiddeniconpass_registers");
+
+var hideiconpassregister2 = document.querySelector('.icon4'); hideiconpassregister2.classList.add("hiddeniconpass_registers");
+ }
+ 
+ var pwShownRegister = 0;
+document.getElementById("showpass2").addEventListener("click", function () {
+    if (pwShownRegister == 0) {
+        pwShownRegister = 1;
+        showpassregister();
+    } else {
+        pwShownRegister = 0;
+        hidepassregister();
+    }
+}, false);
+function validatePassword() {
+    var password = document.getElementById("register-password");
+    var confirm_password = document.getElementById("register-confirm-password");
+    var error_message = document.getElementById("passTidaksama");
+
+    if (password.value === "" || password.value !== confirm_password.value) {
+        confirm_password.style.border = "thin solid red";
+        error_message.innerHTML = "password is not the same";
+    } else {
+ confirm_password.style.border = ""; 
+ error_message.innerHTML = "password correct";
+    }
+}
+document.getElementById("register-password").addEventListener("input", validatePassword);
+document.getElementById("register-confirm-password").addEventListener("input", validatePassword);
+/*]]>*/
+  </script>     

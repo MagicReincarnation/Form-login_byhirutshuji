@@ -143,5 +143,5 @@ masuk kebagian layout blogger kamu dan cari bagian **Config Sdk** ganti isi conf
 
 ## Kontribusi 
  1. **[Wernayasa](https://emissionhex.blogspot.com/2024/08/hexanime-v1-free.html?m=1#c2757858608377440120)** (Developer tema hexanime)
- 2. **Hirutshuji** (Login & player StreamMiko)
+ 2. **Hirutshuji** (Login & player StreamMiko & playerClone hexanime)
  3. **Roka** (player StreamMiko)
