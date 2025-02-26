@@ -1,0 +1,93 @@
+<script data-guard='true'>
+  /*<![CDATA[*/
+  /*profile user belum login atau belum ada profile.*/
+
+  var nullprofile = "https://www.icegif.com/wp-content/uploads/2022/04/icegif-1302.gif";
+
+  /*data yang bisa ditampilkan.*/  
+  var showdata = ["email", "username", "role", "exp"];
+/*
+id: adalah id="idcontoh" yang ada dilink.
+true: link hanya muncul jika sudah login.
+false: muncul jika tidak login.
+*/
+  var els = [
+  { id: "registerLink", show: false },
+  { id: "loginLink", show: false },
+  { id: "resetPasswordLink", show: false},
+ 
+  { id: "boxMyprofile", show: true },
+
+  { id: "profileLink", show: true },
+  { id: "logouthome", show: true },
+  { id: "email", show: true },
+  { id: "username", show: true },
+  { id: "role", show: true },
+  { id: "exp", show: true },
+  ];
+
+// Lisensi for protect code.
+const lisensi_hr = [
+  {
+    lisensi: 'DAgGFB8cDBACAC0RBRUVCgQLAQ0BGwc=',
+    ownerLisensi: 'Hirutshuji',
+  }
+];
+
+var locknologin = '<div class="warning">Konten terkunci. Harap masuk untuk melihat konten ini.</div>';
+   
+ var lockKontent = '<div class="warning">Tidak ada konten yang tersedia atau akses tidak diberikan oleh admin.</div>';
+    
+var loaderKontent = 'Loading...';
+    
+    
+function aksesrole(userRole, aksesKontent) {
+      const ijinrole = {
+        "Admin": ["Admin","Member", "User"],
+        "Member": ["Member", "User"],
+        "User": ["User"],
+      };
+return ijinrole[userRole].includes(aksesKontent);
+    }
+    
+let hariWrn = 2; //peringatan membership akan habis dalam 2 hari lagi
+
+let notifwrn_membership = "Membership Anda akan habis dalam {hari} hari lagi.";
+
+let notifwrn_membership_habis1 = "Membership Anda habis besok hari.";
+
+let notifwrn_membership_habis2 = "Membership kamu telah habis.";
+
+function showntf(message, autoClose, closeTime = 5000) {
+  const notifDiv = document.createElement("div");
+  notifDiv.innerHTML = `
+    <div style="position: fixed; top: 60px; right: 10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 5px; padding: 10px; z-index: 99999999;">
+      <p>${message}</p>
+      <a href="#" style="border:none;" onclick="this.parentElement.style.display='none';">Tutup</a>
+    </div>
+  `;
+  document.body.appendChild(notifDiv);
+  if (autoClose) {
+    setTimeout(() => {
+      notifDiv.style.display = 'none';
+    }, closeTime);
+  }
+}
+document.getElementById("logouthome").addEventListener("click", () => {
+if (auth.currentUser) {
+auth.signOut().then(() => {
+Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "Successful Logout",
+  showConfirmButton: false,
+  timer: 1500
+});});}});
+const _0x299551=_0xe720;(function(_0x447564,_0x176722){const _0x2418a0=_0xe720,_0x48f3fe=_0x447564();while(!![]){try{const _0x53fcb0=parseInt(_0x2418a0(0x1e7))/0x1+parseInt(_0x2418a0(0x1de))/0x2*(-parseInt(_0x2418a0(0x1d0))/0x3)+parseInt(_0x2418a0(0x1c1))/0x4+-parseInt(_0x2418a0(0x1ea))/0x5*(parseInt(_0x2418a0(0x1da))/0x6)+-parseInt(_0x2418a0(0x1d1))/0x7*(-parseInt(_0x2418a0(0x1bd))/0x8)+parseInt(_0x2418a0(0x1c2))/0x9+-parseInt(_0x2418a0(0x1e0))/0xa*(-parseInt(_0x2418a0(0x1ef))/0xb);if(_0x53fcb0===_0x176722)break;else _0x48f3fe['push'](_0x48f3fe['shift']());}catch(_0x356e9f){_0x48f3fe['push'](_0x48f3fe['shift']());}}}(_0x5d61,0xb43e1));function updateShowDF(_0x465e01){const _0x591c7d=_0xe720;showdata[_0x591c7d(0x1bc)](_0x1a507a=>{const _0x1a5c99=_0x591c7d;let _0x45b45c=document[_0x1a5c99(0x1be)](_0x1a5c99(0x1c9)+_0x1a507a+'\x22]');_0x45b45c[_0x1a5c99(0x1bc)](_0x55efe9=>{const _0x17588c=_0x1a5c99;_0x55efe9[_0x17588c(0x1bf)]=_0x465e01[_0x1a507a]||'';});});}function _0xe720(_0x430aaf,_0x5bd582){const _0x5d61b8=_0x5d61();return _0xe720=function(_0xe72029,_0x3d26d2){_0xe72029=_0xe72029-0x1ba;let _0x296a80=_0x5d61b8[_0xe72029];return _0x296a80;},_0xe720(_0x430aaf,_0x5bd582);}function updateProfile(_0x3c7dcb,_0x2cc551){const _0x1a25af=_0xe720;let _0x173731=document['getElementById'](_0x1a25af(0x1e8));_0x173731[_0x1a25af(0x1d8)]=_0x3c7dcb||nullprofile,_0x173731[_0x1a25af(0x1c7)]=_0x2cc551||'User\x20belum\x20login';}auth['onAuthStateChanged'](function(_0x123665){const _0x46c49c=_0xe720;if(document['getElementById'](_0x46c49c(0x1e8)),els[_0x46c49c(0x1bc)](_0x25f316=>{const _0x9d4046=_0x46c49c;let _0x3f6be3=document[_0x9d4046(0x1eb)](_0x25f316['id']);_0x123665&&_0x25f316[_0x9d4046(0x1ec)]?_0x3f6be3[_0x9d4046(0x1e5)][_0x9d4046(0x1e3)]=_0x9d4046(0x1cc):_0x123665||_0x25f316[_0x9d4046(0x1ec)]?_0x3f6be3[_0x9d4046(0x1e5)][_0x9d4046(0x1e3)]=_0x9d4046(0x1ba):_0x3f6be3[_0x9d4046(0x1e5)][_0x9d4046(0x1e3)]=_0x9d4046(0x1cc);}),_0x123665){let _0x369c68=_0x123665[_0x46c49c(0x1bb)]||nullprofile,_0x337bac=localStorage[_0x46c49c(0x1c0)](_0x46c49c(0x1d3)),_0xda3e87=localStorage[_0x46c49c(0x1c0)](_0x46c49c(0x1ce));_0x369c68!==_0x337bac&&(localStorage[_0x46c49c(0x1d5)](_0x46c49c(0x1d3),_0x369c68),localStorage[_0x46c49c(0x1d5)](_0x46c49c(0x1ce),_0x123665[_0x46c49c(0x1e9)]||_0x46c49c(0x1d6))),updateProfile(_0x337bac||_0x369c68,_0xda3e87||_0x123665['displayName']||_0x46c49c(0x1d6));let _0x2a8002=db['collection']('users')[_0x46c49c(0x1d4)](_0x123665[_0x46c49c(0x1dd)]);_0x2a8002[_0x46c49c(0x1c4)]()[_0x46c49c(0x1c3)](function(_0x54b0e2){const _0x397933=_0x46c49c;if(_0x54b0e2[_0x397933(0x1c8)]){let _0x1592a7=_0x54b0e2['data']();updateShowDF(_0x1592a7);}else console[_0x397933(0x1e4)](_0x397933(0x1df));})[_0x46c49c(0x1cb)](function(_0x4250b6){const _0x36c2e7=_0x46c49c;console[_0x36c2e7(0x1e4)](_0x36c2e7(0x1e1),_0x4250b6);});}else updateProfile(nullprofile,_0x46c49c(0x1c6));});function Myprofile(){const _0xc839d2=_0xe720;var _0x514348=document[_0xc839d2(0x1eb)](_0xc839d2(0x1d9));_0x514348['classList'][_0xc839d2(0x1ca)](_0xc839d2(0x1cf))?_0x514348['classList'][_0xc839d2(0x1db)](_0xc839d2(0x1cf)):_0x514348[_0xc839d2(0x1d7)][_0xc839d2(0x1e6)](_0xc839d2(0x1cf));}window[_0x299551(0x1ee)]=function(_0x528761){const _0x53dc31=_0x299551;if(!_0x528761['target'][_0x53dc31(0x1d2)](_0x53dc31(0x1cd))&&!_0x528761[_0x53dc31(0x1ed)][_0x53dc31(0x1c5)](_0x53dc31(0x1e2))){for(var _0x3af933=document['getElementsByClassName'](_0x53dc31(0x1dc)),_0x6ca42=0x0;_0x6ca42<_0x3af933['length'];_0x6ca42++)_0x3af933[_0x6ca42][_0x53dc31(0x1d7)][_0x53dc31(0x1db)]('showpp');}};function _0x5d61(){const _0x4f1622=['displayName','6400820WBAcvf','getElementById','show','target','onclick','22ekyCJK','none','photoURL','forEach','58408ckwzCD','querySelectorAll','textContent','getItem','4428432hCjShp','6197985GBYCSj','then','get','closest','User\x20belum\x20login','alt','exists','[showdata=\x22','contains','catch','flex','.dropbtn','profileAlt','showpp','18ikjyNM','147QqymrW','matches','profileURL','doc','setItem','User','classList','src','myDropdown','6pUhMPp','remove','dropdown-ppdata','uid','417394xXLzTd','User\x20tidak\x20ditemukan!','1005020cXtqtG','Error\x20getting\x20document:','.dropdownprofile','display','log','style','add','1120521sccJCl','ppdata'];_0x5d61=function(){return _0x4f1622;};return _0x5d61();}
+  /*]]>*/
+</script> 
+  <!--All CDN body-->
+   
+ <script src='https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/codebyhirutshuji_lite/logincode_litex_v4.0.js'/>  
+ <script src='https://cdn.jsdelivr.net/gh/MagicReincarnation/codeHirutshuji@main/codebyhirutshuji_lite/lisensiCodeLogin_lite.js'/> 
+

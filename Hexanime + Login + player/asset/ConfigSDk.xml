@@ -1,0 +1,41 @@
+   Bagian script ini letakan dibawah `<head>` aja.
+
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js'/>
+  <script src='https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js'/>
+    <script src='https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css'/>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'/>
+    
+
+Sedangkan ini config yang Sudah aku modif agar jadi wdiget.
+bisa letakan dibagian widget homepage.
+
+
+<b:section id='configSdk' showaddelement='false'>
+  <b:widget id='HTML1' locked='true' title='Config Sdk' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[apiKey: "AIzaSyCDUKoueS66e77qvqGbrc1Clb0eFJWi2JU",
+      authDomain: "formlogin-6e176.firebaseapp.com",
+      databaseURL: "https://formlogin-6e176-default-rtdb.firebaseio.com",
+      projectId: "formlogin-6e176",
+      storageBucket: "formlogin-6e176.appspot.com",
+      messagingSenderId: "197923569691",
+      appId: "1:197923569691:web:db39447bcd0f6d7bd6f8be",
+      measurementId: "G-9RHRPYQXVQ"]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+    <script>
+       const config2 = {<data:content/>};
+    /*<![CDATA[*/
+    firebase.initializeApp(config2);
+    const dbrl = firebase.database();
+    const auth = firebase.auth();
+    const storagedb = firebase.storage();
+    const db = firebase.firestore();
+/*]]>*/
+   </script>
+</b:includable>
+  </b:widget>
+</b:section>

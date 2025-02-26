@@ -1,0 +1,110 @@
+<div class='w-7 h-7 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-cover bg-center bg-no-repeat rounded-full relative cursor-pointer' data-dropdown-toggle='dropdown' id='dropdownDefaultButton' style='background-image: url(&apos;https://img.zorores.com/_r/100x100/100/avatar/zoro_chibi/avatar-10.png&apos;);'>
+  <img alt='' class='w-7 h-7 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-cover bg-center bg-no-repeat rounded-full relative cursor-pointer' heigth='200' id='ppdata' onclick='Myprofile()' src='' width='200' />
+  <div class='w-80 h-auto overflow-x-hidden transform transition-all duration-100 absolute top-full left-auto z-20 bg-white/80 dark:bg-neutral-700/80 hidden rounded-xl shadow-lg -translate-y-full text-neutral-800 backdrop-blur-lg dark:text-accent' id='dropdown'>
+    <div class='py-3 px-4'>
+      <div class='w-full'>
+        <div class='w-full text-sm font-semibold leading-9 dark:text-accent'> <strong data-current-username=''>My profile</strong>
+        </div>
+        <style>
+          #boxMyprofile span {
+            border: 1px solid #ccc;
+            display: flex;
+            margin: 5px 0;
+            padding: 3px 7px;
+            border-radius: 5px;
+            gap: 5px;
+          }
+          
+          #boxMyprofile span strong {
+            font-weight: bold;
+            font-size: 12px;
+          }
+        </style>
+        <div class='w-full flex-col text-xs font-light' id='boxMyprofile'>
+          <span class='Myname'>
+            <strong>Name:</strong>
+            <a href='#' id='username' showdata='username' /></span>
+          <span class='Myemail'>
+            <strong>Email:</strong>
+            <a href='#' id='email' showdata='email' /></span>
+          <span class='Myrole'>
+            <strong>Role:</strong>
+            <a href='#' id='role' showdata='role' /></span>
+          <span class='Exprole'>
+            <strong>Exp Role:</strong>
+            <a href='#' id='exp' showdata='exp' /></span>
+          
+        </div>
+      </div>
+    </div>
+    <div class='mt-1 mx-3 space-y-1'> <button class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full w-full' id='theme-toggle' type='button'>
+        <svg class='hidden w-5 h-5' fill='currentColor' id='theme-toggle-dark-icon' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z' />
+        </svg>
+        <svg class='hidden w-5 h-5' fill='currentColor' id='theme-toggle-light-icon' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'>
+          <path clip-rule='evenodd' d='M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z' fill-rule='evenodd' />
+        </svg>
+        <div>dark/light</div>
+      </button>
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full w-full' href='/p/login.html' id='loginLink' style='display: none;'><svg class='w-4 h-4' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M12 21v-2h7V5h-7V3h9v18zm-2-4l-1.375-1.45l2.55-2.55H3v-2h8.175l-2.55-2.55L10 7l5 5z' fill='currentColor' />
+        </svg>Login</a>
+      
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full' href='/p/register.html' id='registerLink' style='display: none;'><svg class='w-4 h-4' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+          <g color='currentColor' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'>
+            <path d='M14 9h4m-4 3.5h3' />
+            <rect height='18' rx='5' width='20' x='2' y='3' />
+            <path d='M5 16c1.208-2.581 5.712-2.75 7 0m-1.5-7a2 2 0 1 1-4 0a2 2 0 0 1 4 0' />
+          </g>
+        </svg>Register</a>
+      
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full' href='/p/profile.html' id='profileLink'><svg class='w-4 h-4' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+          <g fill='none' stroke='currentColor' stroke-width='1.5'>
+            <path d='M11.607 2.342a.6.6 0 0 1 .787 0l1.948 1.692a.6.6 0 0 0 .445.145l2.572-.224a.6.6 0 0 1 .636.463l.582 2.514a.6.6 0 0 0 .275.38l2.212 1.33a.6.6 0 0 1 .243.748l-1.008 2.376a.6.6 0 0 0 0 .468l1.008 2.376a.6.6 0 0 1-.243.749l-2.212 1.33a.6.6 0 0 0-.275.379l-.582 2.514a.6.6 0 0 1-.636.463l-2.572-.224a.6.6 0 0 0-.445.144l-1.949 1.693a.6.6 0 0 1-.787 0l-1.948-1.693a.6.6 0 0 0-.445-.144l-2.572.224a.6.6 0 0 1-.636-.463l-.582-2.514a.6.6 0 0 0-.275-.38l-2.212-1.33a.6.6 0 0 1-.243-.748l1.008-2.376a.6.6 0 0 0 0-.468L2.693 9.39a.6.6 0 0 1 .243-.749l2.212-1.33a.6.6 0 0 0 .275-.379l.582-2.514a.6.6 0 0 1 .636-.463l2.572.224a.6.6 0 0 0 .445-.145z' />
+            <path d='m9 13l2 2l5-5' stroke-linecap='round' stroke-linejoin='round' />
+          </g>
+        </svg>My Profile</a>
+      
+      
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full' href='/p/change-password.html' id='resetPasswordLink'><svg class='w-4 h-4' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M7.5 2c2 0 3.6 1.2 4.2 3H21v3h-3v3h-3V8h-3.3c-.6 1.8-2.3 3-4.2 3C5 11 3 9 3 6.5S5 2 7.5 2m0 3C6.7 5 6 5.7 6 6.5S6.7 8 7.5 8S9 7.3 9 6.5S8.3 5 7.5 5m0 8c2 0 3.6 1.2 4.2 3H21v3h-1v3h-2v-3h-2v3h-3v-3h-1.3c-.6 1.8-2.3 3-4.2 3C5 22 3 20 3 17.5S5 13 7.5 13m0 3c-.8 0-1.5.7-1.5 1.5S6.7 19 7.5 19S9 18.3 9 17.5S8.3 16 7.5 16' fill='currentColor' />
+        </svg>Change Password</a>
+      
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full' href='/p/bookmark.html'>
+        <svg class='w-4 h-4' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z' fill='currentColor' />
+        </svg>
+        Watch List
+      </a>
+      <a class='px-4 py-3 flex items-center hover:text-accent gap-2 font-medium text-xs bg-overlay bg-neutral-100 dark:bg-neutral-600 rounded-full' href=''>
+        <svg class='w-4 h-4' viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M16 288c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h112v-64zm489-183L407.1 7c-4.5-4.5-10.6-7-17-7H384v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H152c-13.3 0-24 10.7-24 24v264h128v-65.2c0-14.3 17.3-21.4 27.4-11.3L379 308c6.6 6.7 6.6 17.4 0 24l-95.7 96.4c-10.1 10.1-27.4 3-27.4-11.3V352H128v136c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H376c-13.2 0-24-10.8-24-24z' fill='currentColor' />
+        </svg>
+        Watch History</a>
+    </div>
+    
+    <a class='p-5 hover:text-accent flex w-full items-center justify-end gap-2 font-medium text-xs rounded-md' data-logout-trigger='' href='#' id='logouthome'>Logout <svg class='w-4 h-4' viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'>
+        <path d='M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z' fill='currentColor' />
+      </svg>
+    </a>
+    <a class='p-5 hover:text-accent flex w-full items-center justify-end gap-2 font-medium text-xs rounded-md' data-logout-trigger='' href='https://t.me/webhiru'>My Telegram<svg height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
+        <g fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5'>
+          <path d='M21 5L18.5 20M21 5L9 13.5' stroke-dasharray='16' stroke-dashoffset='16'>
+            <animate attributeName='stroke-dashoffset' dur='0.4s' fill='freeze' values='16;0' />
+          </path>
+          <path d='M21 5L2 12.5' stroke-dasharray='22' stroke-dashoffset='22'>
+            <animate attributeName='stroke-dashoffset' dur='0.4s' fill='freeze' values='22;0' />
+          </path>
+          <path d='M18.5 20L9 13.5' stroke-dasharray='12' stroke-dashoffset='12'>
+            <animate attributeName='stroke-dashoffset' begin='0.4s' dur='0.3s' fill='freeze' values='12;0' />
+          </path>
+          <path d='M2 12.5L9 13.5' stroke-dasharray='8' stroke-dashoffset='8'>
+            <animate attributeName='stroke-dashoffset' begin='0.4s' dur='0.3s' fill='freeze' values='8;0' />
+          </path>
+          <path d='M12 16L9 19M9 13.5L9 19' stroke-dasharray='6' stroke-dashoffset='6'>
+            <animate attributeName='stroke-dashoffset' begin='0.7s' dur='0.3s' fill='freeze' values='6;0' />
+          </path>
+        </g>
+      </svg></a>
+  </div>
+</div>
