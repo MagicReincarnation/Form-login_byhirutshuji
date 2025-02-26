@@ -1,0 +1,87 @@
+<img class="show_profile" src="" alt="user" style="width:30px; height:30px; border-radius:50%;" />
+
+<span class="show_name">Guest</span>
+<span class="show_role"></span>
+<span class="show_expdate"></span>
+<span class="show_email"></span>
+
+<a href='/p/register.html' class='registerLink'>Register</a>
+<a href='/p/login.html' class='loginLink'>Login</a>
+<a href='/p/profile.html' class='profileLink'>Profile</a>
+<a href='/p/reset-password.html' class='resetpasswordLink'>Reset Password</a>
+<a href='#' class='logoutLink' onclick='run_logout()' style='display:none;'>Logout</a>
+
+<script>
+  /*<![CDATA[*/
+  function runprofile_Header(user) {
+    const registerLink = document.querySelector(".registerLink");
+    const loginLink = document.querySelector(".loginLink");
+    const profileLink = document.querySelector(".profileLink");
+    const resetpasswordLink = document.querySelector(".resetpasswordLink");
+    const logoutLink = document.querySelector(".logoutLink");
+    
+    if (user) {
+      profileLink.style.display = "inline";
+      resetpasswordLink.style.display = "none";
+      registerLink.style.display = "none";
+      loginLink.style.display = "none";
+      logoutLink.style.display = "inline";
+    } else {
+      registerLink.style.display = "inline";
+      loginLink.style.display = "inline";
+      profileLink.style.display = "none";
+      resetpasswordLink.style.display = "inline";
+      logoutLink.style.display = "none";
+    }
+  }
+  
+  function get_datauser(userId) {
+    const user_doc = db.collection("users").doc(userId);
+    return user_doc.get().then((doc) => {
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        console.warn("No data.");
+        return;
+      }
+    }).catch((error) => {
+      console.error("Error:", error);
+      return;
+    });
+  }
+  
+  function show_profile(user, data_user) {
+    const profile_Avatar = document.querySelector(".show_profile");
+    const show_name = document.querySelector(".show_name");
+    const show_role = document.querySelector(".show_role");
+    const show_expdate = document.querySelector(".show_expdate");
+    const show_email = document.querySelector(".show_email");
+    
+    if (user.photoURL) {profile_Avatar.src = user.photoURL;}
+
+    show_name.textContent = data_user.username || "Guest";
+    show_role.textContent = data_user.role ? `Role: ${data_user.role}` : "Role: N/A";
+    show_expdate.textContent = data_user.exp ? `EXP role: ${data_user.exp}` : "EXP role: N/A";
+    show_email.textContent = data_user.email ? `Email: ${data_user.email}` : "Email: N/A";
+  }
+  
+  function run_logout() {
+    auth.signOut().then(() => {
+      window.location.href = '/p/login.html';
+    }).catch((error) => {
+      console.error("Error logging out:", error);
+    });
+  }
+  
+  auth.onAuthStateChanged(function(user) {
+    runprofile_Header(user);
+    if (user) {
+      get_datauser(user.uid).then((data_user) => {
+        show_profile(user, data_user);
+      });
+    } else {
+      show_profile(null, null);
+    }
+  });
+  /*]]>*/
+</script>
